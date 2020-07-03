@@ -8,6 +8,7 @@ use App\User;
 use App\Sponsor;
 use App\Service;
 use App\Message;
+use App\View;
 
 class Apartment extends Model
 {
@@ -24,5 +25,8 @@ class Apartment extends Model
   }
   public function messages(){
     return $this -> hasMany(Message::class);
+  }
+  public function views(){
+    return $this -> hasMany(View::class);
   }
 }
