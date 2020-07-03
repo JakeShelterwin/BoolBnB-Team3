@@ -33,6 +33,19 @@ class AddForeignKeysTable extends Migration
               -> onDelete("cascade")
               ;
     });
+
+    Schema::table('location_service', function (Blueprint $table) {
+        $table-> foreign("location_id" , "locationS")
+              -> references("id")
+              -> on("locations")
+              -> onDelete("cascade")
+              ;
+        $table-> foreign("service_id" , "serviceS")
+              -> references("id")
+              -> on("services")
+              -> onDelete("cascade")
+              ;
+    });
     }
 
     /**
@@ -48,6 +61,10 @@ class AddForeignKeysTable extends Migration
         Schema::table('locations', function (Blueprint $table) {
             $table-> dropForeign("hostL");
             $table-> dropForeign("sponsorL");
+        });
+        Schema::table('location_service', function (Blueprint $table) {
+            $table-> dropForeign("locationS");
+            $table-> dropForeign("serviceS");
         });
     }
 }

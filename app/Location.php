@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Host;
 use App\Sponsor;
+use App\Service;
 use App\LocationMessage;
 
 class Location extends Model
@@ -17,6 +18,9 @@ class Location extends Model
   }
   public function sponsor(){
     return $this -> belongsTo(Sponsor::class);
+  }
+  public function services(){
+    return $this -> belongsToMany(Service::class);
   }
   public function locationMessages(){
     return $this -> hasMany(LocationMessage::class);

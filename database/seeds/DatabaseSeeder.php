@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
           HostsSeeder::class,
           SponsorsSeeder::class,
           LocationsSeeder::class,
-          LocationMessagesSeeder::class]);
+          LocationMessagesSeeder::class,
+          ServicesSeeder::class]);
     }
 }

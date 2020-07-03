@@ -16,8 +16,7 @@ $factory->define(Location::class, function (Faker $faker) {
       "bathrooms_n" => $faker -> numberBetween(1, 3),
       "square_meters" => $faker -> numberBetween(30, 100),
       "address" => $faker -> address(),
-      "images" => "ciao",
-      "other_services" => "vai",
+      "image" => $faker -> word(),
       "ad_not_active" => $faker -> boolean(),
       "views_n" => $faker -> numberBetween(1, 100),
       "sponsor_expire_time" => $faker -> numberBetween(1, 100)

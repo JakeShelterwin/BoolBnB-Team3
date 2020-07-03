@@ -24,12 +24,7 @@ class CreateLocationsTable extends Migration
             $table->integer("bathrooms_n");
             $table->integer("square_meters");
             $table->string("address");
-
-            // questi due ra renderli un array o json roba simile
-            $table->string("images");
-            $table->string("other_services");
-
-
+            $table->string("image");
             $table->boolean("ad_not_active");
             $table->integer("views_n");
             $table->integer("sponsor_expire_time") -> unsigned();
