@@ -13,36 +13,51 @@ class AddForeignKeysTable extends Migration
      */
     public function up()
     {
-      Schema::table('location_messages', function (Blueprint $table) {
-        $table-> foreign("location_id" , "locationM")
+      Schema::table('messages', function (Blueprint $table) {
+        $table-> foreign("apartment_id" , "apartmentM")
               -> references("id")
-              -> on("locations")
+              -> on("apartments")
               -> onDelete("cascade")
               ;
     });
 
-    Schema::table('locations', function (Blueprint $table) {
-        $table-> foreign("host_id" , "hostL")
+    Schema::table('apartments', function (Blueprint $table) {
+        $table-> foreign("user_id" , "userL")
               -> references("id")
-              -> on("hosts")
-              -> onDelete("cascade")
-              ;
-        $table-> foreign("sponsor_id" , "sponsorL")
-              -> references("id")
-              -> on("sponsors")
+              -> on("users")
               -> onDelete("cascade")
               ;
     });
 
-    Schema::table('location_service', function (Blueprint $table) {
-        $table-> foreign("location_id" , "locationS")
+    Schema::table('apartment_service', function (Blueprint $table) {
+        $table-> foreign("apartment_id" , "apartmentS")
               -> references("id")
-              -> on("locations")
+              -> on("apartments")
               -> onDelete("cascade")
               ;
         $table-> foreign("service_id" , "serviceS")
               -> references("id")
               -> on("services")
+              -> onDelete("cascade")
+              ;
+    });
+
+      Schema::table('apartment_sponsor', function (Blueprint $table) {
+          $table-> foreign("apartment_id" , "apartmentA")
+                -> references("id")
+                -> on("apartments")
+                -> onDelete("cascade")
+                ;
+          $table-> foreign("sponsor_id" , "sponsorA")
+                -> references("id")
+                -> on("sponsors")
+                -> onDelete("cascade")
+                ;
+      });
+      Schema::table('views', function (Blueprint $table) {
+        $table-> foreign("apartment_id" , "apartmentV")
+              -> references("id")
+              -> on("apartments")
               -> onDelete("cascade")
               ;
     });
@@ -55,16 +70,22 @@ class AddForeignKeysTable extends Migration
      */
     public function down()
     {
-        Schema::table('location_messages', function (Blueprint $table) {
-            $table-> dropForeign("locationM");
+        Schema::table('messages', function (Blueprint $table) {
+            $table-> dropForeign("apartmentM");
         });
-        Schema::table('locations', function (Blueprint $table) {
-            $table-> dropForeign("hostL");
-            $table-> dropForeign("sponsorL");
+        Schema::table('apartments', function (Blueprint $table) {
+            $table-> dropForeign("userL");
         });
-        Schema::table('location_service', function (Blueprint $table) {
-            $table-> dropForeign("locationS");
+        Schema::table('apartment_service', function (Blueprint $table) {
+            $table-> dropForeign("apartmentS");
             $table-> dropForeign("serviceS");
+        });
+        Schema::table('apartment_sponsor', function (Blueprint $table) {
+            $table-> dropForeign("apartmentA");
+            $table-> dropForeign("sponsorA");
+        });
+        Schema::table('views', function (Blueprint $table) {
+            $table-> dropForeign("apartmentV");
         });
     }
 }

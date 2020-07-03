@@ -3,11 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Location;
+
+use App\Apartment;
 
 class Service extends Model
 {
-  public function locations(){
-    return $this -> belongsToMany(Location::class);
+  protected $table = "services";
+  
+  public function apartments(){
+    return $this -> belongsToMany(Apartment::class);
   }
 }

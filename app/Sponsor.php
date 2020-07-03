@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-use App\Location;
+use App\Apartment;
 
 class Sponsor extends Model
 {
   protected $table = "sponsors";
 
-  public function locations(){
-    return $this -> hasMany(Location::class);
+  public function apartments(){
+    return $this -> belongsToMany(Apartment::class);
   }
 }

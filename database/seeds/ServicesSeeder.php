@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
 use App\Service;
-use App\Location;
+use App\Apartment;
 class ServicesSeeder extends Seeder
 {
     /**
@@ -15,8 +14,8 @@ class ServicesSeeder extends Seeder
     {
       factory(Service::class, 6) -> create()
                   -> each(function($service){
-                    $locations = Location::inRandomOrder() -> take(rand(1,20))  -> get();
-                    $service -> locations() -> attach($locations);
+                    $apartments = Apartment::inRandomOrder() -> take(rand(1,20))  -> get();
+                    $service -> apartments() -> attach($apartments);
                   })
                   ;
     }
