@@ -30,8 +30,8 @@
                 </div>
             @endif
         </div>
-        @include('header')
+        @include('components.header')
         @yield('content')
-        @include('footer')
+        @include('components.footer')
     </body>
 </html>
