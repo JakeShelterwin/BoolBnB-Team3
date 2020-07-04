@@ -16,20 +16,16 @@ class CreateApartmentsTable extends Migration
         Schema::create('apartments', function (Blueprint $table) {
             $table->id();
             $table->string("title");
-            $table->string("lat");
-            $table->string("lon");
-            $table->string("description");
-            $table->integer("rooms_n");
-            $table->integer("bedrooms_n");
-            $table->integer("bathrooms_n");
-            $table->integer("square_meters");
+            $table->text("description");
             $table->string("address");
+            $table->float("lat") -> nullable(); //da sistemare dopo aver inserito tomtom
+            $table->float("lon") -> nullable(); //da sistemare dopo aver inserito tomtom
+            $table->integer("rooms_n") -> unsigned();
+            $table->integer("bedrooms_n") -> unsigned();
+            $table->integer("bathrooms_n") -> unsigned();
+            $table->integer("square_meters") -> unsigned();
             $table->string("image");
-            $table->boolean("ad_not_active");
-
-            // DA TOGLIERE
-            $table->integer("views_n");
-
+            $table->boolean("is_active");
             $table->integer("sponsor_expire_time") -> unsigned();
 
             $table->bigInteger("user_id") -> unsigned() -> index();

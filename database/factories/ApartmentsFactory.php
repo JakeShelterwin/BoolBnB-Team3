@@ -17,8 +17,7 @@ $factory->define(Apartment::class, function (Faker $faker) {
       "square_meters" => $faker -> numberBetween(30, 100),
       "address" => $faker -> address(),
       "image" => $faker -> word(),
-      "ad_not_active" => $faker -> boolean(),
-      "views_n" => $faker -> numberBetween(1, 100),
+      "is_active" => $faker -> boolean(true),
       "sponsor_expire_time" => $faker -> numberBetween(1, 100)
     ];
 });
