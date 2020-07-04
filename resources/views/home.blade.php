@@ -13,9 +13,21 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    <a href="{{route('createApartment')}}">Crea nuovo appartamento</a>
 
-                    {{ __('You are logged in!') }}
+
                 </div>
+                @if ($user_apartments)
+                  @foreach ($user_apartments as $apartment)
+
+                    <a href="{{route('showApartment',$apartment['id'])}}"><div class="card-header">{{$apartment -> title}}</div></a> 
+                    <div class="card-body">
+                      {{$apartment -> description}}
+
+                    </div>
+                  @endforeach
+                @endif
+
             </div>
         </div>
     </div>

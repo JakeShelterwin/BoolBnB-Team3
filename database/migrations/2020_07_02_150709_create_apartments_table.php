@@ -21,12 +21,12 @@ class CreateApartmentsTable extends Migration
             $table->float("lat") -> nullable(); //da sistemare dopo aver inserito tomtom
             $table->float("lon") -> nullable(); //da sistemare dopo aver inserito tomtom
             $table->integer("rooms_n") -> unsigned();
-            $table->integer("bedrooms_n") -> unsigned();
+            $table->integer("beds_n") -> unsigned();
             $table->integer("bathrooms_n") -> unsigned();
             $table->integer("square_meters") -> unsigned();
             $table->string("image");
             $table->boolean("is_active");
-            $table->integer("sponsor_expire_time") -> unsigned();
+            $table->integer("sponsor_expire_time") -> nullable() -> unsigned();
 
             $table->bigInteger("user_id") -> unsigned() -> index();
             $table->timestamps();

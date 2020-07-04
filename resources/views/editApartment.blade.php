@@ -3,19 +3,20 @@
 
 <div class="apartment">
 
-  <div class="photo">
-    <img src="{{$apartment['image']}}" alt="photo{{$apartment['id']}}">
-  </div>
-
-  <div class="info">
     @if ($errors->any())
       @foreach ($errors->all() as $error)
         <p>{{$error}}</p>
       @endforeach
     @endif
-    <form class="" action="{{route('updateApartment', $apartment['id'])}}" method="post">
+  <form class="" action="{{route('updateApartment', $apartment['id'])}}" method="post">
       @csrf
       @method('POST')
+    <div class="photo">
+      <label for="image">Foto Appartamento: </label>
+      <input type="text" name="image" value="{{old('image', $apartment['image'])}}">
+    </div>
+    <div class="info">
+
       <h1><input type="text" name="title" value="{{old('title', $apartment['title'])}}"></h1>
       <div class="description">
           <h2>Descrizione</h2>
@@ -28,43 +29,19 @@
           <ul>
 
             <li><b>Numero stanze: </b>
-              <select class="" name="rooms_n">
-                @for ($i=1; $i < 11; $i++)
-                  <option value="{{$i}}" @if ($i == $apartment['rooms_n'])
-                    selected
-                  @endif>{{$i}}</option>
-                @endfor
-              </select>
+              <input type="number" name="rooms_n" value="{{old('rooms_n', $apartment['rooms_n'])}}">
             </li>
 
             <li><b>Numero letti: </b>
-              <select class="" name="bedrooms_n">
-                @for ($i=1; $i < 11; $i++)
-                  <option value="{{$i}}" @if ($i == $apartment['bedrooms_n'])
-                    selected
-                  @endif>{{$i}}</option>
-                @endfor
-              </select>
+              <input type="number" name="beds_n" value="{{old('beds_n', $apartment['beds_n'])}}">
             </li>
 
             <li><b>Numero bagni: </b>
-              <select class="" name="bathrooms_n">
-                @for ($i=1; $i < 11; $i++)
-                  <option value="{{$i}}" @if ($i == $apartment['bathrooms_n'])
-                    selected
-                  @endif>{{$i}}</option>
-                @endfor
-              </select>
+              <input type="number" name="bathrooms_n" value="{{old('bathrooms_n', $apartment['bathrooms_n'])}}">
             </li>
 
             <li><b>Metri quadrati: </b>
-              <select class="" name="square_meters">
-                @for ($i=30; $i < 201; $i++)
-                  <option value="{{$i}}" @if ($i == $apartment['square_meters'])
-                    selected
-                  @endif>{{$i}}</option>
-                @endfor
-              </select> metri2
+              <input type="number" name="square_meters" value="{{old('square_meters', $apartment['square_meters'])}}"> m<SUP>2</SUP>
             </li>
           </ul>
         </div>
@@ -82,9 +59,20 @@
             @endforeach
           </ul>
         </div>
-        <button type="submit" name="submit">Submittami Tutto</button>
-      </form>
+        <label for="is_active">Visibilità annuncio</label>
+        <select class="" name="is_active">
+          @if ($apartment -> is_active)
+            <option value="1">Si</option>
+            <option value="0">No</option>
+          @else
+            <option value="0">No</option>
+            <option value="1">Si</option>
+          @endif
+        </select>
+        <br>
+        <button type="submit" name="submit">Apporta Modifiche</button>
     </div>
+  </form>
 
       <div class="user_interactions">
         <div class="map">
