@@ -12,7 +12,7 @@ $factory->define(Apartment::class, function (Faker $faker) {
       "lon" => $faker -> longitude(),
       "description" => $faker -> sentence(),
       "rooms_n" => $faker -> numberBetween(1, 10),
-      "bedrooms_n" => $faker -> numberBetween(1, 4),
+      "beds_n" => $faker -> numberBetween(1, 4),
       "bathrooms_n" => $faker -> numberBetween(1, 3),
       "square_meters" => $faker -> numberBetween(30, 100),
       "address" => $faker -> address(),

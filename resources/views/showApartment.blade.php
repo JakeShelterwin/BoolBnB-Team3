@@ -6,7 +6,6 @@
   <p>{{session("success")}}</p>
 @endif
 <div class="apartment">
-  <a href="{{route('editApartment', $apartment['id'])}}">Modifica</a>
   <div class="photo">
     <img src="{{$apartment['image']}}" alt="photo{{$apartment['id']}}">
   </div>
@@ -23,7 +22,7 @@
         <h2>Caratteristiche</h2>
         <ul>
           <li><b>Numero stanze: </b>{{$apartment['rooms_n']}}</li>
-          <li><b>Numero letti: </b>{{$apartment['bedrooms_n']}}</li>
+          <li><b>Numero letti: </b>{{$apartment['beds_n']}}</li>
           <li><b>Numero bagni: </b>{{$apartment['bathrooms_n']}}</li>
           <li><b>Metri quadrati: </b>{{$apartment['square_meters']}} metri2</li>
         </ul>
@@ -48,7 +47,17 @@
     </div>
 
   </div>
+  @auth
+    @if (auth()->user()-> id == $apartment -> user_id)
+      <a href="{{route('editApartment', $apartment['id'])}}">
+        <button type="button" name="button">Modifica</button>
+      </a>
+      <a style="margin-left:50px" href="{{route('deleteApartment', $apartment['id'])}}">
+        <button type="button" name="button">Cancella</button>
+      </a>
 
+    @endif
+  @endauth
 </div>
 
 
