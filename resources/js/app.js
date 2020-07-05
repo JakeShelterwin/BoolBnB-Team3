@@ -3,11 +3,8 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
 require('./bootstrap');
-
 window.Vue = require('vue');
-
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -15,20 +12,36 @@ window.Vue = require('vue');
  *
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
-
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-console.log("funziono");
-
 const app = new Vue({
     el: '#app',
+});
+$(document).ready(function(){
+    $(".info").on("blur", "input[name=address]", function(){
+        var input = $("input[name=address]").val();
+        $.ajax({
+            url : "https://api.tomtom.com/search/2/geocode/"+input+".json?",
+            data: {
+              "key": "GqqMbjtoswnKOW5HbgKmS6sLaqEXL7pl",
+            },
+            method : "GET",
+            success : function (data) {
+              var lat = data["results"][0]["position"]["lat"];
+              var lon = data["results"][0]["position"]["lon"];
+              var position = data["results"][0]["position"];
+              $("input[name=lat]").val(position["lat"]);
+              $("input[name=lon]").val(position["lon"]);
+            },
+            error : function (richiesta,stato,errori) {
+              console.log("E' avvenuto un errore. " + errori, "stato " + stato, richiesta);
+            }
+      }); 
+    })
 });

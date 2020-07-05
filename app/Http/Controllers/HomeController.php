@@ -54,6 +54,8 @@ class HomeController extends Controller
         'square_meters' => 'required | integer',
         'services' => 'required',
         'address' => 'required | string',
+        "lat" => 'required | string',
+        "lon" => 'required | string',
         'is_active' => 'required | boolean'
       ]);
       $apartment = new Apartment;
@@ -65,6 +67,8 @@ class HomeController extends Controller
       $apartment -> bathrooms_n = $validateData['bathrooms_n'];
       $apartment -> square_meters = $validateData['square_meters'];
       $apartment -> address = $validateData['address'];
+      $apartment -> lat = $validateData['lat'];
+      $apartment -> lon = $validateData['lon'];
       $apartment -> is_active = $validateData['is_active'];
       $apartment -> user_id = auth()->user()->id;
 

@@ -17,15 +17,20 @@
   </div>
 
   <div class="info">
-      <label for="title">Nome Apppartamento </label>
+      <label for="title">Nome Appartamento </label>
       <input type="text" name="title" value="{{old('title')}}">
       <div class="description">
           <h2>Descrizione</h2>
           <p><input type="textarea" name="description" value="{{old('description')}}"></p>
       </div>
 
-      <label for="address">Indirizzo Apppartamento </label>
+      <label for="address">Indirizzo Appartamento</label>
       <input type="text" name="address" value="{{old('address')}}">
+      <input style="display:none" type="text" name="lat" value="">
+      <input style="display:none" type="text" name="lon" value="">
+      
+      
+      
 
       <div class="other_info">
         <div class="features">

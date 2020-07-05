@@ -18,8 +18,8 @@ class CreateApartmentsTable extends Migration
             $table->string("title");
             $table->text("description");
             $table->string("address");
-            $table->float("lat") -> nullable(); //da sistemare dopo aver inserito tomtom
-            $table->float("lon") -> nullable(); //da sistemare dopo aver inserito tomtom
+            $table->double("lat"); 
+            $table->double("lon");
             $table->integer("rooms_n") -> unsigned();
             $table->integer("beds_n") -> unsigned();
             $table->integer("bathrooms_n") -> unsigned();

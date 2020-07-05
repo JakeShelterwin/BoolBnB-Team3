@@ -49701,9 +49701,30 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-console.log("funziono");
 var app = new Vue({
   el: '#app'
+});
+$(document).ready(function () {
+  $(".info").on("blur", "input[name=address]", function () {
+    var input = $("input[name=address]").val();
+    $.ajax({
+      url: "https://api.tomtom.com/search/2/geocode/" + input + ".json?",
+      data: {
+        "key": "GqqMbjtoswnKOW5HbgKmS6sLaqEXL7pl"
+      },
+      method: "GET",
+      success: function success(data) {
+        var lat = data["results"][0]["position"]["lat"];
+        var lon = data["results"][0]["position"]["lon"];
+        var position = data["results"][0]["position"];
+        $("input[name=lat]").val(position["lat"]);
+        $("input[name=lon]").val(position["lon"]);
+      },
+      error: function error(richiesta, stato, errori) {
+        console.log("E' avvenuto un errore. " + errori, "stato " + stato, richiesta);
+      }
+    });
+  });
 });
 
 /***/ }),
@@ -49840,8 +49861,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\boolean\Progettone\BoolBnB-Team3\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\boolean\Progettone\BoolBnB-Team3\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\gohan\OneDrive\Desktop\Scuola\progetti_github\progettone\BoolBnB-Team3\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\gohan\OneDrive\Desktop\Scuola\progetti_github\progettone\BoolBnB-Team3\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
