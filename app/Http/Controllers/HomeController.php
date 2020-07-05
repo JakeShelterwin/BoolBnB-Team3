@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Service;
 use App\Apartment;
 use App\User;
+use App\Message;
 class HomeController extends Controller
 {
     /**
@@ -27,8 +28,13 @@ class HomeController extends Controller
     {
       $apartments = Apartment::all();
       $user_id = auth()->user()->id;
+      $messages = Message::all();
       $user_apartments = $apartments -> where('user_id',$user_id);
-      return view('home', compact('user_apartments'));
+      $user_messages = [];
+      foreach ($user_apartments as $apartment) {
+        $user_messages[] = $messages -> where('apartment_id', $apartment -> id);
+      }
+      return view('home', compact('user_apartments', 'user_messages'));
     }
 
     public function createApartment()
