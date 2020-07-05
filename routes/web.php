@@ -12,3 +12,4 @@ Route::get('/apartment-delete/{id}', 'HomeController@deleteApartment')->name('de
 
 Route::get('/', "ApartmentController@index")->name("welcome");
 Route::get('/apartment/{id}', 'ApartmentController@showApartment')->name('showApartment');
+Route::post('/message/apartment{id}', 'ApartmentController@storeMessage')->name('storeMessage');

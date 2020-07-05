@@ -39,12 +39,31 @@
 
     <div class="user_interactions">
       <div class="map">
-
+        <div style="border: 1px solid black; width: 300px; height: 200px;" class="tomtom">
+          questa è la mappa
+        </div>
       </div>
       <div class="contact">
+        {{$emailUtente = NULL}}
+        @auth
+          @php
+            $emailUtente = auth()->user()-> email
+          @endphp
 
+        @endauth
+        <form class="" action="{{route('storeMessage', $apartment -> id)}}" method="post">
+          @csrf
+          @method('POST')
+          <label for="email">Inserisci la tua mail per essere ricontattato</label> <br>
+          <input type="email" name="email" value="{{old('email', $emailUtente)}}"> <br>
+
+          <label for="message">Inserisci ciò che vuoi chiedere al proprietario</label> <br>
+          <input type="textarea" name="message" value="{{old('message')}}"> <br>
+          <button type="submit" name="submit">Invia Messaggio</button> <br>
+        </form>
       </div>
     </div>
+
 
   </div>
   @auth
@@ -59,38 +78,5 @@
     @endif
   @endauth
 </div>
-
-
-
-
-{{-- @foreach ($apartments as $apartment)
-    <li>Titolo appartamento: {{$apartment -> title}}</li>
-    <li>Descrizione appartamento: {{$apartment["description"]}}</li>
-    <li>proprietario {{$apartment -> user -> name}}</li>
-    <li>messaggi  <ul>
-                    @foreach ($apartment -> messages as $message)
-                      <li> {{$message -> message }}</li>
-                    @endforeach
-                  </ul>  </li>
-    <li>sponsor  <ul>
-                    @foreach ($apartment -> sponsor as $sponsor)
-                      <li> {{$sponsor -> name }}</li>
-                    @endforeach
-                  </ul>  </li>
-    <li>servizi  <ul>
-                    @foreach ($apartment -> services as $service)
-                      <li> {{$service -> name }}</li>
-                    @endforeach
-                  </ul>  </li>
-    <li>visite  <ul>
-                    @foreach ($apartment -> views as $view)
-                      <li> {{$view -> views }}</li>
-                    @endforeach
-                  </ul>  </li>
-    -----------------------------
-    <br>
-  @endforeach --}}
-
-
 
 @endsection
