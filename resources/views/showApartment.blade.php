@@ -7,7 +7,7 @@
 @endif
 <div class="apartment">
   <div class="photo">
-    <img src="{{$apartment['image']}}" alt="photo{{$apartment['id']}}">
+    <img src="{{asset($apartment['image'])}}" alt="photo{{$apartment['id']}}">
   </div>
 
   <div class="info">
@@ -15,6 +15,10 @@
     <div class="description">
       <h2>Descrizione</h2>
       <p>{{$apartment['description']}}</p>
+    </div>
+    <div class="address">
+      <h2>Indirizzo</h2>
+      <p>"{{$apartment['address']}}"</p>
     </div>
 
     <div class="other_info">
@@ -24,7 +28,7 @@
           <li><b>Numero stanze: </b>{{$apartment['rooms_n']}}</li>
           <li><b>Numero letti: </b>{{$apartment['beds_n']}}</li>
           <li><b>Numero bagni: </b>{{$apartment['bathrooms_n']}}</li>
-          <li><b>Metri quadrati: </b>{{$apartment['square_meters']}} metri2</li>
+          <li><b>Metri quadrati: </b>{{$apartment['square_meters']}} m<SUP>2</SUP></li>
         </ul>
       </div>
       <div class="services">

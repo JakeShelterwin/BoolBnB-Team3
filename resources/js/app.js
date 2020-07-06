@@ -1,30 +1,12 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+
 require('./bootstrap');
-window.Vue = require('vue');
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-const app = new Vue({
-    el: '#app',
-});
+
 $(document).ready(function(){
-    $(".info").on("blur", "input[name=address]", function(){
+    console.log("js collegato");
+      // questo if gestisce il modo in cui ci ricaviamo le coordiante dato un indirizzo.
+      //Nel caso in cui l'utente commetta errori e dunque la pagina si ricarichi (non perdendo i valori grazie a old()) l'ajax viene richiamato in automatico su quei valori.
+      // Nel caso in cui l'indirizzo non sia stato ancora inserito allora si attende che l'utente abbia finito di scriverlo e quando il focus esce dall'input viene richiamato l'ajax che ottiene le coordinate.
+      if ($("input[name=address]").val()) {
         var input = $("input[name=address]").val();
         $.ajax({
             url : "https://api.tomtom.com/search/2/geocode/"+input+".json?",
@@ -38,10 +20,52 @@ $(document).ready(function(){
               var position = data["results"][0]["position"];
               $("input[name=lat]").val(position["lat"]);
               $("input[name=lon]").val(position["lon"]);
+              $("#bottoneCreate").prop("disabled", false);
             },
             error : function (richiesta,stato,errori) {
               console.log("E' avvenuto un errore. " + errori, "stato " + stato, richiesta);
             }
-      }); 
-    })
+      });
+      } else {
+        $(".info").on("blur", "input[name=address]", function(){
+            var input = $("input[name=address]").val();
+
+            $.ajax({
+                url : "https://api.tomtom.com/search/2/geocode/"+input+".json?",
+                data: {
+                  "key": "GqqMbjtoswnKOW5HbgKmS6sLaqEXL7pl",
+                },
+                method : "GET",
+                success : function (data) {
+                  //rimuovo eventuali p che mostra l'errore
+                  $(".address p").remove();
+                  // controllo di riceve almeno un indirizzo valido, se non lo ricevo faccio append di un p che mostra un messaggio d'errore
+                  // e disattiva il bottone d'invio dati
+                  // altrimneti valorizzo i campi lat e lon come sopra
+                  // e attivo il bottone d'invio dati
+                  if (data["results"].length === 0){
+                    $("#bottoneCreate").prop("disabled", true);
+                    $(".address").append("<p style='color: red'>Indirizzo non riconosciuto</p>")
+                  } else {
+                    var lat = data["results"][0]["position"]["lat"];
+                    var lon = data["results"][0]["position"]["lon"];
+                    var position = data["results"][0]["position"];
+                    $("input[name=lat]").val(position["lat"]);
+                    $("input[name=lon]").val(position["lon"]);
+                    $("#bottoneCreate").prop("disabled", false);
+                  }
+
+                },
+                error : function (richiesta,stato,errori) {
+                  console.log("E' avvenuto un errore. " + errori, "stato " + stato, richiesta);
+                }
+          });
+        })
+      }
+
+      // TEST PER ORDINARE CRONOLOGICAMENTE I MESSAGGI
+      // $('.messages .card').sort(function(a,b) {
+      //     console.log("ciclo");
+      //    return $(a).data('time') > $(b).data('time');
+      // }).appendTo('.messages');
 });

@@ -3,12 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 use App\Service;
 use App\Apartment;
 use App\User;
 use App\Message;
+
+// file UploadTrait creato da noi dentro la cartella creata da noi Traits per fare l'upload delle immagini
+use App\Traits\UploadTrait;
+
 class HomeController extends Controller
 {
+    use UploadTrait;
+
     /**
      * Create a new controller instance.
      *
@@ -30,11 +38,12 @@ class HomeController extends Controller
       $user_id = auth()->user()->id;
       $messages = Message::all();
       $user_apartments = $apartments -> where('user_id',$user_id);
-      $user_messages = [];
+      $users_messages_grouped_by_apartment = [];
       foreach ($user_apartments as $apartment) {
-        $user_messages[] = $messages -> where('apartment_id', $apartment -> id);
+        $users_messages_grouped_by_apartment[] = $messages -> where('apartment_id', $apartment -> id);
       }
-      return view('home', compact('user_apartments', 'user_messages'));
+      // dd($users_messages_grouped_by_apartment);
+      return view('home', compact('user_apartments', 'users_messages_grouped_by_apartment'));
     }
 
     public function createApartment()
@@ -46,12 +55,12 @@ class HomeController extends Controller
     public function storeApartment(Request $request){
       $validateData = $request -> validate([
         'title' => 'required | string',
-        'image' => 'required | string',
+        'image' => 'required | image | mimes:jpeg,png,jpg,gif | max:2048',
         'description' => 'required | string',
-        'rooms_n' => 'required | integer',
-        'beds_n' => 'required | integer',
-        'bathrooms_n' => 'required | integer',
-        'square_meters' => 'required | integer',
+        'rooms_n' => 'required | integer | min:1',
+        'beds_n' => 'required | integer | min:1',
+        'bathrooms_n' => 'required | integer | min:0',
+        'square_meters' => 'required | integer | min:4',
         'services' => 'required',
         'address' => 'required | string',
         "lat" => 'required | string',
@@ -60,7 +69,7 @@ class HomeController extends Controller
       ]);
       $apartment = new Apartment;
       $apartment -> title = $validateData['title'];
-      $apartment -> image = $validateData['image'];
+      // $apartment -> image = $validateData['image'];
       $apartment -> description = $validateData['description'];
       $apartment -> rooms_n = $validateData['rooms_n'];
       $apartment -> beds_n = $validateData['beds_n'];
@@ -71,6 +80,24 @@ class HomeController extends Controller
       $apartment -> lon = $validateData['lon'];
       $apartment -> is_active = $validateData['is_active'];
       $apartment -> user_id = auth()->user()->id;
+
+      // Check if a profile image has been uploaded
+        if ($request->has('image')) {
+            // Get image file
+            $image = $request->file('image');
+            // Make a image name based on apartment title and current timestamp
+            $name = Str::slug($request->input('title'), '-').'_'.time();
+            // $name = Str::slug($request->input('title')).'_'.time();
+            // Define folder path
+            $folder = '/uploads/images/';
+            // Make a file path where image will be stored [ folder path + file name + file extension]
+            $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
+            // Upload image
+            $this->uploadOne($image, $folder, 'public', $name);
+            // Set user profile image path in database to filePath
+            $apartment -> image = $filePath;
+            // $user->profile_image = $filePath; ESEMPIO MODIFICATO DA LARACAST
+        }
 
       $apartment -> save();
       $apartment -> services() -> sync($validateData['services']);
@@ -88,11 +115,12 @@ class HomeController extends Controller
 
       $validateData = $request -> validate([
         'title' => 'required | string',
+        'image' => 'nullable | image | mimes:jpeg,png,jpg,gif | max:2048',
         'description' => 'required | string',
-        'rooms_n' => 'required | integer',
-        'beds_n' => 'required | integer',
-        'bathrooms_n' => 'required | integer',
-        'square_meters' => 'required | integer',
+        'rooms_n' => 'required | integer | min:1',
+        'beds_n' => 'required | integer | min:1',
+        'bathrooms_n' => 'required | integer | min:0',
+        'square_meters' => 'required | integer | min:4',
         'services' => 'required',
         'is_active' => 'required | boolean'
       ]);
@@ -104,6 +132,31 @@ class HomeController extends Controller
       $apartment -> bathrooms_n = $validateData['bathrooms_n'];
       $apartment -> square_meters = $validateData['square_meters'];
       $apartment -> is_active = $validateData['is_active'];
+
+      $oldImage = public_path($apartment -> image);
+
+      // Check if a profile image has been uploaded
+        if ($request->has('image')) {
+            // Get image file
+            $image = $request->file('image');
+            // Make a image name based on apartment title and current timestamp
+            $name = 'apartment'.Str::slug($apartment -> id, '-').'_'.time();
+            // Define folder path
+            $folder = '/uploads/images/';
+            // Make a file path where image will be stored [ folder path + file name + file extension]
+            $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
+
+            // PRIMA DI SALVARE L'APPARTAMENTO CANCELLO IN LOCALE LA VECCHIA IMMAGINE
+            File::delete($oldImage);
+
+            // Upload image
+            $this->uploadOne($image, $folder, 'public', $name);
+            // Set user profile image path in database to filePath
+            $apartment -> image = $filePath;
+            // $user->profile_image = $filePath; ESEMPIO MODIFICATO DA LARACAST
+        }
+
+
       $apartment -> save();
 
       $apartment -> services() -> sync($validateData['services']);
@@ -115,6 +168,7 @@ class HomeController extends Controller
 
     public function deleteApartment($id){
       $apartment = Apartment::findOrFail($id);
+      $deleteImage = File::delete(public_path($apartment -> image));
       $apartment -> delete();
       return redirect() -> route("welcome")
                         -> withSuccess("Appartamento eliminato con successo!");

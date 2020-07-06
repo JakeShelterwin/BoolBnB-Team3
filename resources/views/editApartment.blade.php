@@ -8,12 +8,12 @@
         <p>{{$error}}</p>
       @endforeach
     @endif
-  <form class="" action="{{route('updateApartment', $apartment['id'])}}" method="post">
+  <form class="" action="{{route('updateApartment', $apartment['id'])}}" method="post"  enctype="multipart/form-data">
       @csrf
       @method('POST')
     <div class="photo">
       <label for="image">Foto Appartamento: </label>
-      <input type="text" name="image" value="{{old('image', $apartment['image'])}}">
+      <input type="file" name="image">
     </div>
     <div class="info">
 

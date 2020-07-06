@@ -7,13 +7,13 @@
       <p>{{$error}}</p>
     @endforeach
   @endif
-  <form class="" action="{{route('storeApartment')}}" method="post">
+  <form class="" action="{{route('storeApartment')}}" method="post" enctype="multipart/form-data">
     @csrf
     @method('POST')
 
   <div class="photo">
     <label for="image">Foto Appartamento: </label>
-    <input type="text" name="image" value="{{old('image')}}">
+    <input type="file" name="image">
   </div>
 
   <div class="info">
@@ -24,13 +24,13 @@
           <p><input type="textarea" name="description" value="{{old('description')}}"></p>
       </div>
 
-      <label for="address">Indirizzo Appartamento</label>
-      <input type="text" name="address" value="{{old('address')}}">
-      <input style="display:none" type="text" name="lat" value="">
-      <input style="display:none" type="text" name="lon" value="">
-      
-      
-      
+      <div class="address">
+        <label for="address">Indirizzo Appartamento</label>
+        <input type="text" name="address" value="{{old('address')}}">
+        <input style="display:none" type="text" name="lat" value="">
+        <input style="display:none" type="text" name="lon" value="">
+      </div>
+
 
       <div class="other_info">
         <div class="features">
@@ -69,7 +69,7 @@
           <option value="0">No</option>
         </select>
         <br>
-        <button type="submit" name="submit">Crea Appartamento</button>
+        <button id="bottoneCreate" class="checkValidity" type="submit" name="submit" disabled >Crea Appartamento</button>
       </form>
     </div>
   </div>

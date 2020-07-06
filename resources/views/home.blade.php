@@ -21,7 +21,7 @@
                 <div class="card">
                   <a href="{{route('showApartment',$apartment['id'])}}"><div class="card-header">{{$apartment -> title}}</div></a>
 
-                      <!-- @if ($apartment -> is_active)
+                     {{-- @if ($apartment -> is_active)
                         <form action="{{route('updateApartment', $apartment['id'])}}" method="post">
                           @csrf
                           @method('POST')
@@ -35,7 +35,7 @@
                           <input style="display:none" type="text" name="is_active" value="1">
                           <button type="submit" name="submit">Attiva</button>
                         </form>
-                      @endif -->
+                      @endif --}}
                   <div class="card-body">
                     {{$apartment -> description}}
                   </div>
@@ -44,18 +44,26 @@
             @endif
         </div>
 
-        <div class="col-md-4 flex-column-reverse d-flex justify-content-end">
-         @if ($user_messages)
-          @foreach ($user_messages[1] as $message)
-              <div class="card">
-                <div class="card-header">Appartamento: {{$message -> apartment -> title}}</div>
-                <div class="card-body">
-                  <b>Messaggio da: </b>{{$message -> email}} <br>
-                  <b>Testo:  </b>{{$message -> message}}
-                </div>
-              </div>
-            @endforeach
+        <div class="messages col-md-4 flex-column-reverse d-flex justify-content-end">
+
+         @if ($users_messages_grouped_by_apartment)
+           @foreach ($users_messages_grouped_by_apartment as $singleApartmentMessages)
+             @foreach ($singleApartmentMessages as $message)
+                 <div class="card" data-time="{{$message -> created_at}}">
+                   <div class="card-header">Appartamento: {{$message -> apartment -> title}}</div>
+                   <div class="card-body">
+                     <b>Messaggio da: </b>{{$message -> email}} <br>
+                     <b>Testo:  </b>{{$message -> message}}
+                   </div>
+                 </div>
+               @endforeach
+           @endforeach
           @endif
+          {{-- aggiunta grafica sopra ai messaggi ricevuti --}}
+          <div class="card">
+            <div class="card-header">{{ __('Messaggi Ricevuti') }}</div>
+            <div class="card-body"> </div>
+          </div>
         </div>
     </div>
 </div>
