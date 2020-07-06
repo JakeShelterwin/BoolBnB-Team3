@@ -18,7 +18,7 @@
             </div>
             @if ($user_apartments)
               @foreach ($user_apartments as $apartment)
-                <div class="card">
+                <div class="card" data-annuncioAttivo="{{$apartment['is_active']}}">
                   <a href="{{route('showApartment',$apartment['id'])}}"><div class="card-header">{{$apartment -> title}}</div></a>
 
                      {{-- @if ($apartment -> is_active)

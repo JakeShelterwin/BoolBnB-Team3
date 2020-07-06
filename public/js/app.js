@@ -37290,7 +37290,30 @@ $(document).ready(function () {
   //     console.log("ciclo");
   //    return $(a).data('time') > $(b).data('time');
   // }).appendTo('.messages');
+  // GUIDA TOM TOM https://developer.tomtom.com/maps-sdk-web-js/tutorials-use-cases/map-marker-tutorial
 
+
+  var currentApartment = [$("#longitude").val(), $("#latitude").val()];
+  var map = tt.map({
+    container: 'map',
+    key: 'GqqMbjtoswnKOW5HbgKmS6sLaqEXL7pl',
+    style: 'tomtom://vector/1/basic-main',
+    center: currentApartment,
+    zoom: 18
+  });
+  var marker = new tt.Marker().setLngLat(currentApartment).addTo(map);
+  var popupOffsets = {
+    top: [0, 0],
+    bottom: [0, -70],
+    'bottom-right': [0, -70],
+    'bottom-left': [0, -70],
+    left: [25, -35],
+    right: [-25, -35]
+  };
+  var popup = new tt.Popup({
+    offset: popupOffsets
+  }).setHTML("<p>" + $(".info #title").text() + "</p>" + $(".address p").text());
+  marker.setPopup(popup).togglePopup();
 });
 
 /***/ }),

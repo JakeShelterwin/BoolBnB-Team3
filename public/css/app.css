@@ -10932,3 +10932,21 @@ a.text-dark:focus {
   margin-top: 10px;
 }
 
+#map {
+  height: 300px;
+  /* The height is 400 pixels */
+  width: 400px;
+  /* The width is the width of the web page */
+  border: 1px solid black;
+}
+
+#map p {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
+.coordinate {
+  display: none;
+}
+

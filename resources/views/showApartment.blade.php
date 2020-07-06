@@ -7,11 +7,11 @@
 @endif
 <div class="apartment">
   <div class="photo">
-    <img src="{{asset($apartment['image'])}}" alt="photo{{$apartment['id']}}">
+    <img id="apartmentImage" src="{{asset($apartment['image'])}}" alt="photo{{$apartment['id']}}">
   </div>
 
   <div class="info">
-    <h1>{{$apartment['title']}}</h1>
+    <h1 id="title">{{$apartment['title']}}</h1>
     <div class="description">
       <h2>Descrizione</h2>
       <p>{{$apartment['description']}}</p>
@@ -19,6 +19,10 @@
     <div class="address">
       <h2>Indirizzo</h2>
       <p>"{{$apartment['address']}}"</p>
+      <div class="coordinate">
+        <input id="latitude" type="text" name="latitude" value="{{$apartment['lat']}}">
+        <input id="longitude" type="text" name="longitude" value="{{$apartment['lon']}}">
+      </div>
     </div>
 
     <div class="other_info">
@@ -42,11 +46,10 @@
     </div>
 
     <div class="user_interactions">
-      <div class="map">
-        <div style="border: 1px solid black; width: 300px; height: 200px;" class="tomtom">
-          questa è la mappa
-        </div>
-      </div>
+      <div id="map"></div>
+      {{-- <div style="border: 1px solid black; width: 300px; height: 200px;" class="tomtom">
+      questa è la mappa
+    </div> --}}
       <div class="contact">
         {{$emailUtente = NULL}}
         @auth
