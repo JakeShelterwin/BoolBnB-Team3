@@ -16,8 +16,19 @@
       <input type="file" name="image">
     </div>
     <div class="info">
-
+      <h2>Titolo</h2>
       <h1><input type="text" name="title" value="{{old('title', $apartment['title'])}}"></h1>
+
+      <div class="address">
+        <h2>Indirizzo</h2>
+        {{-- <p>"{{$apartment['address']}}"</p> --}}
+        <input type="text" name="address" value="{{old('address', $apartment['address'])}}">
+        <div class="coordinate">
+          <input id="latitude" type="text" name="lat" value="">
+          <input id="longitude" type="text" name="lon" value="">
+        </div>
+      </div>
+
       <div class="description">
           <h2>Descrizione</h2>
           <p><input type="textarea" name="description" value="{{old('description', $apartment['description'])}}"></p>
@@ -70,7 +81,7 @@
           @endif
         </select>
         <br>
-        <button type="submit" name="submit">Apporta Modifiche</button>
+        <button id="bottoneCreate" type="submit" name="submit" disabled>Apporta Modifiche</button>
     </div>
   </form>
 

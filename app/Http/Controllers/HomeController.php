@@ -122,6 +122,9 @@ class HomeController extends Controller
         'bathrooms_n' => 'required | integer | min:0',
         'square_meters' => 'required | integer | min:4',
         'services' => 'required',
+        'address' => 'required | string',
+        "lat" => 'required | string',
+        "lon" => 'required | string',
         'is_active' => 'required | boolean'
       ]);
       $apartment = Apartment::findOrFail($id);
@@ -131,6 +134,9 @@ class HomeController extends Controller
       $apartment -> beds_n = $validateData['beds_n'];
       $apartment -> bathrooms_n = $validateData['bathrooms_n'];
       $apartment -> square_meters = $validateData['square_meters'];
+      $apartment -> address = $validateData['address'];
+      $apartment -> lat = $validateData['lat'];
+      $apartment -> lon = $validateData['lon'];
       $apartment -> is_active = $validateData['is_active'];
 
       $oldImage = public_path($apartment -> image);

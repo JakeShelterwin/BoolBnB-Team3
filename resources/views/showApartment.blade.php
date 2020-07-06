@@ -18,7 +18,7 @@
     </div>
     <div class="address">
       <h2>Indirizzo</h2>
-      <p>"{{$apartment['address']}}"</p>
+      <p>{{$apartment['address']}}</p>
       <div class="coordinate">
         <input id="latitude" type="text" name="latitude" value="{{$apartment['lat']}}">
         <input id="longitude" type="text" name="longitude" value="{{$apartment['lon']}}">
