@@ -5,6 +5,11 @@
 @if (session("success"))
   <p>{{session("success")}}</p>
 @endif
+@if ($errors->any())
+  @foreach ($errors->all() as $error)
+    <p>{{$error}}</p>
+  @endforeach
+@endif
 <div class="apartment">
   <div class="photo">
     <img id="apartmentImage" src="{{asset($apartment['image'])}}" alt="photo{{$apartment['id']}}">
