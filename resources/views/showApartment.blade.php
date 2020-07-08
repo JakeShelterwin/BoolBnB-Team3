@@ -86,9 +86,11 @@
       <a style="margin-left:50px" href="{{route('deleteApartment', $apartment['id'])}}">
         <button type="button" name="button">Cancella</button>
       </a>
-
     @endif
   @endauth
+  <a style="margin-left:50px" href="{{route('storeView', $apartment['id'])}}">
+    <button type="button" name="button">MOSTRA VIEW</button>
+  </a>
 </div>
 
 @endsection

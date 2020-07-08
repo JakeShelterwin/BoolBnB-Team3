@@ -60,6 +60,11 @@ class AddForeignKeysTable extends Migration
               -> on("apartments")
               -> onDelete("cascade")
               ;
+        $table-> foreign("user_id" , "userV")
+              -> references("id")
+              -> on("users")
+              -> onDelete("cascade")
+              ;
     });
     }
 
@@ -86,6 +91,7 @@ class AddForeignKeysTable extends Migration
         });
         Schema::table('views', function (Blueprint $table) {
             $table-> dropForeign("apartmentV");
+            // $table-> dropForeign("userV");
         });
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use App\Apartment;
+use App\View;
 
 class User extends Authenticatable
 {
@@ -14,6 +15,9 @@ class User extends Authenticatable
     // CUSTOMIZZAZIONE
     public function apartments(){
       return $this -> hasMany(Apartment::class);
+    }
+    public function views(){
+      return $this -> hasMany(View::class);
     }
     // FINE CUSCOMIZZAZIONE
 
