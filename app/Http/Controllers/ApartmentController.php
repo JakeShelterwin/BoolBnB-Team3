@@ -12,7 +12,8 @@ class ApartmentController extends Controller
 {
     public function index(){
       $apartments = Apartment::all();
-      return view('welcome', compact("apartments"));
+      $services = Service::all();
+      return view('welcome', compact("apartments", "services"));
     }
     public function showApartment($id){
       $apartment = Apartment::findOrFail($id);

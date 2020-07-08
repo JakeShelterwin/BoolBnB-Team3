@@ -6,7 +6,14 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul {
+  list-style-type: none;
+}
 .card{
   margin-top: 10px;
 }
@@ -23,3 +30,76 @@
 .coordinate{
   display: none;
 }
+header{
+  background-color: pink;
+  height: 10vh;
+
+}
+.all{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  background-color: pink;
+}
+.jumbotron{
+  background-color: pink;
+  height: 90vh;
+  width: 100%;
+}
+.searchbar{
+  width: 24%;
+  height: 49px;
+}
+.buttonsearch{
+  height: 50px;
+  width: 76px;
+}
+footer{
+  background-color: grey;
+}
+.linkfooter{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 30vh;
+  width: 80%;
+  margin: 0 auto;
+  .start{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: calc(100% / 3);
+  }
+  .center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% / 3);
+  }
+  .end{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: calc(100% / 3);
+  }
+}
+.titolilink{
+  font-size: 20px;
+
+}
+.social{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 10vh;
+  width: 80%;
+  margin: 0 auto;
+  span{
+    font-size: 20px;
+  }
+}
+
+
+

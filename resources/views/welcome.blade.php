@@ -1,6 +1,12 @@
 @extends('layouts.mainLayout')
 
 @section('content')
+<div class="jumbotron"> 
+  <input class="searchbar" type="text" placeholder="Cerca un appartamento..."><input class="buttonsearch" type="button" value="Cerca"><br>
+  @foreach ($services as $service)
+      <input type="checkbox" name="{{$service -> name}}" value="{{$service -> id}}">{{$service -> name}}
+  @endforeach
+</div>
 
 <ul class="appartamenti">
 
