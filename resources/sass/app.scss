@@ -33,7 +33,6 @@ ul {
 header{
   background-color: pink;
   height: 10vh;
-
 }
 .all{
   display: flex;
@@ -44,16 +43,23 @@ header{
   background-color: pink;
 }
 .jumbotron{
-  background-color: pink;
   height: 90vh;
   width: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.mySlides {
+  width: 100%;
+  height: 100%;
 }
 .searchbar{
-  width: 24%;
+  width: 26%;
   height: 49px;
 }
 .buttonsearch{
-  height: 50px;
+  height: 49px;
   width: 76px;
 }
 footer{
@@ -99,6 +105,42 @@ footer{
   span{
     font-size: 20px;
   }
+}
+.absolute_searchbar{
+  position: absolute;
+  left: 2%;
+  top: 62%;
+  transform: translate(-6px, 10px);
+}
+.absolute_botton{
+  position: absolute;
+  left: 28%;
+  top: 62%;
+  transform: translate(-6px, 10px);
+}
+.absolute_title{
+  position: absolute;
+  left: 2%;
+  top: 27%;
+  transform: translate(-6px, 10px);
+  color: white;
+  font-size: 50px;
+}
+.absolute_p{
+  position: absolute;
+  left: 2%;
+  top: 40%;
+  transform: translate(-6px, 10px);
+  color: white;
+  font-size: 25px;
+  width: 50%;
+}
+.apartments_row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% / 3);
+  height: 100%;
 }
 
 

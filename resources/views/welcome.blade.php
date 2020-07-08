@@ -2,7 +2,12 @@
 
 @section('content')
 <div class="jumbotron"> 
-  <input class="searchbar" type="text" placeholder="Cerca un appartamento..."><input class="buttonsearch" type="button" value="Cerca"><br>
+  <h1 class="absolute_title">CIAO SONO UN TITOLO</h1>
+  <p class="absolute_p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore obcaecati, reprehenderit beatae eveniet numquam cum deserunt iste nemo fugiat nisi? Illum, accusantium vero sit laudantium ipsum amet facere sapiente quos!</p>
+  <div><input class="searchbar absolute_searchbar" type="text" placeholder="Cerca un appartamento..."><input class="buttonsearch absolute_botton" type="button" value="Cerca"></div>
+  <img class="mySlides" src="{{ asset('uploads/images/img.jpg') }}" alt="">
+  <img class="mySlides" src="{{ asset('uploads/images/img1.jpg') }}" alt="">
+  <img class="mySlides" src="{{ asset('uploads/images/img2.jpg') }}" alt="">
   <!-- @foreach ($services as $service)
       <input type="checkbox" name="{{$service -> name}}" value="{{$service -> id}}">{{$service -> name}}
   @endforeach -->
@@ -35,7 +40,7 @@
                     @endforeach
                   </ul>  </li>
     -----------------------------
-    <br>
+    
   @endforeach
 </ul>
 
