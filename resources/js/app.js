@@ -1,4 +1,4 @@
-
+require('chart.js');
 require('./bootstrap');
 
 $(document).ready(function(){
@@ -77,25 +77,74 @@ $(document).ready(function(){
       //    return $(a).data('time') > $(b).data('time');
       // }).appendTo('.messages');
 
+
+
       // GUIDA TOM TOM https://developer.tomtom.com/maps-sdk-web-js/tutorials-use-cases/map-marker-tutorial
-      var currentApartment = [$("#longitude").val(), $("#latitude").val()];
-      var map = tt.map({
-                container: 'map',
-                key: 'GqqMbjtoswnKOW5HbgKmS6sLaqEXL7pl',
-                style: 'tomtom://vector/1/basic-main',
-                center: currentApartment,
-                zoom: 18
-            });
-      var marker = new tt.Marker().setLngLat(currentApartment).addTo(map);
-      var popupOffsets = {
-        top: [0, 0],
-        bottom: [0, -70],
-        'bottom-right': [0, -70],
-        'bottom-left': [0, -70],
-        left: [25, -35],
-        right: [-25, -35]
+      if($('#map').length){ // se esiste nella pagina il div con id "map"
+        var currentApartment = [$("#longitude").val(), $("#latitude").val()];
+        var map = tt.map({
+                  container: 'map',
+                  key: 'GqqMbjtoswnKOW5HbgKmS6sLaqEXL7pl',
+                  style: 'tomtom://vector/1/basic-main',
+                  center: currentApartment,
+                  zoom: 18
+              });
+        var marker = new tt.Marker().setLngLat(currentApartment).addTo(map);
+        var popupOffsets = {
+          top: [0, 0],
+          bottom: [0, -70],
+          'bottom-right': [0, -70],
+          'bottom-left': [0, -70],
+          left: [25, -35],
+          right: [-25, -35]
+        }
+
+        var popup = new tt.Popup({offset: popupOffsets}).setHTML("<p>" + $(".info #title").text() + "</p>" + $(".address p").text());
+        marker.setPopup(popup).togglePopup();
       }
 
-      var popup = new tt.Popup({offset: popupOffsets}).setHTML("<p>" + $(".info #title").text() + "</p>" + $(".address p").text());
-      marker.setPopup(popup).togglePopup();
+
+
+      // STATISTICHE
+      if ($('#charts').length) {
+        var ctx = $('#viewsStats');
+        var visualizzazioni = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+      }
+
+      console.log(statistics.views);
 });
