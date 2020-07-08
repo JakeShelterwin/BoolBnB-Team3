@@ -9,6 +9,7 @@ use App\Service;
 use App\Message;
 use App\View;
 use Carbon\Carbon;
+use JavaScript;
 
 class ApartmentController extends Controller
 {
@@ -69,12 +70,18 @@ class ApartmentController extends Controller
 
     }
 
-    public function showView($apartment_id)
+    public function showApartmentStatistics($apartment_id)
     {
-        $post = View::where('apartment_id', '=' , $apartment_id)->firstOrFail();
+        $views = View::all() -> where('apartment_id', $apartment_id); //restituisce array[] con all'interno ogni singola view dell'appartamento
+        $messages = Message::all() -> where('apartment_id', $apartment_id); //restituisce array[] con all'interno ogni singolo messaggio per l'appartamento
 
-        View::createViewLog($post);//or add `use App\PostView;` in beginning of the file in order to use only `PostView` here
+        JavaScript::put([ // questa classe trasferisce i dati al javascript
+        'views' => $views,
+        'messages' => $messages
+        ]);
 
+        // return view('showApartmentStatistics', compact("views", "messages"));
+        return view('showApartmentStatistics');
     }
 
 }

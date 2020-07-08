@@ -13,6 +13,8 @@ Route::get('/apartment-delete/{id}', 'HomeController@deleteApartment')->name('de
 Route::get('/', "ApartmentController@index")->name("welcome");
 Route::get('/apartment/{id}', 'ApartmentController@showApartment')->name('showApartment');
 
+Route::get('/apartment/{id}/stats', 'ApartmentController@showApartmentStatistics')->name('showApartmentStatistics');
+
 Route::get('/view/{id}', 'ApartmentController@storeView')->name('storeView');
 
 Route::post('/message/apartment{id}', 'ApartmentController@storeMessage')->name('storeMessage');
