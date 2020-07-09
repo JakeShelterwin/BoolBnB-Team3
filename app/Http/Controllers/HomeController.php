@@ -10,6 +10,10 @@ use App\Apartment;
 use App\User;
 use App\Message;
 
+use App\View;
+use Carbon\Carbon;
+use JavaScript;
+
 // file UploadTrait creato da noi dentro la cartella creata da noi Traits per fare l'upload delle immagini
 use App\Traits\UploadTrait;
 
@@ -178,5 +182,30 @@ class HomeController extends Controller
       $apartment -> delete();
       return redirect() -> route("welcome")
                         -> withSuccess("Appartamento eliminato con successo!");
+    }
+    public function showApartmentStatistics($apartment_id)
+    {
+        $views = View::all() -> where('apartment_id', $apartment_id); //restituisce array[] con all'interno ogni singola view dell'appartamento
+        $messages = Message::all() -> where('apartment_id', $apartment_id); //restituisce array[] con all'interno ogni singolo messaggio per l'appartamento
+        $viewsFiltrate = [];
+        foreach ($views as $view) {
+          $viewsFiltrate[] = date( "M",  strtotime( $view -> created_at) );
+        }
+        // dd($viewsFiltrate);
+        // $expiredViewTime = date( "M",  strtotime( Carbon::now()) );
+        // dd($expiredViewTime);
+        // soluzione https://jsfiddle.net/simevidas/bnACW/
+        //soluzione spiegata https://stackoverflow.com/questions/5667888/counting-the-occurrences-frequency-of-array-elements
+        $messaggiFiltrati = [];
+        foreach ($messages as $message) {
+          $messaggiFiltrati[] = date( "M",  strtotime( $message -> created_at) );
+        }
+        JavaScript::put([ // questa classe trasferisce i dati al javascript
+        'views' => $viewsFiltrate,
+        'messages' => $messaggiFiltrati
+        ]);
+
+        // return view('showApartmentStatistics', compact("views", "messages"));
+        return view('showApartmentStatistics');
     }
 }

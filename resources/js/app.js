@@ -104,32 +104,107 @@ $(document).ready(function(){
       }
 
 
+      var mesi = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno','Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre']
+      // STATISTICHE MESSAGGI
+      var everyApartmentMessages = statistics.messages;
+      console.log("tutti i messaggi:", everyApartmentMessages);
+      // for (var variable in everyApartmentMessages) {
+      //   console.log("il primo messaggio:", variable);
+      // }
+      // for (variabile of everyApartmentMessages) {
+      //   console.log("il primo messaggio:", variable);
+      // }
 
-      // STATISTICHE
+      // for (var i = 0; i < everyApartmentMessages.length; i++) {
+      //   console.log("tutti i messaggi:", everyApartmentMessages[i]);
+      // }
+      console.log("statistics", statistics.messages);
       if ($('#charts').length) {
         var ctx = $('#viewsStats');
         var visualizzazioni = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: mesi,
                 datasets: [{
-                    label: '# of Votes',
+                    label: '# messaggi ricevuti',
                     data: [12, 19, 3, 5, 2, 3],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
+                      'rgba(150, 33, 146, 0.2)',
+                      'rgba(82, 40, 204, 0.2)',
+                      'rgba(4, 51, 255, 0.2)',
+                      'rgba(0, 146, 146, 0.2)',
+                      'rgba(0, 249, 0, 0.2)',
+                      'rgba(202, 250, 0, 0.2)',
+                      'rgba(255, 251, 0, 0.2)',
+                      'rgba(255, 199, 0, 0.2)',
+                      'rgba(255, 147, 0, 0.2)',
+                      'rgba(255, 80, 0, 0.2)',
+                      'rgba(255, 38, 0, 0.2)',
+                      'rgba(216, 34, 83, 0.2)'
                     ],
                     borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
+                        'rgba(150, 33, 146, 1)',
+                        'rgba(82, 40, 204, 1)',
+                        'rgba(4, 51, 255, 1)',
+                        'rgba(0, 146, 146, 1)',
+                        'rgba(0, 249, 0, 1)',
+                        'rgba(202, 250, 0, 1)',
+                        'rgba(255, 251, 0, 1)',
+                        'rgba(255, 199, 0, 1)',
+                        'rgba(255, 147, 0, 1)',
+                        'rgba(255, 80, 0, 1)',
+                        'rgba(255, 38, 0, 1)',
+                        'rgba(216, 34, 83, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+        // VISUALIZZAZIONI
+        var ctm = $('#messagesStats');
+        var messaggiRicevuti = new Chart(ctm, {
+            type: 'line',
+            data: {
+                labels: mesi,
+                datasets: [{
+                    label: '# visualizzazioni',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                      'rgba(150, 33, 146, 0.2)',
+                      'rgba(82, 40, 204, 0.2)',
+                      'rgba(4, 51, 255, 0.2)',
+                      'rgba(0, 146, 146, 0.2)',
+                      'rgba(0, 249, 0, 0.2)',
+                      'rgba(202, 250, 0, 0.2)',
+                      'rgba(255, 251, 0, 0.2)',
+                      'rgba(255, 199, 0, 0.2)',
+                      'rgba(255, 147, 0, 0.2)',
+                      'rgba(255, 80, 0, 0.2)',
+                      'rgba(255, 38, 0, 0.2)',
+                      'rgba(216, 34, 83, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(150, 33, 146, 1)',
+                        'rgba(82, 40, 204, 1)',
+                        'rgba(4, 51, 255, 1)',
+                        'rgba(0, 146, 146, 1)',
+                        'rgba(0, 249, 0, 1)',
+                        'rgba(202, 250, 0, 1)',
+                        'rgba(255, 251, 0, 1)',
+                        'rgba(255, 199, 0, 1)',
+                        'rgba(255, 147, 0, 1)',
+                        'rgba(255, 80, 0, 1)',
+                        'rgba(255, 38, 0, 1)',
+                        'rgba(216, 34, 83, 1)'
                     ],
                     borderWidth: 1
                 }]
@@ -147,4 +222,6 @@ $(document).ready(function(){
       }
 
       console.log(statistics.views);
+
+      // console.log(statistics.messages);
 });
