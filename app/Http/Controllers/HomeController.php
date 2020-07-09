@@ -9,7 +9,6 @@ use App\Service;
 use App\Apartment;
 use App\User;
 use App\Message;
-
 use App\View;
 use Carbon\Carbon;
 use JavaScript;
@@ -19,7 +18,7 @@ use App\Traits\UploadTrait;
 
 class HomeController extends Controller
 {
-    use UploadTrait;
+  use UploadTrait;
 
     /**
      * Create a new controller instance.
@@ -86,22 +85,20 @@ class HomeController extends Controller
       $apartment -> user_id = auth()->user()->id;
 
       // Check if a profile image has been uploaded
-        if ($request->has('image')) {
-            // Get image file
-            $image = $request->file('image');
-            // Make a image name based on apartment title and current timestamp
-            $name = Str::slug($request->input('title'), '-').'_'.time();
-            // $name = Str::slug($request->input('title')).'_'.time();
-            // Define folder path
-            $folder = '/uploads/images/';
-            // Make a file path where image will be stored [ folder path + file name + file extension]
-            $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
-            // Upload image
-            $this->uploadOne($image, $folder, 'public', $name);
-            // Set user profile image path in database to filePath
-            $apartment -> image = $filePath;
-            // $user->profile_image = $filePath; ESEMPIO MODIFICATO DA LARACAST
-        }
+      if ($request->has('image')) {
+          // Get image file
+          $image = $request->file('image');
+          // Make a image name based on apartment title and current timestamp
+          $name = Str::slug($request->input('title'), '-').'_'.time();
+          // Define folder path
+          $folder = '/uploads/images/';
+          // Make a file path where image will be stored [ folder path + file name + file extension]
+          $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
+          // Upload image
+          $this->uploadOne($image, $folder, 'public', $name);
+          // Set user profile image path in database to filePath
+          $apartment -> image = $filePath;
+      }
 
       $apartment -> save();
       $apartment -> services() -> sync($validateData['services']);
@@ -116,7 +113,6 @@ class HomeController extends Controller
     }
 
     public function updateApartment(Request $request, $id){
-
       $validateData = $request -> validate([
         'title' => 'required | string',
         'image' => 'nullable | image | mimes:jpeg,png,jpg,gif | max:2048',
@@ -146,29 +142,25 @@ class HomeController extends Controller
       $oldImage = public_path($apartment -> image);
 
       // Check if a profile image has been uploaded
-        if ($request->has('image')) {
-            // Get image file
-            $image = $request->file('image');
-            // Make a image name based on apartment title and current timestamp
-            $name = 'apartment'.Str::slug($apartment -> id, '-').'_'.time();
-            // Define folder path
-            $folder = '/uploads/images/';
-            // Make a file path where image will be stored [ folder path + file name + file extension]
-            $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
+      if ($request->has('image')) {
+          // Get image file
+          $image = $request->file('image');
+          // Make a image name based on apartment title and current timestamp
+          $name = 'apartment'.Str::slug($apartment -> id, '-').'_'.time();
+          // Define folder path
+          $folder = '/uploads/images/';
+          // Make a file path where image will be stored [ folder path + file name + file extension]
+          $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
 
-            // PRIMA DI SALVARE L'APPARTAMENTO CANCELLO IN LOCALE LA VECCHIA IMMAGINE
-            File::delete($oldImage);
+          // PRIMA DI SALVARE L'APPARTAMENTO CANCELLO IN LOCALE LA VECCHIA IMMAGINE
+          File::delete($oldImage);
 
-            // Upload image
-            $this->uploadOne($image, $folder, 'public', $name);
-            // Set user profile image path in database to filePath
-            $apartment -> image = $filePath;
-            // $user->profile_image = $filePath; ESEMPIO MODIFICATO DA LARACAST
-        }
-
-
+          // Upload image
+          $this->uploadOne($image, $folder, 'public', $name);
+          // Set user profile image path in database to filePath
+          $apartment -> image = $filePath;
+      }
       $apartment -> save();
-
       $apartment -> services() -> sync($validateData['services']);
 
       return redirect() -> route("showApartment", $id)
@@ -185,27 +177,92 @@ class HomeController extends Controller
     }
     public function showApartmentStatistics($apartment_id)
     {
-        $views = View::all() -> where('apartment_id', $apartment_id); //restituisce array[] con all'interno ogni singola view dell'appartamento
-        $messages = Message::all() -> where('apartment_id', $apartment_id); //restituisce array[] con all'interno ogni singolo messaggio per l'appartamento
-        $viewsFiltrate = [];
-        foreach ($views as $view) {
-          $viewsFiltrate[] = date( "M",  strtotime( $view -> created_at) );
-        }
-        // dd($viewsFiltrate);
-        // $expiredViewTime = date( "M",  strtotime( Carbon::now()) );
-        // dd($expiredViewTime);
-        // soluzione https://jsfiddle.net/simevidas/bnACW/
-        //soluzione spiegata https://stackoverflow.com/questions/5667888/counting-the-occurrences-frequency-of-array-elements
-        $messaggiFiltrati = [];
-        foreach ($messages as $message) {
-          $messaggiFiltrati[] = date( "M",  strtotime( $message -> created_at) );
-        }
-        JavaScript::put([ // questa classe trasferisce i dati al javascript
-        'views' => $viewsFiltrate,
-        'messages' => $messaggiFiltrati
-        ]);
+      //soluzione spiegata https://stackoverflow.com/questions/5667888/counting-the-occurrences-frequency-of-array-elements
+      // soluzione https://jsfiddle.net/simevidas/bnACW/
+      $views = View::all() -> where('apartment_id', $apartment_id); //restituisce array[] con all'interno ogni singola view dell'appartamento
+      $messages = Message::all() -> where('apartment_id', $apartment_id); //restituisce array[] con all'interno ogni singolo messaggio per l'appartamento
 
-        // return view('showApartmentStatistics', compact("views", "messages"));
-        return view('showApartmentStatistics');
+      // Gestione delle informazioni per le visualizzazioni
+      $viewsFiltered = [];
+      foreach ($views as $view) {
+        $viewsFiltered[] = date( "m",  strtotime( $view -> created_at) );
+      }
+      $viewsMonths = []; // restituirà l'array con i mesi in ordine
+      $viewsCount = []; // restituirà l'array le occorrenze di ciascun mese
+      $prev = 0;
+
+      sort($viewsFiltered);
+      for ($i = 0; $i < count($viewsFiltered); $i++ ) {
+          if ( $viewsFiltered[$i] !== $prev ) {
+              $viewsMonths[] = $viewsFiltered[$i];
+              $viewsCount[] = 1;
+          } else {
+              $viewsCount[count($viewsCount) - 1]++;
+          }
+          $prev = $viewsFiltered[$i];
+      }
+
+      // Gestione delle informazioni per i Messaggi
+      $messagesFiltered = [];
+      foreach ($messages as $message) {
+        $messagesFiltered[] = date( "m",  strtotime( $message -> created_at) );
+      }
+      $messagesMonths = []; // restituirà l'array con i mesi in ordine
+      $messagesCount = []; // restituirà l'array le occorrenze di ciascun mese
+      $prev = 0;
+
+      sort($messagesFiltered);
+      for ($i = 0; $i < count($messagesFiltered); $i++ ) {
+          if ( $messagesFiltered[$i] !== $prev ) {
+              $messagesMonths[] = $messagesFiltered[$i];
+              $messagesCount[] = 1;
+          } else {
+              $messagesCount[count($messagesCount) - 1]++;
+          }
+          $prev = $messagesFiltered[$i];
+      }
+
+      function trasformaMesi($array){
+        for ($i=0; $i < count($array); $i++) {
+          if($array[$i] == '01'){
+            $array[$i] = 'Gen';
+          }elseif ($array[$i] == '02'){
+            $array[$i] = 'Feb';
+          }elseif ($array[$i] == '03'){
+            $array[$i] = 'Mar';
+          }elseif ($array[$i] == '04'){
+            $array[$i] = 'Apr';
+          }elseif ($array[$i] == '05'){
+            $array[$i] = 'Mag';
+          }elseif ($array[$i] == '06'){
+            $array[$i] = 'Giu';
+          }elseif ($array[$i] == '07'){
+            $array[$i] = 'Lug';
+          }elseif ($array[$i] == '08'){
+            $array[$i] = 'Ago';
+          }elseif ($array[$i] == '09'){
+            $array[$i] = 'Set';
+          }elseif ($array[$i] == '10'){
+            $array[$i] = 'Ott';
+          }elseif ($array[$i] == '11'){
+            $array[$i] = 'Nov';
+          }elseif ($array[$i] == '12'){
+            $array[$i] = 'Dic';
+        }
+      }
+      return $array;
+    }
+      $viewsMonths = trasformaMesi($viewsMonths);
+      $messagesMonths = trasformaMesi($messagesMonths);
+
+      JavaScript::put([ // questa classe trasferisce i dati al javascript
+      'viewsCount' => $viewsCount,
+      'viewsMonths' => $viewsMonths,
+      'messagesMonths' => $messagesMonths,
+      'messagesCount' => $messagesCount,
+      ]);
+
+      // return view('showApartmentStatistics', compact("views", "messages"));
+      return view('showApartmentStatistics');
     }
 }

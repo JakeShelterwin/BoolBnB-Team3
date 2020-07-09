@@ -3,14 +3,17 @@
 @section('content')
 
   <div id="charts">
-    <div class="visualizzazioni" style="border: 1px solid black; width: 400px; height: 400px">
-      <canvas id="viewsStats" width="400px" height="400px"></canvas>
+    <div class="chartBox visualizzazioni" style="width: 400px">
+      <h2>Visualizzazioni</h2>
+      <canvas id="viewsStatsBar" style="width: 400px; height: 400px"></canvas>
+      <canvas id="viewsStatsLine" style="width: 400px; height: 400px"></canvas>
 
     </div>
 
-    <div class="messaggi" style="border: 1px solid black; width: 400px; height: 400px">
-
-      <canvas id="messagesStats" width="400px" height="400px"></canvas>
+    <div class="chartBox messaggi" style="width: 400px">
+      <h2>Messaggi ricevuti</h2>
+      <canvas id="messagesStatsBar" style="width: 400px; height: 400px"></canvas>
+      <canvas id="messagesStatsLine" style="width: 400px; height: 400px"></canvas>
 
     </div>
 

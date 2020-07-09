@@ -104,124 +104,78 @@ $(document).ready(function(){
       }
 
 
-      var mesi = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno','Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre']
-      // STATISTICHE MESSAGGI
-      var everyApartmentMessages = statistics.messages;
-      console.log("tutti i messaggi:", everyApartmentMessages);
-      // for (var variable in everyApartmentMessages) {
-      //   console.log("il primo messaggio:", variable);
-      // }
-      // for (variabile of everyApartmentMessages) {
-      //   console.log("il primo messaggio:", variable);
-      // }
 
-      // for (var i = 0; i < everyApartmentMessages.length; i++) {
-      //   console.log("tutti i messaggi:", everyApartmentMessages[i]);
-      // }
-      console.log("statistics", statistics.messages);
       if ($('#charts').length) {
-        var ctx = $('#viewsStats');
-        var visualizzazioni = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: mesi,
-                datasets: [{
-                    label: '# messaggi ricevuti',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                      'rgba(150, 33, 146, 0.2)',
-                      'rgba(82, 40, 204, 0.2)',
-                      'rgba(4, 51, 255, 0.2)',
-                      'rgba(0, 146, 146, 0.2)',
-                      'rgba(0, 249, 0, 0.2)',
-                      'rgba(202, 250, 0, 0.2)',
-                      'rgba(255, 251, 0, 0.2)',
-                      'rgba(255, 199, 0, 0.2)',
-                      'rgba(255, 147, 0, 0.2)',
-                      'rgba(255, 80, 0, 0.2)',
-                      'rgba(255, 38, 0, 0.2)',
-                      'rgba(216, 34, 83, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(150, 33, 146, 1)',
-                        'rgba(82, 40, 204, 1)',
-                        'rgba(4, 51, 255, 1)',
-                        'rgba(0, 146, 146, 1)',
-                        'rgba(0, 249, 0, 1)',
-                        'rgba(202, 250, 0, 1)',
-                        'rgba(255, 251, 0, 1)',
-                        'rgba(255, 199, 0, 1)',
-                        'rgba(255, 147, 0, 1)',
-                        'rgba(255, 80, 0, 1)',
-                        'rgba(255, 38, 0, 1)',
-                        'rgba(216, 34, 83, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-        // VISUALIZZAZIONI
-        var ctm = $('#messagesStats');
-        var messaggiRicevuti = new Chart(ctm, {
-            type: 'line',
-            data: {
-                labels: mesi,
-                datasets: [{
-                    label: '# visualizzazioni',
-                    data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                      'rgba(150, 33, 146, 0.2)',
-                      'rgba(82, 40, 204, 0.2)',
-                      'rgba(4, 51, 255, 0.2)',
-                      'rgba(0, 146, 146, 0.2)',
-                      'rgba(0, 249, 0, 0.2)',
-                      'rgba(202, 250, 0, 0.2)',
-                      'rgba(255, 251, 0, 0.2)',
-                      'rgba(255, 199, 0, 0.2)',
-                      'rgba(255, 147, 0, 0.2)',
-                      'rgba(255, 80, 0, 0.2)',
-                      'rgba(255, 38, 0, 0.2)',
-                      'rgba(216, 34, 83, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(150, 33, 146, 1)',
-                        'rgba(82, 40, 204, 1)',
-                        'rgba(4, 51, 255, 1)',
-                        'rgba(0, 146, 146, 1)',
-                        'rgba(0, 249, 0, 1)',
-                        'rgba(202, 250, 0, 1)',
-                        'rgba(255, 251, 0, 1)',
-                        'rgba(255, 199, 0, 1)',
-                        'rgba(255, 147, 0, 1)',
-                        'rgba(255, 80, 0, 1)',
-                        'rgba(255, 38, 0, 1)',
-                        'rgba(216, 34, 83, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        });
-      }
+        //ricevo dati dall' HomeController@showApartmentStatistics
+        var viewsMonths = statistics.viewsMonths;
+        var views = statistics.viewsCount;
+        var messagesMonths = statistics.messagesMonths;
+        var messages = statistics.messagesCount;
 
-      console.log(statistics.views);
+        // sommo le visualizzazioni e i messaggi
+        var viewsTotalsCounter = views.reduce((a, b) => a + b, 0);
+        var messagesTotalsCounter = messages.reduce((a, b) => a + b, 0);
+        $('#charts .visualizzazioni h2').append("<br>" + viewsTotalsCounter + " totali");
+        $('#charts .messaggi h2').append("<br>" + messagesTotalsCounter + " totali");
 
-      // console.log(statistics.messages);
+        //creo i grafici
+        createCharts('#viewsStatsBar', 'bar', 'Visualizzazioni Appartamento', viewsMonths, views);
+        createCharts('#viewsStatsLine', 'line', 'Visualizzazioni Appartamento', viewsMonths, views);
+        createCharts('#messagesStatsBar', 'bar', 'Messaggi Ricevuti', messagesMonths, messages);
+        createCharts('#messagesStatsLine', 'line', 'Messaggi Ricevuti', messagesMonths, messages);
+
+    }
+
+    // FUNZIONE CHE CREA GRAFICI
+    function createCharts(idHtml, type, titleOfGraph, months,data){
+      var ctx = $(idHtml);
+      var graph = new Chart(ctx, {
+          type:  type,
+          data: {
+              labels: months,
+              datasets: [{
+                  label: titleOfGraph,
+                  data: data,
+                  backgroundColor: [
+                    'rgba(150, 33, 146, 0.2)',
+                    'rgba(82, 40, 204, 0.2)',
+                    'rgba(4, 51, 255, 0.2)',
+                    'rgba(0, 146, 146, 0.2)',
+                    'rgba(0, 249, 0, 0.2)',
+                    'rgba(202, 250, 0, 0.2)',
+                    'rgba(255, 251, 0, 0.2)',
+                    'rgba(255, 199, 0, 0.2)',
+                    'rgba(255, 147, 0, 0.2)',
+                    'rgba(255, 80, 0, 0.2)',
+                    'rgba(255, 38, 0, 0.2)',
+                    'rgba(216, 34, 83, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(150, 33, 146, 1)',
+                      'rgba(82, 40, 204, 1)',
+                      'rgba(4, 51, 255, 1)',
+                      'rgba(0, 146, 146, 1)',
+                      'rgba(0, 249, 0, 1)',
+                      'rgba(202, 250, 0, 1)',
+                      'rgba(255, 251, 0, 1)',
+                      'rgba(255, 199, 0, 1)',
+                      'rgba(255, 147, 0, 1)',
+                      'rgba(255, 80, 0, 1)',
+                      'rgba(255, 38, 0, 1)',
+                      'rgba(216, 34, 83, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero: true
+                      }
+                  }]
+              }
+          }
+      });
+    }
 });
