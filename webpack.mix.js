@@ -13,9 +13,5 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
-<<<<<<< HEAD
     .js('node_modules/chart.js/dist/Chart.js', 'public/js')
-=======
     .js('resources/js/appfront.js', 'public/js');
->>>>>>> master
-    

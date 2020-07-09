@@ -11090,3 +11090,18 @@ footer {
   height: 100%;
 }
 
+.appartamenti {
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+}
+
+.appartamenti ul {
+  width: calc(100% / 3 - 40px);
+  margin: 20px;
+  text-align: center;
+}
+

@@ -142,6 +142,18 @@ footer{
   width: calc(100% / 3);
   height: 100%;
 }
-
-
-
+.appartamenti{
+  width: 90%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+  // border: 2px solid black;
+  ul {
+    width: calc(100% / 3 - 40px);
+    margin: 20px;
+    text-align: center;
+    // border: 1px solid black;
+  }
+}

@@ -1,7 +1,7 @@
 @extends('layouts.mainLayout')
 
 @section('content')
-<div class="jumbotron"> 
+<div class="jumbotron">
   <h1 class="absolute_title">CIAO SONO UN TITOLO</h1>
   <p class="absolute_p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore obcaecati, reprehenderit beatae eveniet numquam cum deserunt iste nemo fugiat nisi? Illum, accusantium vero sit laudantium ipsum amet facere sapiente quos!</p>
   <div><input class="searchbar absolute_searchbar" type="text" placeholder="Cerca un appartamento..."><input class="buttonsearch absolute_botton" type="button" value="Cerca"></div>
@@ -13,7 +13,7 @@
   @endforeach -->
 </div>
 
-<ul class="appartamenti">
+{{-- <ul class="appartamenti">
 
   @foreach ($apartments as $apartment)
     <li><b><a href="{{route('showApartment', $apartment -> id)}}">Titolo appartamento:</b> {{$apartment -> title}} </a></li>
@@ -40,9 +40,18 @@
                     @endforeach
                   </ul>  </li>
     -----------------------------
-    
+
   @endforeach
-</ul>
+</ul> --}}
 
-
+<div class="appartamenti">
+  @foreach ($apartments as $apartment)
+  <ul>
+    <li><img src="{{$apartment->image}}" alt=""></li>
+    <li><b><a href="{{route('showApartment', $apartment -> id)}}">Titolo appartamento:</b> {{$apartment -> title}} </a></li>
+    <li><b>Descrizione appartamento:</b> {{$apartment["description"]}}</li>
+    <li><b>proprietario</b> {{$apartment -> user -> name}}</li>
+  </ul>
+  @endforeach
+</div>
 @endsection
