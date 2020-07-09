@@ -11105,3 +11105,22 @@ footer {
   text-align: center;
 }
 
+#charts {
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+  max-width: 1000px;
+  min-width: 850px;
+}
+
+#charts h2 {
+  text-align: center;
+}
+
+#charts #viewsStatsBar,
+#charts #viewsStatsLine,
+#charts #messagesStatsBar,
+#charts #messagesStatsLine {
+  margin: 10px;
+}
+
