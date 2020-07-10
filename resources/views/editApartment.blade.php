@@ -1,5 +1,6 @@
 @extends('layouts.mainLayout')
 @section('content')
+  @if (auth()->user()-> id == $apartment -> user_id)
 
 <div class="apartment">
 
@@ -96,4 +97,5 @@
   </div>
 </div>
 
+  @endif
 @endsection

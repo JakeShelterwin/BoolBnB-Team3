@@ -9,7 +9,7 @@ use App\Service;
 use App\Message;
 use App\View;
 use Carbon\Carbon;
-
+use Treffynnon\Navigator as N;
 class ApartmentController extends Controller
 {
     public function index(){
@@ -65,10 +65,50 @@ class ApartmentController extends Controller
                         -> withSuccess("Messaggio inviato correttamente");
     }
 
-    public function searchApartments($lat, $lon){
+    // public function searchApartments(Request $request){
+    //   $apartments = Apartment::all();
+    //   $lat = $request['lat'];
+    //   $lon = $request['lon'];
+    //
+    //
+    //   if($request['radius']){
+    //     $radius = $request['radius'] * 1000;
+    //   }else{
+    //     $radius = 20000;
+    //   }
+    //
+    //   $selectedApartments = [];
+    //   foreach ($apartments as $apartment) {
+    //     $distance = N::getDistance($lat, $lon, $apartment['lat'], $apartment['lon']);
+    //     if($distance <= $radius){
+    //       $selectedApartments[] = $apartment;
+    //     }
+    //   }
+    //   // dd($request);
+    //
+    //   //$distance = N::getDistance($lat, $lon, 37.2540561, 13.7905864);
+    //
+    //   return view('searchApartments', compact("apartments"));
+    // }
+
+    public function searchApartments(){
       $apartments = Apartment::all();
+      // $lat = $request['lat'];
+      // $lon = $request['lon'];
+      // $radius *= 1000;
+      // // dd($radius);
+      //
+      //
+      // $selectedApartments = [];
+      // foreach ($apartments as $apartment) {
+      //   $distance = N::getDistance($lat, $lon, $apartment['lat'], $apartment['lon']);
+      //   if($distance <= $radius){
+      //     $selectedApartments[] = $apartment;
+      //   }
+      // }
 
+      return view("searchApartments", compact('apartments'));
 
-      return view('welcome', compact("apartments", ));
     }
+
 }

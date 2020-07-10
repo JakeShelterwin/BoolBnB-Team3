@@ -12,7 +12,8 @@ Route::get('/apartment-delete/{id}', 'HomeController@deleteApartment')->name('de
 Route::get('/apartment/{id}/stats', 'HomeController@showApartmentStatistics')->name('showApartmentStatistics');
 
 Route::get('/', "ApartmentController@index")->name("welcome");
-Route::get('/searchApartments/{lat}/{lon}', "ApartmentController@searchApartments")->name("searchApartments");
+Route::get('/searchApartments', "ApartmentController@searchApartments")->name("searchApartments");
+
 Route::get('/apartment/{id}', 'ApartmentController@showApartment')->name('showApartment');
 
 
