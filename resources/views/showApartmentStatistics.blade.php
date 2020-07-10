@@ -1,6 +1,6 @@
 @extends('layouts.mainLayout')
-
 @section('content')
+  @if (auth()->user()-> id == $apartment -> user_id)
   <div id="statistics">
     <h1>Statistiche appartamento: {{$apartment -> title}}</h1>
     <div id="charts">
@@ -30,5 +30,5 @@
 </div>
 
   </div>
-
+  @endif
 @endsection

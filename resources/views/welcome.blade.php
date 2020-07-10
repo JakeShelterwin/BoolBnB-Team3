@@ -4,9 +4,17 @@
 <div class="jumbotron">
   <h1 class="absolute_title">CIAO SONO UN TITOLO</h1>
   <p class="absolute_p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore obcaecati, reprehenderit beatae eveniet numquam cum deserunt iste nemo fugiat nisi? Illum, accusantium vero sit laudantium ipsum amet facere sapiente quos!</p>
-  <div>
-    <input id="ricerca" class="searchbar absolute_searchbar" type="text" placeholder="Cerca un appartamento...">
-    <input id="btnQuery" class="buttonsearch absolute_botton" type="button" value="Cerca">
+  <div class="info">
+    <form action="{{route('searchApartments')}}" method="post">
+      @csrf
+      @method('POST')
+      <input id="ricerca" name="address" class="searchbar absolute_searchbar" type="text" placeholder="Dove vorresti alloggiare?">
+      <div class="coordinate">
+        <input id="latitude" type="text" name="lat" value="">
+        <input id="longitude" type="text" name="lon" value="">
+      </div>
+      <button id="btnQuery" class="buttonsearch absolute_botton" type="submit" name="button" value="Cerca">Cerca!</button>
+    </form>
   </div>
   <img class="mySlides" src="{{ asset('uploads/images/img.jpg') }}" alt="">
   <img class="mySlides" src="{{ asset('uploads/images/img1.jpg') }}" alt="">

@@ -198,7 +198,7 @@ $(document).ready(function(){
             var lat = data["results"][0]["position"]["lat"];
             var lon = data["results"][0]["position"]["lon"];
 
-            var querystring = lat + "/" + lon;
+            var querystring = "?search=" + input + "&lat=" + lat + "&lon=" + lon;
 
             var url = "searchApartments/" + querystring;
             window.location.href = url;
@@ -209,7 +209,7 @@ $(document).ready(function(){
           console.log("E' avvenuto un errore. " + errori, "stato " + stato, richiesta);
         }
       });
-
   });
-
+  // $('#searchbar').val()
+  console.log(window.location.search);
 });

@@ -5,8 +5,8 @@
 <div id="searchPage">
 
   <div>
-    <input class="searchbar absolute_searchbar" type="text" placeholder="Cerca un appartamento...">
-    <input class="buttonsearch absolute_botton" type="button" value="Cerca">
+    <input id="searchbar" class="searchbar" type="text" placeholder="Cerca un appartamento...">
+    <input class="buttonsearch" type="button" value="Cerca">
   </div>
 
 
