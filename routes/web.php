@@ -13,6 +13,7 @@ Route::get('/apartment/{id}/stats', 'HomeController@showApartmentStatistics')->n
 
 Route::get('/', "ApartmentController@index")->name("welcome");
 Route::get('/searchApartments', "ApartmentController@searchApartments")->name("searchApartments");
+
 Route::get('/apartment/{id}', 'ApartmentController@showApartment')->name('showApartment');
 
 

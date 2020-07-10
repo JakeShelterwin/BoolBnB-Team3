@@ -198,10 +198,10 @@ $(document).ready(function(){
             var lat = data["results"][0]["position"]["lat"];
             var lon = data["results"][0]["position"]["lon"];
 
-            var querystring = "?search=" + input + "&lat=" + lat + "&lon=" + lon;
-
-            var url = "searchApartments/" + querystring;
-            window.location.href = url;
+            // var querystring = "?search=" + input + "&lat=" + lat + "&lon=" + lon;
+            //
+            // var url = "searchApartments/" + querystring;
+            // window.location.href = url;
           }
 
         },
@@ -211,5 +211,5 @@ $(document).ready(function(){
       });
   });
   // $('#searchbar').val()
-  console.log(window.location.search);
+  
 });

@@ -5,16 +5,17 @@
   <h1 class="absolute_title">CIAO SONO UN TITOLO</h1>
   <p class="absolute_p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore obcaecati, reprehenderit beatae eveniet numquam cum deserunt iste nemo fugiat nisi? Illum, accusantium vero sit laudantium ipsum amet facere sapiente quos!</p>
   <div class="info">
-    <form action="{{route('searchApartments')}}" method="post">
+    {{-- <form action="{{route('searchApartments')}}" method="post">
       @csrf
       @method('POST')
-      <input id="ricerca" name="address" class="searchbar absolute_searchbar" type="text" placeholder="Dove vorresti alloggiare?">
+      <input id="ricerca" name="address" class="searchbar absolute_searchbar" type="text" placeholder="Dove vorresti alloggiare?" value="palermo">
       <div class="coordinate">
         <input id="latitude" type="text" name="lat" value="">
         <input id="longitude" type="text" name="lon" value="">
       </div>
       <button id="btnQuery" class="buttonsearch absolute_botton" type="submit" name="button" value="Cerca">Cerca!</button>
-    </form>
+    </form> --}}
+    <a href="{{route('searchApartments')}}">Vai</a>
   </div>
   <img class="mySlides" src="{{ asset('uploads/images/img.jpg') }}" alt="">
   <img class="mySlides" src="{{ asset('uploads/images/img1.jpg') }}" alt="">

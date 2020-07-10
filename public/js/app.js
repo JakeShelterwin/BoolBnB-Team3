@@ -74792,10 +74792,10 @@ $(document).ready(function () {
           // $(".address").append("<p style='color: red'>Indirizzo non riconosciuto</p>")
         } else {
           var lat = data["results"][0]["position"]["lat"];
-          var lon = data["results"][0]["position"]["lon"];
-          var querystring = "?search=" + input + "&lat=" + lat + "&lon=" + lon;
-          var url = "searchApartments/" + querystring;
-          window.location.href = url;
+          var lon = data["results"][0]["position"]["lon"]; // var querystring = "?search=" + input + "&lat=" + lat + "&lon=" + lon;
+          //
+          // var url = "searchApartments/" + querystring;
+          // window.location.href = url;
         }
       },
       error: function error(richiesta, stato, errori) {
@@ -74803,8 +74803,6 @@ $(document).ready(function () {
       }
     });
   }); // $('#searchbar').val()
-
-  console.log(window.location.search);
 });
 
 /***/ }),

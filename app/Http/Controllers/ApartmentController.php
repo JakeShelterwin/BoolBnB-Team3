@@ -9,7 +9,7 @@ use App\Service;
 use App\Message;
 use App\View;
 use Carbon\Carbon;
-
+use Treffynnon\Navigator as N;
 class ApartmentController extends Controller
 {
     public function index(){
@@ -65,32 +65,50 @@ class ApartmentController extends Controller
                         -> withSuccess("Messaggio inviato correttamente");
     }
 
-    public function searchApartments(Request $request){
+    // public function searchApartments(Request $request){
+    //   $apartments = Apartment::all();
+    //   $lat = $request['lat'];
+    //   $lon = $request['lon'];
+    //
+    //
+    //   if($request['radius']){
+    //     $radius = $request['radius'] * 1000;
+    //   }else{
+    //     $radius = 20000;
+    //   }
+    //
+    //   $selectedApartments = [];
+    //   foreach ($apartments as $apartment) {
+    //     $distance = N::getDistance($lat, $lon, $apartment['lat'], $apartment['lon']);
+    //     if($distance <= $radius){
+    //       $selectedApartments[] = $apartment;
+    //     }
+    //   }
+    //   // dd($request);
+    //
+    //   //$distance = N::getDistance($lat, $lon, 37.2540561, 13.7905864);
+    //
+    //   return view('searchApartments', compact("apartments"));
+    // }
+
+    public function searchApartments(){
       $apartments = Apartment::all();
+      // $lat = $request['lat'];
+      // $lon = $request['lon'];
+      // $radius *= 1000;
+      // // dd($radius);
+      //
+      //
+      // $selectedApartments = [];
+      // foreach ($apartments as $apartment) {
+      //   $distance = N::getDistance($lat, $lon, $apartment['lat'], $apartment['lon']);
+      //   if($distance <= $radius){
+      //     $selectedApartments[] = $apartment;
+      //   }
+      // }
 
+      return view("searchApartments", compact('apartments'));
 
-      function getDistance($latitude1, $longitude1, $latitude2, $longitude2) {
-        $earth_radius = 6371;
-
-        $dLat = deg2rad($latitude2 - $latitude1);
-        $dLon = deg2rad($longitude2 - $longitude1);
-
-        $a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($latitude1)) * cos(deg2rad($latitude2)) * sin($dLon/2) * sin($dLon/2);
-        $c = 2 * asin(sqrt($a));
-        $d = $earth_radius * $c;
-
-        return $d;
-      }
-
-      $distance = getDistance(38.1620283, 13.3231795, 37.2540561, 13.7905864);
-      
-      if ($distance < 15) {
-        echo "Within 100 kilometer radius";
-      } else {
-        echo "Outside 100 kilometer radius";
-      }
-
-
-      return view('searchApartments', compact("apartments", ));
     }
+
 }
