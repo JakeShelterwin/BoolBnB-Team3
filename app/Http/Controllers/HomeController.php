@@ -179,6 +179,8 @@ class HomeController extends Controller
     {
       //soluzione spiegata https://stackoverflow.com/questions/5667888/counting-the-occurrences-frequency-of-array-elements
       // soluzione https://jsfiddle.net/simevidas/bnACW/
+      $apartment = Apartment::findOrFail($apartment_id);
+
       $views = View::all() -> where('apartment_id', $apartment_id); //restituisce array[] con all'interno ogni singola view dell'appartamento
       $messages = Message::all() -> where('apartment_id', $apartment_id); //restituisce array[] con all'interno ogni singolo messaggio per l'appartamento
 
@@ -202,6 +204,21 @@ class HomeController extends Controller
           $prev = $viewsFiltered[$i];
       }
 
+      // array di appoggio per rispettare le corrispondenze con i mesi dell'anno
+      $viewsMonthsFinal = [0,0,0,0,0,0,0,0,0,0,0,0];
+      $viewsCountFinal = [0,0,0,0,0,0,0,0,0,0,0,0];
+
+      // iteratore di appoggio
+      $index = 0;
+      for ($i = 1; $i < count($viewsMonthsFinal)+1; $i++) {
+        if (in_array($i, $viewsMonths)) {
+          $x = $i-1; // riduciamo di una posizione l'indice per la corrispondenza con i mesi
+          $viewsMonthsFinal[$x] = $i;  // ripopolo l'array dei mesi
+          $viewsCountFinal[$x] = $viewsCount[$index]; // ripopolo l'array delle visualizzazioni
+          $index++;
+        }
+      }
+
       // Gestione delle informazioni per i Messaggi
       $messagesFiltered = [];
       foreach ($messages as $message) {
@@ -210,6 +227,7 @@ class HomeController extends Controller
       $messagesMonths = []; // restituirà l'array con i mesi in ordine
       $messagesCount = []; // restituirà l'array le occorrenze di ciascun mese
       $prev = 0;
+
 
       sort($messagesFiltered);
       for ($i = 0; $i < count($messagesFiltered); $i++ ) {
@@ -222,47 +240,27 @@ class HomeController extends Controller
           $prev = $messagesFiltered[$i];
       }
 
-      function trasformaMesi($array){
-        for ($i=0; $i < count($array); $i++) {
-          if($array[$i] == '01'){
-            $array[$i] = 'Gen';
-          }elseif ($array[$i] == '02'){
-            $array[$i] = 'Feb';
-          }elseif ($array[$i] == '03'){
-            $array[$i] = 'Mar';
-          }elseif ($array[$i] == '04'){
-            $array[$i] = 'Apr';
-          }elseif ($array[$i] == '05'){
-            $array[$i] = 'Mag';
-          }elseif ($array[$i] == '06'){
-            $array[$i] = 'Giu';
-          }elseif ($array[$i] == '07'){
-            $array[$i] = 'Lug';
-          }elseif ($array[$i] == '08'){
-            $array[$i] = 'Ago';
-          }elseif ($array[$i] == '09'){
-            $array[$i] = 'Set';
-          }elseif ($array[$i] == '10'){
-            $array[$i] = 'Ott';
-          }elseif ($array[$i] == '11'){
-            $array[$i] = 'Nov';
-          }elseif ($array[$i] == '12'){
-            $array[$i] = 'Dic';
+      // array di appoggio per rispettare le corrispondenze con i mesi dell'anno
+      $messagesMonthsFinal = [0,0,0,0,0,0,0,0,0,0,0,0];
+      $messagesCountFinal = [0,0,0,0,0,0,0,0,0,0,0,0];
+
+      // iteratore di appoggio
+      $index = 0;
+      for ($i = 1; $i < count($messagesMonthsFinal)+1; $i++) {
+        if (in_array($i, $messagesMonths)) {
+          $x = $i-1; // riduciamo di una posizione l'indice per la corrispondenza con i mesi
+          $messagesMonthsFinal[$x] = $i;  // ripopolo l'array dei mesi
+          $messagesCountFinal[$x] = $messagesCount[$index]; // ripopolo l'array dei messaggi
+          $index++;
         }
       }
-      return $array;
-    }
-      $viewsMonths = trasformaMesi($viewsMonths);
-      $messagesMonths = trasformaMesi($messagesMonths);
 
       JavaScript::put([ // questa classe trasferisce i dati al javascript
-      'viewsCount' => $viewsCount,
-      'viewsMonths' => $viewsMonths,
-      'messagesMonths' => $messagesMonths,
-      'messagesCount' => $messagesCount,
+      'viewsCount' => $viewsCountFinal,
+      'messagesCount' => $messagesCountFinal,
       ]);
 
       // return view('showApartmentStatistics', compact("views", "messages"));
-      return view('showApartmentStatistics');
+      return view('showApartmentStatistics', compact('apartment'));
     }
 }

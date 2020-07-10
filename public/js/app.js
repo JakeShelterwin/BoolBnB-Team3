@@ -74646,9 +74646,8 @@ $(document).ready(function () {
       success: function success(data) {
         var lat = data["results"][0]["position"]["lat"];
         var lon = data["results"][0]["position"]["lon"];
-        var position = data["results"][0]["position"];
-        $("input[name=lat]").val(position["lat"]);
-        $("input[name=lon]").val(position["lon"]);
+        $("input[name=lat]").val(lat);
+        $("input[name=lon]").val(lon);
         $("#bottoneCreate").prop("disabled", false);
       },
       error: function error(richiesta, stato, errori) {
@@ -74680,9 +74679,8 @@ $(document).ready(function () {
         } else {
           var lat = data["results"][0]["position"]["lat"];
           var lon = data["results"][0]["position"]["lon"];
-          var position = data["results"][0]["position"];
-          $("input[name=lat]").val(position["lat"]);
-          $("input[name=lon]").val(position["lon"]);
+          $("input[name=lat]").val(lat);
+          $("input[name=lon]").val(lon);
           $("#bottoneCreate").prop("disabled", false);
         }
       },
@@ -74745,10 +74743,11 @@ $(document).ready(function () {
     $('#charts .visualizzazioni h2').append("<br>" + viewsTotalsCounter + " totali");
     $('#charts .messaggi h2').append("<br>" + messagesTotalsCounter + " totali"); //creo i grafici
 
-    createCharts('#viewsStatsBar', 'bar', 'Visualizzazioni Appartamento', viewsMonths, views);
-    createCharts('#viewsStatsLine', 'line', 'Visualizzazioni Appartamento', viewsMonths, views);
-    createCharts('#messagesStatsBar', 'bar', 'Messaggi Ricevuti', messagesMonths, messages);
-    createCharts('#messagesStatsLine', 'line', 'Messaggi Ricevuti', messagesMonths, messages);
+    var months = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre'];
+    createCharts('#viewsStatsBar', 'bar', 'Visualizzazioni Appartamento', months, views);
+    createCharts('#viewsStatsLine', 'line', 'Visualizzazioni Appartamento', months, views);
+    createCharts('#messagesStatsBar', 'bar', 'Messaggi Ricevuti', months, messages);
+    createCharts('#messagesStatsLine', 'line', 'Messaggi Ricevuti', months, messages);
   } // FUNZIONE CHE CREA GRAFICI
 
 
@@ -74763,6 +74762,7 @@ $(document).ready(function () {
           data: data,
           backgroundColor: ['rgba(150, 33, 146, 0.2)', 'rgba(82, 40, 204, 0.2)', 'rgba(4, 51, 255, 0.2)', 'rgba(0, 146, 146, 0.2)', 'rgba(0, 249, 0, 0.2)', 'rgba(202, 250, 0, 0.2)', 'rgba(255, 251, 0, 0.2)', 'rgba(255, 199, 0, 0.2)', 'rgba(255, 147, 0, 0.2)', 'rgba(255, 80, 0, 0.2)', 'rgba(255, 38, 0, 0.2)', 'rgba(216, 34, 83, 0.2)'],
           borderColor: ['rgba(150, 33, 146, 1)', 'rgba(82, 40, 204, 1)', 'rgba(4, 51, 255, 1)', 'rgba(0, 146, 146, 1)', 'rgba(0, 249, 0, 1)', 'rgba(202, 250, 0, 1)', 'rgba(255, 251, 0, 1)', 'rgba(255, 199, 0, 1)', 'rgba(255, 147, 0, 1)', 'rgba(255, 80, 0, 1)', 'rgba(255, 38, 0, 1)', 'rgba(216, 34, 83, 1)'],
+          lineTension: 0,
           borderWidth: 1
         }]
       },
@@ -74777,6 +74777,32 @@ $(document).ready(function () {
       }
     });
   }
+
+  $("#btnQuery").bind("click", function () {
+    var input = $("#ricerca").val();
+    $.ajax({
+      url: "https://api.tomtom.com/search/2/geocode/" + input + ".json?",
+      data: {
+        "key": "GqqMbjtoswnKOW5HbgKmS6sLaqEXL7pl"
+      },
+      method: "GET",
+      success: function success(data) {
+        // $(".address p").remove();
+        if (data["results"].length === 0) {// $("#bottoneCreate").prop("disabled", true);
+          // $(".address").append("<p style='color: red'>Indirizzo non riconosciuto</p>")
+        } else {
+          var lat = data["results"][0]["position"]["lat"];
+          var lon = data["results"][0]["position"]["lon"];
+          var querystring = lat + "/" + lon;
+          var url = "searchApartments/" + querystring;
+          window.location.href = url;
+        }
+      },
+      error: function error(richiesta, stato, errori) {
+        console.log("E' avvenuto un errore. " + errori, "stato " + stato, richiesta);
+      }
+    });
+  });
 });
 
 /***/ }),

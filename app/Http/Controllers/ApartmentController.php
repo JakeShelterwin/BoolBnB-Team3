@@ -65,4 +65,10 @@ class ApartmentController extends Controller
                         -> withSuccess("Messaggio inviato correttamente");
     }
 
+    public function searchApartments($lat, $lon){
+      $apartments = Apartment::all();
+
+
+      return view('welcome', compact("apartments", ));
+    }
 }
