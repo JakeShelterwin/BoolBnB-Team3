@@ -11105,7 +11105,12 @@ footer {
   text-align: center;
 }
 
-#charts {
+#statistics h1 {
+  text-align: center;
+  margin: 20px 0;
+}
+
+#statistics #charts {
   display: flex;
   justify-content: space-around;
   margin: auto;
@@ -11113,14 +11118,14 @@ footer {
   min-width: 850px;
 }
 
-#charts h2 {
+#statistics #charts h2 {
   text-align: center;
 }
 
-#charts #viewsStatsBar,
-#charts #viewsStatsLine,
-#charts #messagesStatsBar,
-#charts #messagesStatsLine {
+#statistics #charts #viewsStatsBar,
+#statistics #charts #viewsStatsLine,
+#statistics #charts #messagesStatsBar,
+#statistics #charts #messagesStatsLine {
   margin: 10px;
 }
 

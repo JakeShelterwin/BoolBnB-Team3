@@ -157,19 +157,26 @@ footer{
     // border: 1px solid black;
   }
 }
-#charts{
-  display: flex;
-  justify-content: space-around;
-  margin: auto;
-  max-width: 1000px;
-  min-width: 850px;
-  h2{
+#statistics{
+  h1{
     text-align: center;
+    margin: 20px 0;
   }
-  #viewsStatsBar,
-  #viewsStatsLine,
-  #messagesStatsBar,
-  #messagesStatsLine{
-    margin: 10px;
+  #charts{
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+    max-width: 1000px;
+    min-width: 850px;
+    h2{
+      text-align: center;
+    }
+    #viewsStatsBar,
+    #viewsStatsLine,
+    #messagesStatsBar,
+    #messagesStatsLine{
+      margin: 10px;
+    }
   }
+
 }

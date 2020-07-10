@@ -16,9 +16,8 @@ $(document).ready(function(){
             success : function (data) {
               var lat = data["results"][0]["position"]["lat"];
               var lon = data["results"][0]["position"]["lon"];
-              var position = data["results"][0]["position"];
-              $("input[name=lat]").val(position["lat"]);
-              $("input[name=lon]").val(position["lon"]);
+              $("input[name=lat]").val(lat);
+              $("input[name=lon]").val(lon);
               $("#bottoneCreate").prop("disabled", false);
             },
             error : function (richiesta,stato,errori) {
@@ -50,9 +49,8 @@ $(document).ready(function(){
                 } else {
                   var lat = data["results"][0]["position"]["lat"];
                   var lon = data["results"][0]["position"]["lon"];
-                  var position = data["results"][0]["position"];
-                  $("input[name=lat]").val(position["lat"]);
-                  $("input[name=lon]").val(position["lon"]);
+                  $("input[name=lat]").val(lat);
+                  $("input[name=lon]").val(lon);
                   $("#bottoneCreate").prop("disabled", false);
                 }
 
@@ -119,10 +117,11 @@ $(document).ready(function(){
         $('#charts .messaggi h2').append("<br>" + messagesTotalsCounter + " totali");
 
         //creo i grafici
-        createCharts('#viewsStatsBar', 'bar', 'Visualizzazioni Appartamento', viewsMonths, views);
-        createCharts('#viewsStatsLine', 'line', 'Visualizzazioni Appartamento', viewsMonths, views);
-        createCharts('#messagesStatsBar', 'bar', 'Messaggi Ricevuti', messagesMonths, messages);
-        createCharts('#messagesStatsLine', 'line', 'Messaggi Ricevuti', messagesMonths, messages);
+        var months = ['Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre']
+        createCharts('#viewsStatsBar', 'bar', 'Visualizzazioni Appartamento', months, views);
+        createCharts('#viewsStatsLine', 'line', 'Visualizzazioni Appartamento', months, views);
+        createCharts('#messagesStatsBar', 'bar', 'Messaggi Ricevuti', months, messages);
+        createCharts('#messagesStatsLine', 'line', 'Messaggi Ricevuti', months, messages);
 
     }
 
@@ -164,6 +163,7 @@ $(document).ready(function(){
                       'rgba(255, 38, 0, 1)',
                       'rgba(216, 34, 83, 1)'
                   ],
+                  lineTension: 0,
                   borderWidth: 1
               }]
           },
@@ -178,4 +178,38 @@ $(document).ready(function(){
           }
       });
     }
+
+  $("#btnQuery").bind("click", function () {
+    var input = $("#ricerca").val();
+    $.ajax({
+        url : "https://api.tomtom.com/search/2/geocode/"+input+".json?",
+        data: {
+          "key": "GqqMbjtoswnKOW5HbgKmS6sLaqEXL7pl",
+        },
+        method : "GET",
+        success : function (data) {
+
+          // $(".address p").remove();
+
+          if (data["results"].length === 0){
+            // $("#bottoneCreate").prop("disabled", true);
+            // $(".address").append("<p style='color: red'>Indirizzo non riconosciuto</p>")
+          } else {
+            var lat = data["results"][0]["position"]["lat"];
+            var lon = data["results"][0]["position"]["lon"];
+
+            var querystring = lat + "/" + lon;
+
+            var url = "searchApartments/" + querystring;
+            window.location.href = url;
+          }
+
+        },
+        error : function (richiesta,stato,errori) {
+          console.log("E' avvenuto un errore. " + errori, "stato " + stato, richiesta);
+        }
+      });
+
+  });
+
 });
