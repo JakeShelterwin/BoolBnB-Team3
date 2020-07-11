@@ -27,7 +27,7 @@ $(document).ready(function(){
       }
 
       // Nel caso in cui l'indirizzo non sia stato ancora inserito allora si attende che l'utente abbia finito di scriverlo e quando il focus esce dall'input viene richiamato l'ajax che ottiene le coordinate.
-      $(".info").on("blur", "input[name=address]", function(){
+      $(".info").on("keyup", "input[name=address]", function(){
           var input = $("input[name=address]").val();
           console.log("funziona o no");
           $.ajax({
@@ -210,6 +210,24 @@ $(document).ready(function(){
         }
       });
   });
-  // $('#searchbar').val()
-  
+  // se il div con la classe filtri esiste
+  if($('.filtri').length){
+    // copiati il valore dell'input redius e mettilo nello span
+    var range = $("input[name=radius]").val();
+    $('.filtri span').text(range);
+
+    // ascolta il cambiamento del value e cambia il contenuto dello span
+    $("input[name=radius]").change(function() {
+      range = $("input[name=radius]").val();
+      $('.filtri span').text(range);
+    });
+    // ogni volta che avviene qualcosa all'input, fai girare l'evento change
+    $('input[name=radius]').on('input', function () {
+      $(this).trigger('change');
+    });
+
+  }
+  // al caricamento della pagina di ricerca, automaticamente si seleziona l'input l'indirizzo
+  $(".info #ricerca").select();
+
 });

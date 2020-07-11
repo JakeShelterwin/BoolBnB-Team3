@@ -10975,7 +10975,7 @@ header {
 }
 
 .jumbotron {
-  height: 3vh;
+  height: 80vh;
   width: 100%;
   position: relative;
   margin: 0;
@@ -11127,5 +11127,14 @@ footer {
 #statistics #charts #messagesStatsBar,
 #statistics #charts #messagesStatsLine {
   margin: 10px;
+}
+
+input[name=radius] {
+  color: red;
+  background-color: green;
+}
+
+.filtri {
+  border: 1px black solid;
 }
 

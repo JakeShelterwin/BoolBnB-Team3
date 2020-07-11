@@ -13,7 +13,7 @@ use Treffynnon\Navigator as N;
 class ApartmentController extends Controller
 {
     public function index(){
-      $apartments = Apartment::all();
+      $apartments = Apartment::all() -> where('is_active', 1);
       $services = Service::all();
       return view('welcome', compact("apartments", "services"));
     }
@@ -65,49 +65,79 @@ class ApartmentController extends Controller
                         -> withSuccess("Messaggio inviato correttamente");
     }
 
-    // public function searchApartments(Request $request){
-    //   $apartments = Apartment::all();
-    //   $lat = $request['lat'];
-    //   $lon = $request['lon'];
-    //
-    //
-    //   if($request['radius']){
-    //     $radius = $request['radius'] * 1000;
-    //   }else{
-    //     $radius = 20000;
-    //   }
-    //
-    //   $selectedApartments = [];
-    //   foreach ($apartments as $apartment) {
-    //     $distance = N::getDistance($lat, $lon, $apartment['lat'], $apartment['lon']);
-    //     if($distance <= $radius){
-    //       $selectedApartments[] = $apartment;
-    //     }
-    //   }
-    //   // dd($request);
-    //
-    //   //$distance = N::getDistance($lat, $lon, 37.2540561, 13.7905864);
-    //
-    //   return view('searchApartments', compact("apartments"));
-    // }
 
-    public function searchApartments(){
-      $apartments = Apartment::all();
-      // $lat = $request['lat'];
-      // $lon = $request['lon'];
-      // $radius *= 1000;
-      // // dd($radius);
-      //
-      //
-      // $selectedApartments = [];
-      // foreach ($apartments as $apartment) {
-      //   $distance = N::getDistance($lat, $lon, $apartment['lat'], $apartment['lon']);
-      //   if($distance <= $radius){
-      //     $selectedApartments[] = $apartment;
-      //   }
-      // }
+    public function searchApartments(Request $request){
+      // preparazione variabili
+      $apartments = Apartment::all() -> where('is_active', 1)  -> where('beds_n', ">=", $request['beds_n'])-> where('rooms_n', ">=", $request['rooms_n']);
+      $services = Service::all();
+      $query = $request['address'];
+      $lat = $request['lat'];
+      $lon = $request['lon'];
+      $radius = $request['radius'];
+      $selectedServices = $request['services'];
+      $numberOfBeds = $request['beds_n'];
+      $numberOfRooms = $request['rooms_n'];
+      $selectedApartments = $apartments;
 
-      return view("searchApartments", compact('apartments'));
+      ///////////////////////////////////////////////////////////////////////////
+      // GESTIONE SELEZIONE APPARTAMENTI IN BASE AI SERVIZI SCELTI DALL'UTENTE //
+      ///////////////////////////////////////////////////////////////////////////
+
+      // funzione che controlla che tutti i valori fi arrayA siano dentro dentro arrayB: https://stackoverflow.com/questions/7542694/in-array-multiple-values
+      function in_array_all($arrayA, $arrayB) {
+         return empty(array_diff($arrayA, $arrayB));
+      }
+
+      // SE L'UTENTE HA DEI SERVIZI SELEZIONATI, SELEZIONIAMO SOLO GLI APPARTAMENTI CHE HANNO QUEI SERVIZI
+      if ($selectedServices) {
+        // prepariam un array dove salvarsi gli appartamenti selezionati
+        $selectedApartments = [];
+        // per ogni appartamenti nel DB
+        foreach ($apartments as $apartment) {
+          // SALVIAMO IN UN ARRAY I SERVIZI DELL'APPARTAMENTO
+          $apartmentServices = $apartment -> services;
+          $arrayApartmentServices = [];
+          foreach ($apartmentServices as $service) {
+            $arrayApartmentServices[] = $service->name;
+          }
+          // USANDO LA FUNZIONE DICHIARA PRIMA, CONTROLLIAMO CHE L'ARRAY CHE CONTIENE I SERVIZI SELEZIONATI DALL'UTENTE SIA COMPLETAMENTE CONTENUTO NELL'ARRAY DEI SERVIZI DELL'APPARTAMENTO, SE QUESTO E' VERO L'APPARTAMENTO VIENE SALVATO
+          if (in_array_all( $selectedServices, $arrayApartmentServices )){
+            $selectedApartments[] = $apartment;
+          }
+        }
+      }
+
+      /////////////////////////////////////////////////////////////////////////////
+      // GESTIONE SELEZIONE APPARTAMENTI IN BASE RAGGIO DI KM SCELTO DALL'UTENTE //
+      /////////////////////////////////////////////////////////////////////////////
+
+      // se l'utente non sceglie nulla, allora il raggio è automaticamente 20km
+      if($request['radius']){
+          $radius = $request['radius'] * 1000;
+        }else{
+          $radius = 20000;
+        }
+
+      $selectedApartmentsBasedOnLocation = [];
+      // FONTE LIBRERIA per il calcolo della distanza fra 2 punti sul globo https://github.com/treffynnon/Navigator
+      // selectedApartments è uguale ad Apartments:all() se non sono stati selezionati servizi, altrimenti corrisponde agli appartamenti già selezionati in base ai servizi
+      foreach ($selectedApartments as $apartment) {
+        $distance = N::getDistance($lat, $lon, $apartment['lat'], $apartment['lon']);
+        if($distance <= $radius){
+          // salvo come chiave dell'array associativo la distanza calcolata, e come valore l'appartamento
+          $selectedApartmentsBasedOnLocation[$distance] = $apartment;
+        }
+      }
+      // ordina l'array associativo in base alla KEY, siccome la key è la distanza gli appartamenti saranno inseriti dal più vicino (alle coordinate inserite) al più lontano
+      ksort($selectedApartmentsBasedOnLocation);
+
+      // se non esistono appartamenti per la selezione corrente, restituisci un array vuoto
+      //se invece esistono, allora restituiscili
+      $selectedApartmentsFilteredByUser=[];
+      if ($selectedApartmentsBasedOnLocation) {
+        $selectedApartmentsFilteredByUser = $selectedApartmentsBasedOnLocation;
+      }
+      return view("searchApartments", compact('selectedApartmentsFilteredByUser', "services","selectedServices", 'query', "numberOfBeds", "numberOfRooms" ));
 
     }
 

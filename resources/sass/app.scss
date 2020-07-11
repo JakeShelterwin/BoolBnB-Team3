@@ -43,7 +43,7 @@ header{
   background-color: pink;
 }
 .jumbotron{
-  height: 3vh;
+  height: 80vh;
   width: 100%;
   position: relative;
   margin: 0;
@@ -179,4 +179,11 @@ footer{
     }
   }
 
+}
+input[name=radius]{
+  color: red;
+  background-color: green;
+}
+.filtri{
+  border: 1px black solid;
 }
