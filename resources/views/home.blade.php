@@ -39,6 +39,7 @@
                   <div class="card-body">
                     {{$apartment -> description}}
                   </div>
+                  <a href="{{route("sponsorApartment", $apartment->id)}}">Sponsorizzami tutto</a>
                 </div>
               @endforeach
             @endif

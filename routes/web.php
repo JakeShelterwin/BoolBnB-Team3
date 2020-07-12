@@ -10,6 +10,9 @@ Route::get('/apartment-edit/{id}', 'HomeController@editApartment')->name('editAp
 Route::post('/apartment-update/{id}', 'HomeController@updateApartment')->name('updateApartment');
 Route::get('/apartment-delete/{id}', 'HomeController@deleteApartment')->name('deleteApartment');
 Route::get('/apartment/{id}/stats', 'HomeController@showApartmentStatistics')->name('showApartmentStatistics');
+Route::get('/apartment/{id}/sponsor', 'HomeController@sponsorApartment')->name('sponsorApartment');
+Route::get('/payment/make', 'HomeController@make')->name('payment.make');
+
 
 Route::get('/', "ApartmentController@index")->name("welcome");
 Route::get('/searchApartments', "ApartmentController@searchApartments")->name("searchApartments");

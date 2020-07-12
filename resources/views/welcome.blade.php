@@ -8,8 +8,8 @@
     <form action="{{route('searchApartments')}}" method="GET">
       <input id="ricerca" name="address" class="searchbar absolute_searchbar" type="text" placeholder="Dove vorresti alloggiare?" value="">
       <div class="coordinate">
-        <input id="latitude" type="text" name="lat" value="">
-        <input id="longitude" type="text" name="lon" value="">
+        <input id="latitude" type="text" name="lat" value="" disabled>
+        <input id="longitude" type="text" name="lon" value="" disabled>
       </div>
       <button id="btnQuery" class="buttonsearch absolute_botton" type="submit" name="button" value="Cerca">Cerca!</button>
     </form>

@@ -12,7 +12,7 @@ use App\Message;
 use App\View;
 use Carbon\Carbon;
 use JavaScript;
-
+use Braintree\Transaction;
 // file UploadTrait creato da noi dentro la cartella creata da noi Traits per fare l'upload delle immagini
 use App\Traits\UploadTrait;
 
@@ -263,4 +263,38 @@ class HomeController extends Controller
       // return view('showApartmentStatistics', compact("views", "messages"));
       return view('showApartmentStatistics', compact('apartment'));
     }
+
+    public function sponsorApartment($apartment_id){
+      $apartment = Apartment::findOrFail($apartment_id);
+      return view('sponsor', compact('apartment'));
+    }
+
+    public function make(Request $request) {
+          $apartment_id = $request->input('ApartmentId');
+          $apartment = Apartment::findOrFail($apartment_id);
+
+          $payload = $request->input('payload', false);
+          $nonce = $payload['nonce'];
+          if ($request->input("sponsorType") == "silver"){
+            $amount = "2.99";
+          }
+          if ($request->input("sponsorType") == "gold"){
+            $amount = "5.99";
+          }
+          if ($request->input("sponsorType") == "platinum"){
+            $amount = "9.99";
+          }
+          // nel caso che l'utente riesca a far uscire il DropIn senza cliccare sul radius che valorizzano la request
+          if (!($request->input("sponsorType"))){
+            $amount = "is_Null";
+          }
+          $status = Transaction::sale([
+                                  'amount' => $amount,
+                                  'paymentMethodNonce' => $nonce,
+                                  'options' => [
+                                             'submitForSettlement' => True
+                                               ]
+                    ]);
+          return response()->json($status);
+      }
 }

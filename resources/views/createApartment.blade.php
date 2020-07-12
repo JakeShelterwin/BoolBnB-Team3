@@ -28,8 +28,8 @@
         <label for="address">Indirizzo Appartamento</label>
         <input type="text" name="address" value="{{old('address')}}">
         <div class="coordinate">
-          <input id="latitude" type="text" name="lat" value="">
-          <input id="longitude" type="text" name="lon" value="">
+          <input id="latitude" type="text" name="lat" value="" disabled>
+          <input id="longitude" type="text" name="lon" value="" disabled>
         </div>
       </div>
 
