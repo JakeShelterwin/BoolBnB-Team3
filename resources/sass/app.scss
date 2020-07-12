@@ -15,7 +15,22 @@ ul {
   list-style-type: none;
 }
 .card{
-  margin-top: 10px;
+  margin-top:10px;
+}
+#sponsored{
+  background-color: rgba(92, 155, 237, 0.84);
+}
+.attivo1{
+  background-color: rgba(23, 232, 94, 0.34);
+}
+.attivo0{
+  background-color: rgba(255, 0, 0, 0.19);
+}
+.sponsor{
+  color: #3F3F3F;
+  border: 3px solid #FF5A5F;
+  border-radius: 20px;
+  padding: 15px;
 }
 #map {
   height: 300px;  /* The height is 400 pixels */
@@ -31,7 +46,7 @@ ul {
   display: none;
 }
 header{
-  background-color: pink;
+  background-color: rgba(52, 144, 221, 0.77);
   height: 10vh;
 }
 .all{
@@ -40,7 +55,6 @@ header{
   align-items: center;
   width: 80%;
   margin: 0 auto;
-  background-color: pink;
 }
 .jumbotron{
   height: 80vh;
@@ -63,7 +77,7 @@ header{
   width: 76px;
 }
 footer{
-  background-color: grey;
+  background-color: rgba(52, 144, 221, 0.3);
 }
 .linkfooter{
   display: flex;

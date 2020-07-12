@@ -16,9 +16,21 @@
                   <a href="{{route('createApartment')}}">Crea nuovo appartamento</a>
               </div>
             </div>
+            @if ($apartmentSponsored)
+              @foreach ($apartmentSponsored as $apartment)
+                <div id="sponsored" class="card attivo{{$apartment['is_active']}}" data-annuncioAttivo="{{$apartment['is_active']}}">
+                  <a href="{{route('showApartment',$apartment['id'])}}"><div class="card-header">{{$apartment -> title}}</div></a>
+
+                  <div class="card-body">
+                    {{$apartment -> description}}
+                  </div>
+                  <a href="{{route("sponsorApartment", $apartment->id)}}">Sponsorizzami tutto</a>
+                </div>
+              @endforeach
+            @endif
             @if ($user_apartments)
               @foreach ($user_apartments as $apartment)
-                <div class="card" data-annuncioAttivo="{{$apartment['is_active']}}">
+                <div class="card attivo{{$apartment['is_active']}}" data-annuncioAttivo="{{$apartment['is_active']}}">
                   <a href="{{route('showApartment',$apartment['id'])}}"><div class="card-header">{{$apartment -> title}}</div></a>
 
                      {{-- @if ($apartment -> is_active)

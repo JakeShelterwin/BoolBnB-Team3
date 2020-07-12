@@ -13,7 +13,7 @@ use Treffynnon\Navigator as N;
 class ApartmentController extends Controller
 {
     public function index(){
-      $apartments = Apartment::all() -> where('is_active', 1);
+      $apartments = Apartment::all() -> where('is_active', 1) -> where('sponsor_expire_time', '>=', time());
       $services = Service::all();
       return view('welcome', compact("apartments", "services"));
     }
@@ -68,6 +68,7 @@ class ApartmentController extends Controller
 
     public function searchApartments(Request $request){
       // preparazione variabili
+      $sponsoredApartment = Apartment::all() -> where('sponsor_expire_time', '>=', time());
       $apartments = Apartment::all() -> where('is_active', 1)  -> where('beds_n', ">=", $request['beds_n'])-> where('rooms_n', ">=", $request['rooms_n']);
       $services = Service::all();
       $query = $request['address'];
@@ -111,11 +112,11 @@ class ApartmentController extends Controller
       // GESTIONE SELEZIONE APPARTAMENTI IN BASE RAGGIO DI KM SCELTO DALL'UTENTE //
       /////////////////////////////////////////////////////////////////////////////
 
-      // se l'utente non sceglie nulla, allora il raggio è automaticamente 20km
+      // se l'utente non sceglie nulla, allora il raggio è automaticamente 20km da frontend. Se sceglie 0 il raggio è 1km
       if($request['radius']){
           $radius = $request['radius'] * 1000;
-        }else{
-          $radius = 20000;
+        } else {
+          $radius = 1000;
         }
 
       $selectedApartmentsBasedOnLocation = [];
@@ -137,7 +138,7 @@ class ApartmentController extends Controller
       if ($selectedApartmentsBasedOnLocation) {
         $selectedApartmentsFilteredByUser = $selectedApartmentsBasedOnLocation;
       }
-      return view("searchApartments", compact('selectedApartmentsFilteredByUser', "services","selectedServices", 'query', "numberOfBeds", "numberOfRooms" ));
+      return view("searchApartments", compact("sponsoredApartment", 'selectedApartmentsFilteredByUser', "services","selectedServices", 'query', "numberOfBeds", "numberOfRooms" ));
 
     }
 

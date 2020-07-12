@@ -48,6 +48,23 @@
 </div>
 
   <div class="appartamenti">
+    @if ($sponsoredApartment)
+      @foreach ($sponsoredApartment as $apartment)
+        <ul id="sponsored">
+          <li><img src="{{$apartment->image}}" alt=""></li>
+          <li><b><a href="{{route('showApartment', $apartment -> id)}}">Titolo appartamento:</b> {{$apartment -> title}} </a></li>
+          <li><b>Descrizione appartamento:</b> {{$apartment["description"]}}</li>
+          <li><b>proprietario</b> {{$apartment -> user -> name}}</li>
+          <li>
+            <ul>
+              @foreach ($apartment -> services as $service)
+               <li> {{$service -> name}} </li>
+              @endforeach
+            </ul>
+          </li>
+        </ul>
+      @endforeach
+    @endif
   @foreach ($selectedApartmentsFilteredByUser as $apartment)
     <ul>
       <li><img src="{{$apartment->image}}" alt=""></li>

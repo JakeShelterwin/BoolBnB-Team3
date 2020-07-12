@@ -10942,6 +10942,25 @@ ul {
   margin-top: 10px;
 }
 
+#sponsored {
+  background-color: rgba(92, 155, 237, 0.84);
+}
+
+.attivo1 {
+  background-color: rgba(23, 232, 94, 0.34);
+}
+
+.attivo0 {
+  background-color: rgba(255, 0, 0, 0.19);
+}
+
+.sponsor {
+  color: #3F3F3F;
+  border: 3px solid #FF5A5F;
+  border-radius: 20px;
+  padding: 15px;
+}
+
 #map {
   height: 300px;
   /* The height is 400 pixels */
@@ -10961,7 +10980,7 @@ ul {
 }
 
 header {
-  background-color: pink;
+  background-color: rgba(52, 144, 221, 0.77);
   height: 10vh;
 }
 
@@ -10971,7 +10990,6 @@ header {
   align-items: center;
   width: 80%;
   margin: 0 auto;
-  background-color: pink;
 }
 
 .jumbotron {
@@ -10999,7 +11017,7 @@ header {
 }
 
 footer {
-  background-color: grey;
+  background-color: rgba(52, 144, 221, 0.3);
 }
 
 .linkfooter {

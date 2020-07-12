@@ -18,7 +18,7 @@ class Apartment extends Model
     return $this -> belongsTo(User::class);
   }
   public function sponsor(){
-    return $this -> belongsToMany(Sponsor::class);
+    return $this -> belongsToMany(Sponsor::class)->withTimestamps();
   }
   public function services(){
     return $this -> belongsToMany(Service::class);

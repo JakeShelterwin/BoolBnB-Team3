@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use App\Service;
+use App\Sponsor;
 use App\Apartment;
 use App\User;
 use App\Message;
@@ -40,13 +41,14 @@ class HomeController extends Controller
       $apartments = Apartment::all();
       $user_id = auth()->user()->id;
       $messages = Message::all();
-      $user_apartments = $apartments -> where('user_id',$user_id);
+      $user_apartments = $apartments -> where('user_id',$user_id) -> where('sponsor_expire_time', '<', time());
+      $apartmentSponsored = $apartments -> where('user_id',$user_id) -> where('sponsor_expire_time', '>=', time());
       $users_messages_grouped_by_apartment = [];
       foreach ($user_apartments as $apartment) {
         $users_messages_grouped_by_apartment[] = $messages -> where('apartment_id', $apartment -> id);
       }
       // dd($users_messages_grouped_by_apartment);
-      return view('home', compact('user_apartments', 'users_messages_grouped_by_apartment'));
+      return view('home', compact('user_apartments', "apartmentSponsored", 'users_messages_grouped_by_apartment'));
     }
 
     public function createApartment()
@@ -266,35 +268,116 @@ class HomeController extends Controller
 
     public function sponsorApartment($apartment_id){
       $apartment = Apartment::findOrFail($apartment_id);
-      return view('sponsor', compact('apartment'));
+      $sponsors = Sponsor::all();
+      return view('sponsor', compact('apartment', "sponsors"));
     }
 
+
+    public function sponsorAppoggio($apartment_id){
+      $apartment = Apartment::findOrFail($apartment_id);
+      $sponsors = Sponsor::all();
+      // $Silver = "Silver";
+      // // 86400
+      $Gold = "Gold";
+      // // 259200
+      // $Platinum = "Platinum";
+      // // 518400
+
+      $allWasWell = false;
+      $sponsorId = 0;
+      foreach ($sponsors as $sponsor) {
+        if ($sponsor["name"]==$Gold) {
+          $duration = $sponsor["duration"];
+          $sponsorId = $sponsor["id"];
+        }
+      }
+
+      if ($apartment -> sponsor_expire_time) {
+        if ($apartment -> sponsor_expire_time <= time()){
+          $apartment -> sponsor_expire_time = time() + $duration;
+          $apartment -> save();
+          $apartment -> sponsor() -> attach($sponsorId);
+          $allWasWell = true;
+        }
+      } else {
+        $apartment -> sponsor_expire_time = time() + $duration;
+        $apartment -> save();
+        $apartment -> sponsor() -> attach($sponsorId);
+        $allWasWell = true;
+      }
+
+      return view('sponsorAppoggio', compact('apartment', "sponsors", "allWasWell"));
+    }
+
+
+
     public function make(Request $request) {
+
           $apartment_id = $request->input('ApartmentId');
           $apartment = Apartment::findOrFail($apartment_id);
+          $sponsors = Sponsor::all();
 
           $payload = $request->input('payload', false);
           $nonce = $payload['nonce'];
-          if ($request->input("sponsorType") == "silver"){
-            $amount = "2.99";
-          }
-          if ($request->input("sponsorType") == "gold"){
-            $amount = "5.99";
-          }
-          if ($request->input("sponsorType") == "platinum"){
-            $amount = "9.99";
-          }
-          // nel caso che l'utente riesca a far uscire il DropIn senza cliccare sul radius che valorizzano la request
-          if (!($request->input("sponsorType"))){
-            $amount = "is_Null";
+          // if ($request->input("sponsorType") == "Silver"){
+          //   $amount = "2.99";
+          // }
+          // if ($request->input("sponsorType") == "Gold"){
+          //   $amount = "5.99";
+          // }
+          // if ($request->input("sponsorType") == "Platinum"){
+          //   $amount = "9.99";
+          // }
+          // // nel caso che l'utente riesca a far uscire il DropIn senza cliccare sul radius che valorizzano la request
+          // if (!($request->input("sponsorType"))){
+          //   $amount = "is_Null";
+          // }
+          $sponsorType = $request->input("sponsorType");
+          $allWasWell = false;
+          $sponsorId = 0;
+          foreach ($sponsors as $sponsor) {
+            if ($sponsor["name"]==$sponsorType) {
+              $duration = $sponsor["duration"];
+              $sponsorId = $sponsor["id"];
+              $amount = $sponsor["price"];
+            }
           }
           $status = Transaction::sale([
-                                  'amount' => $amount,
+                                  'amount' => 0,
                                   'paymentMethodNonce' => $nonce,
                                   'options' => [
-                                             'submitForSettlement' => True
+                                             'submitForSettlement' => False
                                                ]
                     ]);
+
+          if ($apartment -> sponsor_expire_time) {
+            if ($apartment -> sponsor_expire_time <= time()){
+              $apartment -> sponsor_expire_time = time() + $duration;
+              $apartment -> save();
+              $apartment -> sponsor() -> attach($sponsorId);
+              $allWasWell = true;
+              $status = Transaction::sale([
+                                      'amount' => $amount,
+                                      'paymentMethodNonce' => $nonce,
+                                      'options' => [
+                                                 'submitForSettlement' => True
+                                                   ]
+                        ]);
+            }
+          } else {
+            $apartment -> sponsor_expire_time = time() + $duration;
+            $apartment -> save();
+            $apartment -> sponsor() -> attach($sponsorId);
+            $allWasWell = true;
+            $status = Transaction::sale([
+                                    'amount' => $amount,
+                                    'paymentMethodNonce' => $nonce,
+                                    'options' => [
+                                               'submitForSettlement' => True
+                                                 ]
+                      ]);
+          }
+
           return response()->json($status);
       }
 }

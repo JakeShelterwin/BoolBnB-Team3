@@ -25,8 +25,8 @@
         {{-- <p>"{{$apartment['address']}}"</p> --}}
         <input type="text" name="address" value="{{old('address', $apartment['address'])}}">
         <div class="coordinate">
-          <input id="latitude" type="text" name="lat" value="" disabled>
-          <input id="longitude" type="text" name="lon" value="" disabled>
+          <input id="latitude" type="text" name="lat" value="">
+          <input id="longitude" type="text" name="lon" value="">
         </div>
       </div>
 

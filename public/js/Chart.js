@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 19);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -37472,7 +37472,7 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ 19:
+/***/ 1:
 /*!***************************************************!*\
   !*** multi ./node_modules/chart.js/dist/Chart.js ***!
   \***************************************************/

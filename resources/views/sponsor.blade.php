@@ -8,12 +8,12 @@
         <div class='row'>
           <div class='col-md-8 col-md-offset-2'>
             <div class="choice">
-              <input type="radio" name="sponsor" value="silver">
-              <label for="silver">silver</label>
-              <input type="radio" name="sponsor" value="gold">
-              <label for="gold">gold</label>
-              <input type="radio" name="sponsor" value="platinum">
-              <label for="platinum">platinum</label>
+              @foreach ($sponsors as $sponsor)
+                <div class="sponsor">
+                  <input type="radio" name="sponsor" value="{{$sponsor -> name}}">
+                  {{$sponsor -> name}} {{$sponsor -> price}}
+                </div>
+              @endforeach
             </div>
             <div id='dropin-container'></div>
             <button id='submit-button' disabled>Request payment method</button>
@@ -28,7 +28,7 @@
       var ApartmentId = $('input[name=apartmentId]').val();
        // = $('input:checked').val();
       // console.log(sponsorType);
-      $('.choice').on('click', "input[name=sponsor]", function () {
+      $('.choice').on('click', "input[type=radio]", function () {
         sponsorType = $(this).val();
         // console.log(sponsorType);
         var button = $('#submit-button');
@@ -42,8 +42,8 @@
               $.get('{{ route('payment.make') }}', {payload, sponsorType, ApartmentId}, function (response) {
                 // console.log("ciao");
                 if (response.success) {
-                  alert('Payment successfull');
                   console.log(response.transaction.amount);
+                  alert('Payment successfull');
                 } else {
                   alert('Payment failed');
                 }
@@ -52,32 +52,6 @@
           });
         });
       });
-
-      // $('#submit-button').on('click', getPayment());
-      //
-      // function getPayment(){
-      //   braintree.dropin.create({
-      //     authorization: '{{ Braintree\ClientToken::generate() }}',
-      //     container: '#dropin-container'
-      //   }, function (createErr, instance) {
-      //     $('#submit-button').on('click', function () {
-      //       instance.requestPaymentMethod(function (err, payload) {
-      //         $.get('{{ route('payment.make') }}', {payload}, function (response) {
-      //           console.log("ciaio");
-      //           if (response.success) {
-      //             alert('Payment successfull');
-      //             // console.log(response.transaction.amount);
-      //           } else {
-      //             alert('Payment failed');
-      //           }
-      //         }, 'json');
-      //       });
-      //     });
-      //   });
-      // }
-
-
-
       </script>
   @endif
 @endsection

@@ -8,8 +8,8 @@
     <form action="{{route('searchApartments')}}" method="GET">
       <input id="ricerca" name="address" class="searchbar absolute_searchbar" type="text" placeholder="Dove vorresti alloggiare?" value="">
       <div class="coordinate">
-        <input id="latitude" type="text" name="lat" value="" disabled>
-        <input id="longitude" type="text" name="lon" value="" disabled>
+        <input id="latitude" type="text" name="lat" value="">
+        <input id="longitude" type="text" name="lon" value="">
       </div>
       <button id="btnQuery" class="buttonsearch absolute_botton" type="submit" name="button" value="Cerca">Cerca!</button>
     </form>
@@ -25,7 +25,7 @@
 
 <div class="appartamenti">
   @foreach ($apartments as $apartment)
-  <ul>
+  <ul id="sponsored">
     <li><img src="{{$apartment->image}}" alt=""></li>
     <li><b><a href="{{route('showApartment', $apartment -> id)}}">Titolo appartamento:</b> {{$apartment -> title}} </a></li>
     <li><b>Descrizione appartamento:</b> {{$apartment["description"]}}</li>
