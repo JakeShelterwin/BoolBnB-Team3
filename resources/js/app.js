@@ -214,12 +214,12 @@ $(document).ready(function(){
   if($('.filtri').length){
     // copiati il valore dell'input redius e mettilo nello span
     var range = $("input[name=radius]").val();
-    $('.filtri span').text(range);
+    $('.searchField span').text(range);
 
     // ascolta il cambiamento del value e cambia il contenuto dello span
     $("input[name=radius]").change(function() {
       range = $("input[name=radius]").val();
-      $('.filtri span').text(range);
+      $('.searchField span').text(range);
     });
     // ogni volta che avviene qualcosa all'input, fai girare l'evento change
     $('input[name=radius]').on('input', function () {
@@ -271,7 +271,21 @@ $(document).ready(function(){
     //
     // module.exports = router;
 
+  // SLIDER
+  var myIndex = 0;
+  carousel();
 
+  function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}
+    x[myIndex-1].style.display = "block";
+    setTimeout(carousel, 5000); // Change image every 2 seconds
+  }
 
 
 });

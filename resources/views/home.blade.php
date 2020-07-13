@@ -18,13 +18,13 @@
             </div>
             @if ($apartmentSponsored)
               @foreach ($apartmentSponsored as $apartment)
-                <div id="sponsored" class="card attivo{{$apartment['is_active']}}" data-annuncioAttivo="{{$apartment['is_active']}}">
+                <div class="card sponsored attivo{{$apartment['is_active']}}" data-annuncioAttivo="{{$apartment['is_active']}}">
                   <a href="{{route('showApartment',$apartment['id'])}}"><div class="card-header">{{$apartment -> title}}</div></a>
 
                   <div class="card-body">
                     {{$apartment -> description}}
                   </div>
-                  <a href="{{route("sponsorApartment", $apartment->id)}}">Sponsorizzami tutto</a>
+                  <p style="margin-bottom: 0; color: white">Sponsor Attivo per questo appartamento</p>
                 </div>
               @endforeach
             @endif
