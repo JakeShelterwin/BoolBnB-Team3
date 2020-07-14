@@ -116,9 +116,10 @@ class ApartmentController extends Controller
       if($request['radius']){
           $radius = $request['radius'] * 1000;
         } else {
-          $radius = 1000;
+          $radius = 20000;
         }
-
+      // dd($radius);
+      
       $selectedApartmentsBasedOnLocation = [];
       // FONTE LIBRERIA per il calcolo della distanza fra 2 punti sul globo https://github.com/treffynnon/Navigator
       // selectedApartments è uguale ad Apartments:all() se non sono stati selezionati servizi, altrimenti corrisponde agli appartamenti già selezionati in base ai servizi

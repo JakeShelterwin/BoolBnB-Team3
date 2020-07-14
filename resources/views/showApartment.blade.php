@@ -80,7 +80,7 @@
   </div>
   @auth
     @if (auth()->user()-> id == $apartment -> user_id)
-      <a href="{{route('editApartment', $apartment['id'])}}">
+      {{-- <a href="{{route('editApartment', $apartment['id'])}}">
         <button type="button" name="button">Modifica</button>
       </a>
       <a style="margin-left:50px" href="{{route('deleteApartment', $apartment['id'])}}">
@@ -88,7 +88,7 @@
       </a>
       <a style="margin-left:50px" href="{{route('showApartmentStatistics', $apartment['id'])}}">
         <button type="button" name="button">MOSTRA STATISTICS</button>
-      </a>
+      </a> --}}
     @endif
   @endauth
 </div>

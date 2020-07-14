@@ -113,18 +113,20 @@ header {
       width: 100%;
       display: flex;
       border: 3px solid #FF5A5F;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
       padding: 15px 20px;
-      border-radius: 50px;
+      border-radius: 30px;
       background: white;
       color: #3F3F3F;
       font-weight: 500;
       margin: 10px 0px;
+      flex-wrap: wrap;
       #ricerca {
         background: white;
         border: 3px solid rgb(228, 228, 228);
         height: 30px;
+        width: 350px;
         border-radius: 50px;
         padding: 15px 20px;
         color: #3F3F3F;
@@ -139,29 +141,55 @@ header {
         height: 35px;
         border-radius: 30px;
       }
-      #btnQuery{
-        width: 75px;
-        height: 35px;
-        background: #FF5A5F;
-        border: none;
-        border-radius: 30px;
-        margin-left: 15px;
-        color: white;
-        font-weight: 700;
-      }
+        #btnQuery{
+          width: 75px;
+          height: 35px;
+          background: #FF5A5F;
+          border: none;
+          border-radius: 30px;
+          margin-left: 15px;
+          color: white;
+          font-weight: 700;
+          outline: 0;
+        }
+        p#btnFilter{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 75px;
+          height: 35px;
+          background: #FF5A5F;
+          border: none;
+          border-radius: 30px;
+          margin-left: 15px;
+          margin-bottom: 0;
+          color: white;
+          font-weight: 700;
+          outline: 0;
+        }
     }
     .filtri {
       width: 100%;
       display: flex;
-      border: 3px solid #FF5A5F;
+      -webkit-box-shadow: 0px 5px 29px -8px rgba(255, 91, 96, 0.44);
+      -moz-box-shadow: 0px 5px 29px -8px rgba(255, 91, 96, 0.44);
+      box-shadow: 0px 5px 29px -8px rgba(255, 91, 96, 0.44);
       justify-content: space-between;
       align-items: center;
       padding: 15px 20px;
-      border-radius: 50px;
+      border-radius: 20px;
       background: white;
       color: #3F3F3F;
       font-weight: 500;
       margin: 10px 0px;
+      display: none;
+      .filtriNascosti {
+        .filtriNumerici, .filtroServizi{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+      }
     }
   }
   .apartments{
@@ -177,12 +205,14 @@ header {
       }
       .sponsoredRibbon{
         position: absolute;
-        top: 10px;
+        top: 8px;
         right: 5%;
         text-align: center;
+        background-color: gold;
+        border-radius: 6px;
+        padding: 5px;
         i{
           font-size: 20px;
-          color: gold;
         }
         p {
           margin: 0;
@@ -206,7 +236,7 @@ header {
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
-      border: 3px solid $primaryRed;
+      border: 3px solid $sponsored;
       border-radius: 20px;
       -webkit-box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
       -moz-box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
@@ -320,7 +350,105 @@ footer {
   }
 
 }
-input[name=radius]{
-  color: red;
-  background-color: green;
+//
+// input[type='range'] {
+//       overflow: hidden;
+//       width: 80px;
+//       -webkit-appearance: none;
+//       background-color: #9a905d;
+//     }
+//
+//     input[type='range']::-webkit-slider-runnable-track {
+//       height: 10px;
+//       -webkit-appearance: none;
+//       color: #13bba4;
+//       margin-top: -1px;
+//     }
+//
+//     input[type='range']::-webkit-slider-thumb {
+//       width: 10px;
+//       -webkit-appearance: none;
+//       height: 10px;
+//       cursor: ew-resize;
+//       background: #434343;
+//       box-shadow: -80px 0 0 80px #43e5f7;
+//     }
+input[type=range] {
+  margin: 7.3px 0;
+  background-color: transparent;
+  -webkit-appearance: none;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #FF7478;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  background: #FF5A5F;
+  border: 0;
+  border-radius: 25px;
+  width: 100%;
+  height: 11.4px;
+  cursor: pointer;
+}
+// pallino slider
+input[type=range]::-webkit-slider-thumb {
+  margin-top: -7.3px;
+  width: 26px;
+  height: 26px;
+  background: #FF5A5F;
+  border: 1.8px solid #FF5A5F;
+  border-radius: 15px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+input[type=range]::-moz-range-track {
+  background: #FF7478;
+  border: 0;
+  border-radius: 25px;
+  width: 100%;
+  height: 11.4px;
+  cursor: pointer;
+}
+input[type=range]::-moz-range-thumb {
+  width: 26px;
+  height: 26px;
+  background: #FF5A5F;
+  border: 1.8px solid #FF5A5F;
+  border-radius: 15px;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  border-width: 8.2px 0;
+  color: transparent;
+  width: 100%;
+  height: 11.4px;
+  cursor: pointer;
+}
+input[type=range]::-ms-fill-lower {
+  background: #FF4146;
+  border: 0;
+  border-radius: 50px;
+}
+input[type=range]::-ms-fill-upper {
+  background: #FF5A5F;
+  border-radius: 50px;
+}
+input[type=range]::-ms-thumb {
+  width: 26px;
+  height: 26px;
+  background: #FF5A5F;
+  border: 1.8px solid #FF5A5F;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-top: 0px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #FF5A5F;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #FF7478;
 }

@@ -25,14 +25,33 @@
                     {{$apartment -> description}}
                   </div>
                   <p style="margin-bottom: 0; color: white">Sponsor Attivo per questo appartamento</p>
+                  <a href="{{route('editApartment', $apartment['id'])}}">
+                    Modifica
+                  </a>
+                  <a href="{{route('deleteApartment', $apartment['id'])}}">
+                    Cancella
+                  </a>
+                  <a href="{{route('showApartmentStatistics', $apartment['id'])}}">
+                    MOSTRA STATISTICS
+                  </a>
                 </div>
               @endforeach
             @endif
             @if ($user_apartments)
               @foreach ($user_apartments as $apartment)
                 <div class="card attivo{{$apartment['is_active']}}" data-annuncioAttivo="{{$apartment['is_active']}}">
-                  <a href="{{route('showApartment',$apartment['id'])}}"><div class="card-header">{{$apartment -> title}}</div></a>
-
+                  <div class="card-header"><a href="{{route('showApartment',$apartment['id'])}}">{{$apartment -> title}}</a>
+                  <a href="{{route("sponsorApartment", $apartment->id)}}">Sponsorizzami tutto</a>
+                  <a href="{{route('editApartment', $apartment['id'])}}">
+                    Modifica
+                  </a>
+                  <a href="{{route('deleteApartment', $apartment['id'])}}">
+                    Cancella
+                  </a>
+                  <a href="{{route('showApartmentStatistics', $apartment['id'])}}">
+                    MOSTRA STATISTICS
+                  </a>
+                </div>
                      {{-- @if ($apartment -> is_active)
                         <form action="{{route('updateApartment', $apartment['id'])}}" method="post">
                           @csrf
@@ -51,16 +70,28 @@
                   <div class="card-body">
                     {{$apartment -> description}}
                   </div>
-                  <a href="{{route("sponsorApartment", $apartment->id)}}">Sponsorizzami tutto</a>
+
                 </div>
               @endforeach
             @endif
         </div>
 
         <div class="messages col-md-4 flex-column-reverse d-flex justify-content-end">
-
-         @if ($users_messages_grouped_by_apartment)
-           @foreach ($users_messages_grouped_by_apartment as $singleApartmentMessages)
+          @if ($users_messages_grouped_by_sponsored_apartment)
+            @foreach ($users_messages_grouped_by_sponsored_apartment as $singleApartmentMessages)
+              @foreach ($singleApartmentMessages as $message)
+                  <div class="card" data-time="{{$message -> created_at}}">
+                    <div class="card-header">Appartamento: {{$message -> apartment -> title}}</div>
+                    <div class="card-body">
+                      <b>Messaggio da: </b>{{$message -> email}} <br>
+                      <b>Testo:  </b>{{$message -> message}}
+                    </div>
+                  </div>
+                @endforeach
+            @endforeach
+           @endif
+         @if ($users_messages_grouped_by_normal_apartment)
+           @foreach ($users_messages_grouped_by_normal_apartment as $singleApartmentMessages)
              @foreach ($singleApartmentMessages as $message)
                  <div class="card" data-time="{{$message -> created_at}}">
                    <div class="card-header">Appartamento: {{$message -> apartment -> title}}</div>

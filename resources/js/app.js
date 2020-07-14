@@ -211,9 +211,12 @@ $(document).ready(function(){
       });
   });
   // se il div con la classe filtri esiste
+  var range;
+  $("input[name=radius]").val(20);
+  $('.searchField span').text(range);
   if($('.filtri').length){
     // copiati il valore dell'input redius e mettilo nello span
-    var range = $("input[name=radius]").val();
+    range = $("input[name=radius]").val();
     $('.searchField span').text(range);
 
     // ascolta il cambiamento del value e cambia il contenuto dello span
@@ -230,6 +233,11 @@ $(document).ready(function(){
   // al caricamento della pagina di ricerca, automaticamente si seleziona l'input l'indirizzo
   $(".info #ricerca").select();
 
+
+  // Pulsante che mostra ulteriori filtri nella pagina di ricerca
+  $('.searchField').on('click', '#btnFilter', function () {
+    $(".filtriNascosti").slideToggle();
+  });
 
 
 ///////////////////////////////////////////////////////////////////
