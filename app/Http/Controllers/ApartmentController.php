@@ -47,7 +47,11 @@ class ApartmentController extends Controller
           // return redirect() -> route("showApartment", $id)
           //     -> withSuccess("View non salvata per limite orario");
       }
-      return view('showApartment', compact("apartment"));
+      $sponsorAttivo = 0;
+       if ($apartment['sponsor_expire_time'] >= time()) {
+         $sponsorAttivo = 1;
+       }
+      return view('showApartment', compact("apartment", "sponsorAttivo"));
     }
     public function storeMessage(Request $request, $id){
       $validateData = $request -> validate([
@@ -119,7 +123,7 @@ class ApartmentController extends Controller
           $radius = 20000;
         }
       // dd($radius);
-      
+
       $selectedApartmentsBasedOnLocation = [];
       // FONTE LIBRERIA per il calcolo della distanza fra 2 punti sul globo https://github.com/treffynnon/Navigator
       // selectedApartments è uguale ad Apartments:all() se non sono stati selezionati servizi, altrimenti corrisponde agli appartamenti già selezionati in base ai servizi

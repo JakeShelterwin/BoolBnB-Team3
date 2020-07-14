@@ -15,7 +15,9 @@ body {
   background-color: #e9ecef;
   color: #1b3c59;
 }
-
+.coordinate{
+  display: none;
+}
 ///////////////////////////////////////////////////////////////////
 //////////////////////////    HEADER  /////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -54,7 +56,7 @@ header {
       width: 350px;
       border: none;
       background: white;
-      border: 5px solid #FF5A5F;
+      border: 5px solid $primaryRed;
       height: 50px;
       border-radius: 50px;
       padding: 0 20px;
@@ -65,7 +67,7 @@ header {
     .buttonWelcome{
       width: 75px;
       height: 50px;
-      background-color: #FF5A5F;
+      background-color: $primaryRed;
       color: white;
       border: none;
       border-radius: 50px;
@@ -112,7 +114,7 @@ header {
     .searchField {
       width: 100%;
       display: flex;
-      border: 3px solid #FF5A5F;
+      border: 3px solid $primaryRed;
       justify-content: space-around;
       align-items: center;
       padding: 15px 20px;
@@ -144,7 +146,7 @@ header {
         #btnQuery{
           width: 75px;
           height: 35px;
-          background: #FF5A5F;
+          background: $primaryRed;
           border: none;
           border-radius: 30px;
           margin-left: 15px;
@@ -158,7 +160,7 @@ header {
           justify-content: center;
           width: 75px;
           height: 35px;
-          background: #FF5A5F;
+          background: $primaryRed;
           border: none;
           border-radius: 30px;
           margin-left: 15px;
@@ -260,7 +262,235 @@ header {
     }
   }
 }
+///////////////////////////////////////////////////////////////////
+/////////////////////////  SHOW APARTMENT  ////////////////////////
+///////////////////////////////////////////////////////////////////
+.apartment{
+  h1 {
+    margin-top: 20px;
+    margin-bottom: 0;
+    display: inline-block;
+    i{
+      color: gold;
+      text-shadow: 1px 1px white;
+    }
+  }
+  .containApartment{
+    -webkit-box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
+    box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    h2 {
+      color: $primaryRed;
+    }
+    .photo{
+      width: 100%;
+      height: 350px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      border-top-left-radius: 20px;
+    }
+    .apartmentlInfo{
+      height: 350px;  /* The height is 400 pixels */
+      border-top-right-radius: 20px;
+      .description,
+      .address,
+      .features,
+      .services{
+        padding: 20px;
+      }
+    }
+    .contact {
+      width: 100%;
+      height: 350px;
+      border-bottom-left-radius: 20px;
+      padding: 20px;
+      input[name=email]{
+        background: white;
+        border: 3px solid #e4e4e4;
+        height: 30px;
+        width: 250px;
+        border-radius: 10px;
+        padding: 15px 15px;
+        color: #3F3F3F;
+        font-size: 16px;
+        outline: 0;
+      }
+      input[name=email]:focus{
+        border: 3px solid $primaryRed;
+      }
+      input[name=message]{
+        background: white;
+        border: 3px solid #e4e4e4;
+        height: 140px;
+        margin-bottom: 5px;
+        width: 100%;
+        border-radius: 10px;
+        padding: 15px 15px;
+        color: #3F3F3F;
+        font-size: 16px;
+        outline: 0;
+      }
+      input[name=message]:focus{
+        border: 3px solid $primaryRed;
+      }
+      button[type=submit]{
+        width: 155px;
+        height: 30px;
+        background: $primaryRed;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-weight: 700;
+        outline: 0;
+      }
+    }
+    #map {
+      height: 350px;  /* The height is 400 pixels */
+      // width: 400px;  /* The width is the width of the web page */
+      border-bottom-right-radius: 20px;
+      padding: 0;
+      p {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 0px;
+      }
+     }
+     .info {
+     }
+ }
+}
+///////////////////////////////////////////////////////////////////
+////////////////////////    DASHBOARD  ////////////////////////////
+///////////////////////////////////////////////////////////////////
+.card {
+  margin-top:10px;
 
+  .funzioni {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    a{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      height: 35px;
+      background: $primaryRed;
+      border: none;
+      border-radius: 30px;
+      margin-left: 15px;
+      margin-bottom: 0;
+      color: white;
+      font-weight: 700;
+      outline: 0;
+    }
+  }
+}
+.attivo1{
+  background-color: rgba(23, 232, 94, 0.34);
+}
+.attivo0{
+  background-color: rgba(255, 0, 0, 0.19);
+}
+.sponsored{
+  background-color: rgba(92, 155, 237, 0.84);
+}
+// .sponsor{
+//   color: #3F3F3F;
+//   border: 3px solid $primaryRed;
+//   border-radius: 20px;
+//   padding: 15px;
+// }
+///////////////////////////////////////////////////////////////////
+////////////////////////  STATISTICHE  ////////////////////////////
+///////////////////////////////////////////////////////////////////
+#statistics{
+  h1{
+    text-align: center;
+    margin: 20px 0;
+  }
+  #charts{
+    display: flex;
+    justify-content: space-around;
+    margin: auto;
+    max-width: 1000px;
+    min-width: 850px;
+    h2{
+      text-align: center;
+    }
+    #viewsStatsBar,
+    #viewsStatsLine,
+    #messagesStatsBar,
+    #messagesStatsLine{
+      margin: 10px;
+    }
+  }
+
+}
+
+///////////////////////////////////////////////////////////////////
+//////////////////////////    LOGIN  /////////////////////////////
+///////////////////////////////////////////////////////////////////
+.login-box{
+    background: white;
+    min-height: 450px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    text-align: center;
+    form {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: column;
+    }
+    .title{
+      color: $primaryRed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-right: 1px solid rgb(228, 228, 228);
+    }
+    input[type="email"],
+    input[type="password"] {
+      width: 250px;
+      border: none;
+      background: rgb(238, 238, 238);
+      /* border: 5px solid $primaryRed; */
+      height: 45px;
+      border-radius: 50px;
+      padding: 0 10px;
+      color: #3F3F3F;
+      font-size: 16px;
+      text-align: center;
+    }
+    button {
+      width: 75px;
+      height: 45px;
+      background: $primaryRed;
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+    }
+    button:hover {
+      background: $primaryRed;
+      transform: scale(1.08);
+    }
+    a {
+      color: $primaryRed;
+    }
+    a:hover {
+      color: $primaryRed;
+      transform: scale(1.05);
+      text-decoration: none;
+    }
+}
 
 ///////////////////////////////////////////////////////////////////
 //////////////////////////    FOOTER  /////////////////////////////
@@ -294,85 +524,6 @@ footer {
 }
 
 
-.card{
-  margin-top:10px;
-}
-.attivo1{
-  background-color: rgba(23, 232, 94, 0.34);
-}
-.attivo0{
-  background-color: rgba(255, 0, 0, 0.19);
-}
-.sponsored{
-  background-color: rgba(92, 155, 237, 0.84);
-}
-.sponsor{
-  color: #3F3F3F;
-  border: 3px solid #FF5A5F;
-  border-radius: 20px;
-  padding: 15px;
-}
-#map {
-  height: 300px;  /* The height is 400 pixels */
-  width: 400px;  /* The width is the width of the web page */
-  border: 1px solid black;
-  p {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 0px;
-  }
- }
-.coordinate{
-  display: none;
-}
-
-
-#statistics{
-  h1{
-    text-align: center;
-    margin: 20px 0;
-  }
-  #charts{
-    display: flex;
-    justify-content: space-around;
-    margin: auto;
-    max-width: 1000px;
-    min-width: 850px;
-    h2{
-      text-align: center;
-    }
-    #viewsStatsBar,
-    #viewsStatsLine,
-    #messagesStatsBar,
-    #messagesStatsLine{
-      margin: 10px;
-    }
-  }
-
-}
-//
-// input[type='range'] {
-//       overflow: hidden;
-//       width: 80px;
-//       -webkit-appearance: none;
-//       background-color: #9a905d;
-//     }
-//
-//     input[type='range']::-webkit-slider-runnable-track {
-//       height: 10px;
-//       -webkit-appearance: none;
-//       color: #13bba4;
-//       margin-top: -1px;
-//     }
-//
-//     input[type='range']::-webkit-slider-thumb {
-//       width: 10px;
-//       -webkit-appearance: none;
-//       height: 10px;
-//       cursor: ew-resize;
-//       background: #434343;
-//       box-shadow: -80px 0 0 80px #43e5f7;
-//     }
 input[type=range] {
   margin: 7.3px 0;
   background-color: transparent;
@@ -385,7 +536,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
   background: #FF7478;
 }
 input[type=range]::-webkit-slider-runnable-track {
-  background: #FF5A5F;
+  background: $primaryRed;
   border: 0;
   border-radius: 25px;
   width: 100%;
@@ -397,8 +548,8 @@ input[type=range]::-webkit-slider-thumb {
   margin-top: -7.3px;
   width: 26px;
   height: 26px;
-  background: #FF5A5F;
-  border: 1.8px solid #FF5A5F;
+  background: $primaryRed;
+  border: 1.8px solid $primaryRed;
   border-radius: 15px;
   cursor: pointer;
   -webkit-appearance: none;
@@ -414,8 +565,8 @@ input[type=range]::-moz-range-track {
 input[type=range]::-moz-range-thumb {
   width: 26px;
   height: 26px;
-  background: #FF5A5F;
-  border: 1.8px solid #FF5A5F;
+  background: $primaryRed;
+  border: 1.8px solid $primaryRed;
   border-radius: 15px;
   cursor: pointer;
 }
@@ -434,21 +585,121 @@ input[type=range]::-ms-fill-lower {
   border-radius: 50px;
 }
 input[type=range]::-ms-fill-upper {
-  background: #FF5A5F;
+  background: $primaryRed;
   border-radius: 50px;
 }
 input[type=range]::-ms-thumb {
   width: 26px;
   height: 26px;
-  background: #FF5A5F;
-  border: 1.8px solid #FF5A5F;
+  background: $primaryRed;
+  border: 1.8px solid $primaryRed;
   border-radius: 15px;
   cursor: pointer;
   margin-top: 0px;
 }
 input[type=range]:focus::-ms-fill-lower {
-  background: #FF5A5F;
+  background: $primaryRed;
 }
 input[type=range]:focus::-ms-fill-upper {
   background: #FF7478;
 }
+
+
+///////////////////////////////////////////////////////////////////
+//////////////////////////  MEDIA QUERIES /////////////////////////////
+///////////////////////////////////////////////////////////////////
+@media all and (max-width: 767px) {
+  .content{
+    .jumboSearch{
+      .jumboText{
+        h1 {
+          font-size: 50px;
+        }
+      }
+    }
+  }
+  .apartment{
+
+  .containApartment{
+    -webkit-box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
+    box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
+    border-radius: 20px;
+    .photo{
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+    .apartmentlInfo{
+      height: 100%;
+      border-top-right-radius: 0px;
+      background-color: rgba(245, 245, 245, 0.4);
+      .description,
+      .address,
+      .features,
+      .services{
+        padding-bottom: 0px;
+      }
+    }
+    .contact {
+      border-bottom: none;
+      background-color: rgba(245, 245, 245, 0.4);
+    }
+    #map {
+      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+     }
+   }
+  }
+
+  // LOGIN
+  .login-box{
+    .title{
+      border-right: none;
+    }
+  }
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media all and (min-width: 768px) and (max-width: 991px) {
+  .apartment{
+
+  .containApartment{
+    -webkit-box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
+    box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
+    border-radius: 20px;
+    .photo{
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+    .apartmentlInfo{
+      height: 100%;
+      border-top-right-radius: 0px;
+      background-color: rgba(245, 245, 245, 0.4);
+      .description,
+      .address,
+      .features,
+      .services{
+        padding-bottom: 0px;
+      }
+    }
+    .contact {
+      border-bottom-left-radius: 0px;
+      border-bottom: none;
+      background-color: rgba(245, 245, 245, 0.4);
+    }
+    #map {
+      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+     }
+   }
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media all and (min-width: 992px) and (max-width:1199px) {
+}
+//
+// /* Extra large devices (large desktops, 1200px and up) */
+// @media all and (min-width: 1200px) {
+// } 

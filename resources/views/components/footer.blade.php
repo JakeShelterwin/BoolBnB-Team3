@@ -2,7 +2,7 @@
   <div class="container">
 
     <div class="linkfooter row">
-        <ul class="col-sm-12 col-lg-4">
+        <ul class="col-sm-12 col-md-4">
           <li><span class="titolilink"><strong>Nostri GitHub</strong></span></li>
           <li>Cose a Caso</li>
           <li>Cose a Caso</li>
@@ -10,7 +10,7 @@
           <li>Cose a Caso</li>
           <li>Cose a Caso</li>
         </ul>
-        <ul class="col-sm-12 col-lg-4">
+        <ul class="col-sm-12 col-md-4">
           <li><span class="titolilink"><strong>Pagine Più Importanti</strong></span></li>
           <li>Cose a Caso</li>
           <li>Cose a Caso</li>
@@ -18,7 +18,7 @@
           <li>Cose a Caso</li>
           <li>Cose a Caso</li>
         </ul>
-        <ul class="col-sm-12 col-lg-4">
+        <ul class="col-sm-12 col-md-4">
           <li><span class="titolilink"><strong>Teachers & Staff</strong></span></li>
           <li>Cose a Caso</li>
           <li>Cose a Caso</li>

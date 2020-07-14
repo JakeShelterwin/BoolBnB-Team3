@@ -24,16 +24,19 @@
                   <div class="card-body">
                     {{$apartment -> description}}
                   </div>
-                  <p style="margin-bottom: 0; color: white">Sponsor Attivo per questo appartamento</p>
-                  <a href="{{route('editApartment', $apartment['id'])}}">
-                    Modifica
-                  </a>
-                  <a href="{{route('deleteApartment', $apartment['id'])}}">
-                    Cancella
-                  </a>
-                  <a href="{{route('showApartmentStatistics', $apartment['id'])}}">
-                    MOSTRA STATISTICS
-                  </a>
+                  <div class="funzioni">
+
+                    <p style="margin-bottom: 0; color: white">Sponsorizzato</p>
+                    <a href="{{route('editApartment', $apartment['id'])}}">
+                      Modifica
+                    </a>
+                    <a href="{{route('deleteApartment', $apartment['id'])}}">
+                      Cancella
+                    </a>
+                    <a href="{{route('showApartmentStatistics', $apartment['id'])}}">
+                      Statistiche
+                    </a>
+                  </div>
                 </div>
               @endforeach
             @endif
@@ -41,16 +44,7 @@
               @foreach ($user_apartments as $apartment)
                 <div class="card attivo{{$apartment['is_active']}}" data-annuncioAttivo="{{$apartment['is_active']}}">
                   <div class="card-header"><a href="{{route('showApartment',$apartment['id'])}}">{{$apartment -> title}}</a>
-                  <a href="{{route("sponsorApartment", $apartment->id)}}">Sponsorizzami tutto</a>
-                  <a href="{{route('editApartment', $apartment['id'])}}">
-                    Modifica
-                  </a>
-                  <a href="{{route('deleteApartment', $apartment['id'])}}">
-                    Cancella
-                  </a>
-                  <a href="{{route('showApartmentStatistics', $apartment['id'])}}">
-                    MOSTRA STATISTICS
-                  </a>
+
                 </div>
                      {{-- @if ($apartment -> is_active)
                         <form action="{{route('updateApartment', $apartment['id'])}}" method="post">
@@ -70,7 +64,19 @@
                   <div class="card-body">
                     {{$apartment -> description}}
                   </div>
+                  <div class="funzioni">
 
+                    <a href="{{route("sponsorApartment", $apartment->id)}}">Sponsorizza</a>
+                    <a href="{{route('editApartment', $apartment['id'])}}">
+                      Modifica
+                    </a>
+                    <a href="{{route('deleteApartment', $apartment['id'])}}">
+                      Cancella
+                    </a>
+                    <a href="{{route('showApartmentStatistics', $apartment['id'])}}">
+                      Statistiche
+                    </a>
+                  </div>
                 </div>
               @endforeach
             @endif

@@ -80,7 +80,7 @@
           </div>
         @endforeach
       @endif
-      @foreach ($selectedApartmentsFilteredByUser as $apartment)
+      @foreach ($selectedApartmentsFilteredByUser as $key => $apartment)
         <div class="searchedApartment row">
           <a class=" col-sm-12 col-md-4" href="{{route('showApartment', $apartment -> id)}}"> <div class="searchedApartmentImg" style="background-image: url('{{$apartment->image}}')"></div> </a>
           <ul class="col-sm-12 col-md-8">
@@ -94,6 +94,18 @@
                  <li> {{$service -> name}} </li>
                 @endforeach
               </ul>
+            </li>
+            <li><b>Distanza:</b>
+                @if ($key < 1000)
+                  {{$key}}m
+
+                @else
+                  @php
+                    $key = $key/1000;
+                    $key = round($key, 2);
+                  @endphp
+                  {{$key}}km
+                @endif
             </li>
           </ul>
         </div>
