@@ -10945,6 +10945,10 @@ body {
   display: none;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 header .navbar {
   background-color: #FF5A5F;
 }
@@ -11284,6 +11288,34 @@ header .navbar .logo img {
   outline: 0;
 }
 
+.apartment .containApartment .contact .funzioni {
+  height: 60%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.apartment .containApartment .contact .funzioni a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 35px;
+  background: #FF5A5F;
+  border: none;
+  border-radius: 30px;
+  margin-left: 15px;
+  margin-bottom: 0;
+  color: white;
+  font-weight: 700;
+  outline: 0;
+}
+
+.apartment .containApartment .contact .manage {
+  margin-top: 5%;
+}
+
 .apartment .containApartment #map {
   height: 350px;
   /* The height is 400 pixels */
@@ -11580,6 +11612,11 @@ input[type=range]:focus::-ms-fill-upper {
     background-color: rgba(245, 245, 245, 0.4);
   }
 
+  .apartment .containApartment .contact .funzioni {
+    height: 80%;
+    flex-direction: column;
+  }
+
   .apartment .containApartment #map {
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
@@ -11618,8 +11655,12 @@ input[type=range]:focus::-ms-fill-upper {
 
   .apartment .containApartment .contact {
     border-bottom-left-radius: 0px;
-    border-bottom: none;
     background-color: rgba(245, 245, 245, 0.4);
+  }
+
+  .apartment .containApartment .contact .funzioni {
+    height: 80%;
+    flex-direction: column;
   }
 
   .apartment .containApartment #map {

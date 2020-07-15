@@ -21,11 +21,14 @@ class ApartmentController extends Controller
       $apartment = Apartment::findOrFail($id);
       // prendo tutte le view
       $allView = View::all();
+
       // mi seleziono l'ultima view salvata appartenente all'ip dell'utente che clicca per un dato appartamento
       $lastViewIP = $allView -> where('ip', \Request::getClientIp()) -> where('apartment_id', $id) -> last() ;
+
       // mi salvo la data completa di questa view e ci aggiungo il limite temporale di 2 ore
       // risorsa usata: https://stackoverflow.com/questions/1124752/add-13-hours-to-a-timestamp
       $expiredViewTime = date( "Y-M-d H:i:s", strtotime( $lastViewIP["created_at"] ) + 2 * 3600 );
+
       // mi salvo la data completa attuale
       $now = date( "Y-M-d H:i:s", strtotime( Carbon::now()));
 
@@ -41,11 +44,6 @@ class ApartmentController extends Controller
         $apartmentViews->ip = \Request::getClientIp();
         $apartmentViews->agent = \Request::header('User-Agent');
         $apartmentViews->save();//please note to save it at lease, very important
-        // return redirect() -> route("showApartment", $id)
-        // -> withSuccess("View aggiunta correttamente");
-      } else {
-          // return redirect() -> route("showApartment", $id)
-          //     -> withSuccess("View non salvata per limite orario");
       }
       $sponsorAttivo = 0;
        if ($apartment['sponsor_expire_time'] >= time()) {
@@ -64,9 +62,20 @@ class ApartmentController extends Controller
       $message -> message = $validateData['message'];
       $message -> apartment_id = $id;
 
-      $message -> save();
-      return redirect() -> route("showApartment", $id)
-                        -> withSuccess("Messaggio inviato correttamente");
+      // Per evitare che l'utente salvi "inavvertitamente" più messaggi identici cliccando più volte
+      // nel pulsante submit, confrontiamo la data del suo ultimo messaggio con l'attuale
+      $lastMessageEmail = Message::all() -> where('email', $validateData['email']) -> last();
+      $now = date( "Y-m-d H:i:s", strtotime( Carbon::now()));
+      $lastMessageEmailCreatedTime = date( "Y-m-d H:i:s", strtotime( $lastMessageEmail["created_at"]) + 10); // 10 secondi dall'ultimo messaggio
+
+      if($now >= $lastMessageEmailCreatedTime){ // se sono passati 10 secondi dall'ultimo messaggio
+        $message -> save();
+        return redirect() -> route("showApartment", $id)
+                          -> withSuccess("Messaggio inviato correttamente");
+      }else{
+        return redirect() -> route("showApartment", $id)
+                          -> withSuccess("Messaggio inviato correttamente");
+      }
     }
 
     public function searchApartments(Request $request){

@@ -51,7 +51,7 @@ class HomeController extends Controller
       foreach ($apartmentSponsored as $apartment) {
         $users_messages_grouped_by_sponsored_apartment[] = $messages -> where('apartment_id', $apartment -> id);
       }
-      
+
       return view('home', compact('user_apartments', "apartmentSponsored", 'users_messages_grouped_by_normal_apartment','users_messages_grouped_by_sponsored_apartment' ));
     }
 
@@ -90,6 +90,8 @@ class HomeController extends Controller
       $apartment -> is_active = $validateData['is_active'];
       $apartment -> user_id = auth()->user()->id;
 
+
+
       // Check if a profile image has been uploaded
       if ($request->has('image')) {
           // Get image file
@@ -106,10 +108,21 @@ class HomeController extends Controller
           $apartment -> image = $filePath;
       }
 
-      $apartment -> save();
-      $apartment -> services() -> sync($validateData['services']);
-      return redirect() -> route("showApartment",$apartment['id'])
-                        -> withSuccess("Appartamento creato correttamente");
+      // Per evitare che l'utente salvi "inavvertitamente" più appartamenti identici cliccando più volte
+      // nel pulsante submit, confrontiamo la data del suo ultimo appartamento creato con la data attuale
+      $lastApartment = Apartment::all() -> where('user_id', auth()->user()->id) -> last();
+      $now = date( "Y-m-d H:i:s", strtotime( Carbon::now()));
+      $lastApartmentCreatedTime = date( "Y-m-d H:i:s", strtotime( $lastApartment["created_at"]) + 30);
+
+      if($now >= $lastApartmentCreatedTime){
+        $apartment -> save();
+        $apartment -> services() -> sync($validateData['services']);
+        return redirect() -> route("showApartment",$apartment['id'])
+                          -> withSuccess("Appartamento creato correttamente");
+      }else{
+        return redirect() -> route("showApartment",$lastApartment['id'])
+                          -> withSuccess("Appartamento creato correttamente");
+      }
     }
 
     public function editApartment($id){
