@@ -33395,7 +33395,7 @@ return jQuery;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.19';
+  var VERSION = '4.17.17';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -74632,7 +74632,11 @@ __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 $(document).ready(function () {
-  console.log("js collegato"); // questo if gestisce il modo in cui ci ricaviamo le coordiante dato un indirizzo.
+  console.log("js collegato"); // $('.form button').click(function(){
+  //   $(this).att("disabled", true);
+  //   console.log('hai cliccato il pulsante');
+  // })
+  // questo if gestisce il modo in cui ci ricaviamo le coordiante dato un indirizzo.
   //Nel caso in cui l'utente commetta errori e dunque la pagina si ricarichi (non perdendo i valori grazie a old()) l'ajax viene richiamato in automatico su quei valori.
 
   if ($("input[name=address]").val()) {
@@ -74955,8 +74959,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/kirtashshek/Desktop/esLezioneLive/BoolBnB-Team3/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/kirtashshek/Desktop/esLezioneLive/BoolBnB-Team3/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\boolean\Progettone\BoolBnB-Team3\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\boolean\Progettone\BoolBnB-Team3\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
