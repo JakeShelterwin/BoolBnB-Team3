@@ -18,6 +18,9 @@ body {
 .coordinate{
   display: none;
 }
+a:hover{
+  text-decoration: none;
+}
 ///////////////////////////////////////////////////////////////////
 //////////////////////////    HEADER  /////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -347,6 +350,31 @@ header {
         font-weight: 700;
         outline: 0;
       }
+      .funzioni {
+        height: 60%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        a{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100px;
+          height: 35px;
+          background: $primaryRed;
+          border: none;
+          border-radius: 30px;
+          margin-left: 15px;
+          margin-bottom: 0;
+          color: white;
+          font-weight: 700;
+          outline: 0;
+        }
+      }
+      .manage{
+        margin-top: 5%;
+      }
     }
     #map {
       height: 350px;  /* The height is 400 pixels */
@@ -643,6 +671,10 @@ input[type=range]:focus::-ms-fill-upper {
     .contact {
       border-bottom: none;
       background-color: rgba(245, 245, 245, 0.4);
+      .funzioni {
+        height: 80%;
+        flex-direction: column;
+      }
     }
     #map {
       border-bottom-right-radius: 20px;
@@ -685,8 +717,12 @@ input[type=range]:focus::-ms-fill-upper {
     }
     .contact {
       border-bottom-left-radius: 0px;
-      border-bottom: none;
+      // border-bottom: none;
       background-color: rgba(245, 245, 245, 0.4);
+      .funzioni {
+        height: 80%;
+        flex-direction: column;
+      }
     }
     #map {
       border-bottom-right-radius: 20px;

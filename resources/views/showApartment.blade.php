@@ -62,21 +62,30 @@
         {{$emailUtente = NULL}}
         @auth
           @php
-          $emailUtente = auth()->user()-> email
-        @endphp
+            $emailUtente = auth()->user()-> email
+          @endphp
+        @endauth
 
-      @endauth
-      <h2>Contatta il Proprietario</h2>
-      <form class="form" action="{{route('storeMessage', $apartment -> id)}}" method="post">
-        @csrf
-        @method('POST')
-        <label for="email">Inserisci la Tua Mail per essere Ricontattato</label> <br>
-        <input type="email" name="email" value="{{old('email', $emailUtente)}}"> <br>
-        <label for="message">Scrivi qui un messaggio per un proprietario</label> <br>
-        <input type="textarea" name="message" value="{{old('message')}}"> <br>
-        <button type="submit" name="submit">Invia Messaggio</button> <br>
-      </form>
-    </div>
+        @if (auth()->user()->id == $apartment -> user_id)
+          <h2 class="manage text-center">Gestisci il tuo appartamento</h2>
+          <div class="funzioni">
+            <a href="{{route('editApartment', $apartment['id'])}}">Modifica</a>
+            <a href="{{route('deleteApartment', $apartment['id'])}}">Cancella</a>
+            <a href="{{route('showApartmentStatistics', $apartment['id'])}}">Statistiche</a>
+          </div>
+        @else
+          <h2>Contatta il Proprietario</h2>
+          <form class="form" action="{{route('storeMessage', $apartment -> id)}}" method="post">
+            @csrf
+            @method('POST')
+            <label for="email">Inserisci la Tua Mail per essere Ricontattato</label> <br>
+            <input type="email" name="email" value="{{old('email', $emailUtente)}}"> <br>
+            <label for="message">Scrivi qui un messaggio per un proprietario</label> <br>
+            <input type="textarea" name="message" value="{{old('message')}}"> <br>
+            <button type="submit" name="submit">Invia Messaggio</button> <br>
+          </form>
+        @endif
+      </div>
     <div id="map" class="col-sm-12 col-lg-6"></div>
   </div>
   </div>
