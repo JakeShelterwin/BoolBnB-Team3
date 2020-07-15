@@ -4,13 +4,6 @@ require('./bootstrap');
 $(document).ready(function(){
     console.log("js collegato");
 
-      // $('.form button').click(function(){
-      //   $(this).att("disabled", true);
-      //   console.log('hai cliccato il pulsante');
-      // })
-
-      
-
       // questo if gestisce il modo in cui ci ricaviamo le coordiante dato un indirizzo.
       //Nel caso in cui l'utente commetta errori e dunque la pagina si ricarichi (non perdendo i valori grazie a old()) l'ajax viene richiamato in automatico su quei valori.
       if ($("input[name=address]").val()) {
@@ -19,6 +12,7 @@ $(document).ready(function(){
             url : "https://api.tomtom.com/search/2/geocode/"+input+".json?",
             data: {
               "key": "GqqMbjtoswnKOW5HbgKmS6sLaqEXL7pl",
+              "countrySet" : "IT"
             },
             method : "GET",
             success : function (data) {
@@ -37,14 +31,16 @@ $(document).ready(function(){
       // Nel caso in cui l'indirizzo non sia stato ancora inserito allora si attende che l'utente abbia finito di scriverlo e quando il focus esce dall'input viene richiamato l'ajax che ottiene le coordinate.
       $(".info").on("keyup", "input[name=address]", function(){
           var input = $("input[name=address]").val();
-          console.log("funziona o no");
+
           $.ajax({
               url : "https://api.tomtom.com/search/2/geocode/"+input+".json?",
               data: {
                 "key": "GqqMbjtoswnKOW5HbgKmS6sLaqEXL7pl",
+                "countrySet" : "IT"
               },
               method : "GET",
               success : function (data) {
+                console.log(data['results']);
                 //rimuovo eventuali p che mostra l'errore
                 $(".address p").remove();
                 // controllo di riceve almeno un indirizzo valido, se non lo ricevo faccio append di un p che mostra un messaggio d'errore
@@ -68,14 +64,6 @@ $(document).ready(function(){
               }
         });
       })
-
-      // TEST PER DISABILITARE IL BOTTONE APPENA VIENE LICCATO PER EVITARE IL SALVATAGGIO DI DUPLICATI DI APPARTAMENTI
-      // Se il bottone è attivo, appena ci clicco sopra si disattiva (evito doppio click)
-      // if ($("#bottoneCreate").prop("disabled", false)) {
-      //   $(".info").on("dblclick", "#bottoneCreate", function(){
-      //     $("#bottoneCreate").prop("disabled", true);
-      //   });
-      // }
 
       // TEST PER ORDINARE CRONOLOGICAMENTE I MESSAGGI
       // $('.messages .card').sort(function(a,b) {

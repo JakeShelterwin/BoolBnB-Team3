@@ -74632,11 +74632,7 @@ __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 $(document).ready(function () {
-  console.log("js collegato"); // $('.form button').click(function(){
-  //   $(this).att("disabled", true);
-  //   console.log('hai cliccato il pulsante');
-  // })
-  // questo if gestisce il modo in cui ci ricaviamo le coordiante dato un indirizzo.
+  console.log("js collegato"); // questo if gestisce il modo in cui ci ricaviamo le coordiante dato un indirizzo.
   //Nel caso in cui l'utente commetta errori e dunque la pagina si ricarichi (non perdendo i valori grazie a old()) l'ajax viene richiamato in automatico su quei valori.
 
   if ($("input[name=address]").val()) {
@@ -74644,7 +74640,8 @@ $(document).ready(function () {
     $.ajax({
       url: "https://api.tomtom.com/search/2/geocode/" + input + ".json?",
       data: {
-        "key": "GqqMbjtoswnKOW5HbgKmS6sLaqEXL7pl"
+        "key": "GqqMbjtoswnKOW5HbgKmS6sLaqEXL7pl",
+        "countrySet": "IT"
       },
       method: "GET",
       success: function success(data) {
@@ -74663,15 +74660,16 @@ $(document).ready(function () {
 
   $(".info").on("keyup", "input[name=address]", function () {
     var input = $("input[name=address]").val();
-    console.log("funziona o no");
     $.ajax({
       url: "https://api.tomtom.com/search/2/geocode/" + input + ".json?",
       data: {
-        "key": "GqqMbjtoswnKOW5HbgKmS6sLaqEXL7pl"
+        "key": "GqqMbjtoswnKOW5HbgKmS6sLaqEXL7pl",
+        "countrySet": "IT"
       },
       method: "GET",
       success: function success(data) {
-        //rimuovo eventuali p che mostra l'errore
+        console.log(data['results']); //rimuovo eventuali p che mostra l'errore
+
         $(".address p").remove(); // controllo di riceve almeno un indirizzo valido, se non lo ricevo faccio append di un p che mostra un messaggio d'errore
         // e disattiva il bottone d'invio dati
         // altrimneti valorizzo i campi lat e lon come sopra
@@ -74692,14 +74690,7 @@ $(document).ready(function () {
         console.log("E' avvenuto un errore. " + errori, "stato " + stato, richiesta);
       }
     });
-  }); // TEST PER DISABILITARE IL BOTTONE APPENA VIENE LICCATO PER EVITARE IL SALVATAGGIO DI DUPLICATI DI APPARTAMENTI
-  // Se il bottone è attivo, appena ci clicco sopra si disattiva (evito doppio click)
-  // if ($("#bottoneCreate").prop("disabled", false)) {
-  //   $(".info").on("dblclick", "#bottoneCreate", function(){
-  //     $("#bottoneCreate").prop("disabled", true);
-  //   });
-  // }
-  // TEST PER ORDINARE CRONOLOGICAMENTE I MESSAGGI
+  }); // TEST PER ORDINARE CRONOLOGICAMENTE I MESSAGGI
   // $('.messages .card').sort(function(a,b) {
   //     console.log("ciclo");
   //    return $(a).data('time') > $(b).data('time');
