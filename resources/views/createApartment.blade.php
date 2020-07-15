@@ -18,15 +18,15 @@
 
   <div class="info">
       <label for="title">Nome Appartamento </label>
-      <input type="text" name="title" value="{{old('title')}}">
+      <input type="text" name="title" value="{{old('title')}}" placeholder="Inserisci un titolo" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Inserisci un titolo'">
       <div class="description">
           <h2>Descrizione</h2>
-          <p><input type="textarea" name="description" value="{{old('description')}}"></p>
+          <p><input type="textarea" name="description" value="{{old('description')}}" placeholder="Inserisci una descrizione" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Inserisci una descrizione'"></p>
       </div>
 
       <div class="address">
-        <label for="address">Indirizzo Appartamento</label>
-        <input type="text" name="address" value="{{old('address')}}">
+        <label for="address">Indirizzo</label>
+        <input type="text" name="address" value="{{old('address')}}" placeholder="Via e n° / CAP / Città" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Via e n° / CAP / Città'">
         <div class="coordinate">
           <input id="latitude" type="text" name="lat" value="">
           <input id="longitude" type="text" name="lon" value="">

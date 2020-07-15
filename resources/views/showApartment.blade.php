@@ -2,23 +2,24 @@
 
 @section('content')
 
-@if (session("success"))
-  <p>{{session("success")}}</p>
-@endif
-@if ($errors->any())
-  @foreach ($errors->all() as $error)
-    <p>{{$error}}</p>
-  @endforeach
-@endif
+<div class="success_or_fail">
+  @if (session("success"))
+    <p>{{session("success")}}</p>
+  @endif
+  @if ($errors->any())
+    @foreach ($errors->all() as $error)
+      <p>{{$error}}</p>
+    @endforeach
+  @endif
+</div>
+
 <div class="apartment container">
   <h1 id="title">{{$apartment['title']}} <i class="fas fa-award"></i> </h1>
   <div class="containApartment col-sm-12">
 
     <div class="row">
 
-      <div class="photo col-sm-12 col-lg-6" style="background-image: url('{{$apartment->image}}')">
-        {{-- <img id="apartmentImage" src="{{asset($apartment['image'])}}" alt="photo{{$apartment['id']}}"> --}}
-      </div>
+      <div class="photo col-sm-12 col-lg-6" style="background-image: url('{{$apartment->image}}')"> </div>
 
       <div class="apartmentlInfo col-sm-12 col-lg-6">
         <div class="row">
@@ -66,6 +67,7 @@
           @endphp
         @endauth
 
+        @auth
         @if (auth()->user()->id == $apartment -> user_id)
           <h2 class="manage text-center">Gestisci il tuo appartamento</h2>
           <div class="funzioni">
@@ -79,9 +81,21 @@
             @csrf
             @method('POST')
             <label for="email">Inserisci la Tua Mail per essere Ricontattato</label> <br>
-            <input type="email" name="email" value="{{old('email', $emailUtente)}}"> <br>
+            <input type="email" name="email" value="{{old('email', $emailUtente)}}" placeholder="La tua e_mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'La tua e_mail'"> <br>
             <label for="message">Scrivi qui un messaggio per un proprietario</label> <br>
-            <input type="textarea" name="message" value="{{old('message')}}"> <br>
+            <input type="textarea" name="message" value="{{old('message')}}" placeholder="Inserisci la tua richiesta" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Inserisci la tua richiesta'"> <br>
+            <button type="submit" name="submit">Invia Messaggio</button> <br>
+          </form>
+        @endauth
+        @else
+          <h2>Contatta il Proprietario</h2>
+          <form class="form" action="{{route('storeMessage', $apartment -> id)}}" method="post">
+            @csrf
+            @method('POST')
+            <label for="email">Inserisci la Tua Mail per essere Ricontattato</label> <br>
+            <input type="email" name="email" value="{{old('email', $emailUtente)}}" placeholder="La tua e_mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'La tua e_mail'"> <br>
+            <label for="message">Scrivi qui un messaggio per un proprietario</label> <br>
+            <input type="textarea" name="message" value="{{old('message')}}" placeholder="Inserisci la tua richiesta" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Inserisci la tua richiesta'"> <br>
             <button type="submit" name="submit">Invia Messaggio</button> <br>
           </form>
         @endif
