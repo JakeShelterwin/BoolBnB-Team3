@@ -74718,7 +74718,7 @@ $(document).ready(function () {
     };
     var popup = new tt.Popup({
       offset: popupOffsets
-    }).setHTML("<p>" + $(".info #title").text() + "</p>" + $(".address p").text());
+    }).setHTML("<p>" + $(".apartment #title").text() + "</p>" + $(".apartment h4").text());
     marker.setPopup(popup).togglePopup();
   }
 

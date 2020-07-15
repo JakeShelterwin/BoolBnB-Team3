@@ -55,10 +55,10 @@
     </form>
   </div>
 
-  <div class="apartments">
+  <div class="apartments row">
       @if ($sponsoredApartment)
         @foreach ($sponsoredApartment as $apartment)
-          <div class="sponsoredApartment row">
+          <div class="sponsoredApartment col-sm-12 row">
             <a  class=" col-sm-12 col-md-4"  href="{{route('showApartment', $apartment -> id)}}"> <div class="sponsoredApartmentImg" style="background-image: url('{{$apartment->image}}')"></div> </a>
             <ul class="col-sm-12 col-md-6">
               <li><a href="{{route('showApartment', $apartment -> id)}}"> <b>{{$apartment -> title}} </b> </a></li>
@@ -81,7 +81,7 @@
         @endforeach
       @endif
       @foreach ($selectedApartmentsFilteredByUser as $key => $apartment)
-        <div class="searchedApartment row">
+        <div class="searchedApartment col-sm-12 row">
           <a class=" col-sm-12 col-md-4" href="{{route('showApartment', $apartment -> id)}}"> <div class="searchedApartmentImg" style="background-image: url('{{$apartment->image}}')"></div> </a>
           <ul class="col-sm-12 col-md-8">
             <li><a href="{{route('showApartment', $apartment -> id)}}"> <b>{{$apartment -> title}} </b> </a></li>

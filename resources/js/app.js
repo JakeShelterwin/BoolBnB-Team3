@@ -92,7 +92,7 @@ $(document).ready(function(){
           right: [-25, -35]
         }
 
-        var popup = new tt.Popup({offset: popupOffsets}).setHTML("<p>" + $(".info #title").text() + "</p>" + $(".address p").text());
+        var popup = new tt.Popup({offset: popupOffsets}).setHTML("<p>" + $(".apartment #title").text() + "</p>" + $(".apartment h4").text());
         marker.setPopup(popup).togglePopup();
       }
 

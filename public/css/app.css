@@ -11193,9 +11193,15 @@ header .navbar .logo img {
   margin-right: 5px;
 }
 
+.apartment .row {
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
 .apartment h1 {
   margin-top: 20px;
-  margin-bottom: 0;
   display: inline-block;
 }
 
@@ -11211,37 +11217,80 @@ header .navbar .logo img {
   margin-bottom: 20px;
 }
 
-.apartment .containApartment h2 {
+.apartment .containApartment h5 {
   color: #FF5A5F;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
 }
 
-.apartment .containApartment .photo {
+.apartment .containApartment .containPhoto {
+  padding: 15px;
+  border-top-left-radius: 20px;
+}
+
+.apartment .containApartment .containPhoto .photo {
   width: 100%;
-  height: 350px;
+  height: 320px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  border-top-left-radius: 20px;
+  border-radius: 20px;
 }
 
 .apartment .containApartment .apartmentlInfo {
   height: 350px;
   /* The height is 400 pixels */
-  border-top-right-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
 
-.apartment .containApartment .apartmentlInfo .description,
-.apartment .containApartment .apartmentlInfo .address,
-.apartment .containApartment .apartmentlInfo .features,
-.apartment .containApartment .apartmentlInfo .services {
-  padding: 20px;
+.apartment .containApartment .apartmentlInfo .description {
+  padding: 10px;
+  padding-bottom: 0px;
+}
+
+.apartment .containApartment .apartmentlInfo .description .textDescription {
+  height: 185px;
+  overflow: auto;
+}
+
+.apartment .containApartment .apartmentlInfo .features .rooms {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.apartment .containApartment .apartmentlInfo .features .rooms li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0px 11px;
+}
+
+.apartment .containApartment .apartmentlInfo .features .services {
+  width: 100%;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.apartment .containApartment .apartmentlInfo .features .services li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0px 11px;
 }
 
 .apartment .containApartment .contact {
   width: 100%;
   height: 350px;
-  border-bottom-left-radius: 20px;
-  padding: 20px;
+  padding: 10px;
+  text-align: center;
 }
 
 .apartment .containApartment .contact input[name=email] {
@@ -11254,6 +11303,7 @@ header .navbar .logo img {
   color: #3F3F3F;
   font-size: 16px;
   outline: 0;
+  margin-top: 17px;
 }
 
 .apartment .containApartment .contact input[name=email]:focus {
@@ -11263,9 +11313,9 @@ header .navbar .logo img {
 .apartment .containApartment .contact textarea[name=message] {
   background: white;
   border: 3px solid #e4e4e4;
-  height: 136px;
+  height: 158px;
   margin-bottom: 5px;
-  width: 100%;
+  width: 250px;
   border-radius: 10px;
   padding: 15px 15px;
   color: #3F3F3F;
@@ -11292,7 +11342,7 @@ header .navbar .logo img {
 .apartment .containApartment .contact .funzioni {
   height: 60%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
 }
@@ -11313,13 +11363,10 @@ header .navbar .logo img {
   outline: 0;
 }
 
-.apartment .containApartment .contact .manage {
-  margin-top: 5%;
-}
-
 .apartment .containApartment #map {
-  height: 350px;
+  height: 700px;
   /* The height is 400 pixels */
+  border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   padding: 0;
 }
@@ -11657,7 +11704,6 @@ input[type=range]:focus::-ms-fill-upper {
   }
 
   .apartment .containApartment .apartmentlInfo {
-    height: 100%;
     border-top-right-radius: 0px;
     background-color: rgba(245, 245, 245, 0.4);
   }
@@ -11672,16 +11718,31 @@ input[type=range]:focus::-ms-fill-upper {
   .apartment .containApartment .contact {
     border-bottom: none;
     background-color: rgba(245, 245, 245, 0.4);
+    height: 200px;
+  }
+
+  .apartment .containApartment .contact input[name=email] {
+    height: 30px;
+    width: 250px;
+    border-radius: 10px;
+    padding: 15px 15px;
+    margin-top: 0px;
+  }
+
+  .apartment .containApartment .contact textarea[name=message] {
+    height: 45px;
+    width: 380px;
+    padding: 3px 15px;
   }
 
   .apartment .containApartment .contact .funzioni {
-    height: 80%;
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .apartment .containApartment #map {
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
+    height: 350px;
   }
 
   .login-box .title {
@@ -11703,7 +11764,6 @@ input[type=range]:focus::-ms-fill-upper {
   }
 
   .apartment .containApartment .apartmentlInfo {
-    height: 100%;
     border-top-right-radius: 0px;
     background-color: rgba(245, 245, 245, 0.4);
   }
@@ -11716,20 +11776,61 @@ input[type=range]:focus::-ms-fill-upper {
   }
 
   .apartment .containApartment .contact {
-    border-bottom-left-radius: 0px;
+    border-bottom: none;
     background-color: rgba(245, 245, 245, 0.4);
+    height: 240px;
+  }
+
+  .apartment .containApartment .contact input[name=email] {
+    height: 30px;
+    width: 250px;
+    border-radius: 10px;
+    padding: 15px 15px;
+    margin-top: 0px;
+  }
+
+  .apartment .containApartment .contact textarea[name=message] {
+    height: 65px;
+    width: 500px;
+    padding: 3px 15px;
   }
 
   .apartment .containApartment .contact .funzioni {
-    height: 80%;
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .apartment .containApartment #map {
+    height: 350px;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
   }
 }
 
 /* Large devices (desktops, 992px and up) */
+
+@media all and (min-width: 992px) and (max-width: 1199px) {
+  .apartment .containApartment .contact {
+    border-bottom: none;
+    background-color: rgba(245, 245, 245, 0.4);
+  }
+
+  .apartment .containApartment .contact input[name=email] {
+    margin-top: 3px;
+    height: 30px;
+    width: 200px;
+    border-radius: 10px;
+    padding: 15px 15px;
+    margin-top: 0px;
+  }
+
+  .apartment .containApartment .contact textarea[name=message] {
+    height: 200px;
+    width: 200px;
+    padding: 3px 15px;
+  }
+
+  .apartment .containApartment .contact .funzioni {
+    flex-direction: row;
+  }
+}
 
