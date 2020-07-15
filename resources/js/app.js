@@ -3,7 +3,6 @@ require('./bootstrap');
 
 $(document).ready(function(){
     console.log("js collegato");
-
       // questo if gestisce il modo in cui ci ricaviamo le coordiante dato un indirizzo.
       //Nel caso in cui l'utente commetta errori e dunque la pagina si ricarichi (non perdendo i valori grazie a old()) l'ajax viene richiamato in automatico su quei valori.
       if ($("input[name=address]").val()) {

@@ -336,19 +336,7 @@ class HomeController extends Controller
 
           $payload = $request->input('payload', false);
           $nonce = $payload['nonce'];
-          // if ($request->input("sponsorType") == "Silver"){
-          //   $amount = "2.99";
-          // }
-          // if ($request->input("sponsorType") == "Gold"){
-          //   $amount = "5.99";
-          // }
-          // if ($request->input("sponsorType") == "Platinum"){
-          //   $amount = "9.99";
-          // }
-          // // nel caso che l'utente riesca a far uscire il DropIn senza cliccare sul radius che valorizzano la request
-          // if (!($request->input("sponsorType"))){
-          //   $amount = "is_Null";
-          // }
+
           $sponsorType = $request->input("sponsorType");
           $allWasWell = false;
           $sponsorId = 0;
