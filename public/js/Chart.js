@@ -37479,7 +37479,7 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/kirtashshek/Desktop/esLezioneLive/BoolBnB-Team3/node_modules/chart.js/dist/Chart.js */"./node_modules/chart.js/dist/Chart.js");
+module.exports = __webpack_require__(/*! C:\boolean\Progettone\BoolBnB-Team3\node_modules\chart.js\dist\Chart.js */"./node_modules/chart.js/dist/Chart.js");
 
 
 /***/ })

@@ -69,10 +69,8 @@ class ApartmentController extends Controller
                         -> withSuccess("Messaggio inviato correttamente");
     }
 
-
     public function searchApartments(Request $request){
       // preparazione variabili
-      $sponsoredApartment = Apartment::all() -> where('sponsor_expire_time', '>=', time());
       $apartments = Apartment::all() -> where('is_active', 1)  -> where('beds_n', ">=", $request['beds_n'])-> where('rooms_n', ">=", $request['rooms_n']);
       $services = Service::all();
       $query = $request['address'];
@@ -122,7 +120,6 @@ class ApartmentController extends Controller
         } else {
           $radius = 20000;
         }
-      // dd($radius);
 
       $selectedApartmentsBasedOnLocation = [];
       // FONTE LIBRERIA per il calcolo della distanza fra 2 punti sul globo https://github.com/treffynnon/Navigator
@@ -134,6 +131,14 @@ class ApartmentController extends Controller
           $selectedApartmentsBasedOnLocation[$distance] = $apartment;
         }
       }
+
+      $sponsoredApartment = [];
+      foreach ($selectedApartmentsBasedOnLocation as $apartment) {
+        if($apartment['sponsor_expire_time'] >= time()){
+          $sponsoredApartment[] = $apartment;
+        }
+      }
+
       // ordina l'array associativo in base alla KEY, siccome la key è la distanza gli appartamenti saranno inseriti dal più vicino (alle coordinate inserite) al più lontano
       ksort($selectedApartmentsBasedOnLocation);
 

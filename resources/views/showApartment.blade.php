@@ -67,7 +67,7 @@
 
       @endauth
       <h2>Contatta il Proprietario</h2>
-      <form class="" action="{{route('storeMessage', $apartment -> id)}}" method="post">
+      <form class="form" action="{{route('storeMessage', $apartment -> id)}}" method="post">
         @csrf
         @method('POST')
         <label for="email">Inserisci la Tua Mail per essere Ricontattato</label> <br>
