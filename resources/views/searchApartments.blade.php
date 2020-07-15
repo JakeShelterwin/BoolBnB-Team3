@@ -60,7 +60,7 @@
         @foreach ($sponsoredApartment as $apartment)
           <div class="sponsoredApartment row">
             <a  class=" col-sm-12 col-md-4"  href="{{route('showApartment', $apartment -> id)}}"> <div class="sponsoredApartmentImg" style="background-image: url('{{$apartment->image}}')"></div> </a>
-            <ul class="col-sm-12 col-md-8">
+            <ul class="col-sm-12 col-md-6">
               <li><a href="{{route('showApartment', $apartment -> id)}}"> <b>{{$apartment -> title}} </b> </a></li>
               <li><b>Descrizione</b> {{$apartment["description"]}}</li>
               <li><b>Proprietario</b> {{$apartment -> user -> name}}</li>
