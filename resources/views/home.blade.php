@@ -11,16 +11,16 @@
                           {{ session('status') }}
                       </div>
                   @endif
-                  <a href="{{route('createApartment')}}">Crea &nbsp  Appartamento &nbsp  <i class="far fa-plus-square"></i></a>
+                  <a href="{{route('createApartment')}}">Crea Appartamento <i class="far fa-plus-square"></i></a>
               </div>
               <div class="legenda col-sm-5 col-lg-5">
                 <span> LEGENDA &nbsp  <i class="fas fa-layer-group"></i></span>
                 <div class="nascondino">
                   <ul>
-                    <li>Sponsor <i class="fas fa-award"></i> </li>
-                    <li>Edit <i class="far fa-edit"></i> </li>
-                    <li>Delete <i class="far fa-trash-alt"></i> </li>
-                    <li>Stats <i class="fas fa-chart-line"></i></li>
+                    <li>Sponsor &nbsp<i class="fas fa-award"></i> </li>
+                    <li>Edit&nbsp <i class="far fa-edit"></i> </li>
+                    <li>Delete &nbsp<i class="far fa-trash-alt"></i> </li>
+                    <li>Stats&nbsp <i class="fas fa-chart-line"></i></li>
                   </ul>
                 </div>
               </div>
@@ -29,8 +29,8 @@
             <div class="apartmentsSponsored row">
               @if ($apartmentSponsored)
                 @foreach ($apartmentSponsored as $apartment)
-                  <div class="card">
-                  <div class="apartment sponsored row attivo{{$apartment['is_active']}}" data-annuncioAttivo="{{$apartment['is_active']}}">
+                  <div class="card  attivo{{$apartment['is_active']}}">
+                  <div class="apartment row" data-annuncioAttivo="{{$apartment['is_active']}}">
                     <div class="immagine col-sm-12">
 
                       <a href="{{route('showApartment', $apartment -> id)}}">
@@ -65,8 +65,8 @@
             <div class="normalApartments row">
               @if ($user_apartments)
                 @foreach ($user_apartments as $apartment)
-                <div class="card">
-                  <div class="apartment row attivo{{$apartment['is_active']}}" data-annuncioAttivo="{{$apartment['is_active']}}">
+                <div class="card attivo{{$apartment['is_active']}}">
+                  <div class="apartment row" data-annuncioAttivo="{{$apartment['is_active']}}">
                     <div class="immagine col-sm-12">
                       <a href="{{route('showApartment', $apartment -> id)}}">
                         <div class="apartmentImg unsponsored" style="background-image: url('{{$apartment->image}}')"></div>
@@ -95,13 +95,18 @@
             </div>
         </div>
 
-        <div class="messages col-md-4 flex-column-reverse d-flex justify-content-end">
+        <div class="col-md-4 containMessages">
+          <div class="messages card row">
+            <div class="bulge col-sm-7">
+              <span>Messaggi ricevuti</span>
+            </div>
+          </div>
           @if ($users_messages_grouped_by_sponsored_apartment)
             @foreach ($users_messages_grouped_by_sponsored_apartment as $singleApartmentMessages)
               @foreach ($singleApartmentMessages as $message)
-                  <div class="card" data-time="{{$message -> created_at}}">
-                    <div class="card-header">Appartamento: {{$message -> apartment -> title}}</div>
-                    <div class="card-body">
+                  <div class="card message row" data-time="{{$message -> created_at}}">
+                    <b> {{$message -> apartment -> title}}</b>
+                     <div class="card-body messageContent  col-sm-12">
                       <b>Messaggio da: </b>{{$message -> email}} <br>
                       <b>Testo:  </b>{{$message -> message}}
                     </div>
@@ -112,9 +117,9 @@
          @if ($users_messages_grouped_by_normal_apartment)
            @foreach ($users_messages_grouped_by_normal_apartment as $singleApartmentMessages)
              @foreach ($singleApartmentMessages as $message)
-                 <div class="card" data-time="{{$message -> created_at}}">
-                   <div class="card-header">Appartamento: {{$message -> apartment -> title}}</div>
-                   <div class="card-body">
+                 <div class="card message row" data-time="{{$message -> created_at}}">
+                   <b> {{$message -> apartment -> title}}</b>
+                   <div class="card-body messageContent col-sm-12">
                      <b>Messaggio da: </b>{{$message -> email}} <br>
                      <b>Testo:  </b>{{$message -> message}}
                    </div>
@@ -122,12 +127,7 @@
                @endforeach
            @endforeach
           @endif
-          {{-- aggiunta grafica sopra ai messaggi ricevuti --}}
-          <div class="card">
-            <div class="card-header">{{ __('Messaggi Ricevuti') }}</div>
-            <div class="card-body"> </div>
-          </div>
-        </div>
+      </div>
     </div>
 </div>
 @endsection

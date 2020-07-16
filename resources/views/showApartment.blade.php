@@ -14,7 +14,11 @@
 </div>
 
 <div class="apartment container">
-  <h1 id="title">{{$apartment['title']}} <i class="fas fa-award"></i> </h1>
+  <h1 id="title">{{$apartment['title']}}
+    @if ($sponsorAttivo)
+      <i class="fas fa-award"></i>
+    @endif
+   </h1>
   <h4>{{$apartment['address']}} </h4>
   <div class="address col-sm-12 col-md-6">
     <div class="coordinate">

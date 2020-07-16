@@ -21,6 +21,18 @@ body {
 a:hover{
   text-decoration: none;
 }
+.card:hover{
+  transform: scale(1.013);
+}
+// nasconde la scrollbar dovesse apparire, ma la fa comunque funzionare
+::-webkit-scrollbar {
+    width: 0px;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: $primaryRed;
+}
 ///////////////////////////////////////////////////////////////////
 //////////////////////////    HEADER  /////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -454,9 +466,6 @@ header {
 ///////////////////////////////////////////////////////////////////
 ////////////////////////    DASHBOARD  ////////////////////////////
 ///////////////////////////////////////////////////////////////////
-.card {
-  margin-top:10px;
-}
 .createApartment{
   border-radius: 20px;
   -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
@@ -467,6 +476,9 @@ header {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  margin-left: -4px;
+  margin-right: -4px;
+  margin-bottom: 10px;
   .bulge {
     display: flex;
     align-items: center;
@@ -503,12 +515,21 @@ header {
     display: block;
     border-radius: 20px;
     ul {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      // flex-wrap: wrap;
-      margin-bottom: 0;
-      width: 300px;
+      position: absolute;
+      bottom: -30px;
+      right: 107px;
+      flex-direction: column;
+      background-color: white;
+      border-radius: 20px;
+      padding: 10px;
+      -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+      -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+      box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
     }
   }
   .legenda:hover span{
@@ -581,7 +602,7 @@ header {
           justify-content: center;
           // width: 100px;
           height: 35px;
-          color: $primaryRed;
+          color: #1b3c59;
           // border: 2px solid $primaryRed;
           border-radius: 30px;
           margin-bottom: 0;
@@ -604,7 +625,7 @@ header {
           font-weight: 700;
           outline: 0;
           i {
-            color: $primaryRed;
+            color: #1b3c59;
           }
         }
       }
@@ -666,7 +687,7 @@ header {
           justify-content: center;
           // width: 100px;
           height: 35px;
-          color: $primaryRed;
+          color: #1b3c59;
           // border: 2px solid $primaryRed;
           border-radius: 30px;
           margin-bottom: 0;
@@ -689,31 +710,100 @@ header {
           font-weight: 700;
           outline: 0;
           i {
-            color: $primaryRed;
+            color: #1b3c59;
           }
         }
       }
     }
   }
 }
-
-
-
-.attivo1{
-  // background-color: rgba(23, 232, 94, 0.34);
+// Messaggi
+.containMessages{
+  max-height: 100vh;
+  overflow: auto;
+  border-radius: 20px;
+  .messages{
+    border-radius: 20px;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    margin-left: 0px;
+    width: calc(100% - 20px);
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .bulge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+      -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+      box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+      height: 30px;
+      span {
+        color: $primaryRed;
+        text-shadow: 1px 1px white;
+        font-weight: 600;
+      }
+    }
+  }
+  .message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    margin: 20px 0px;
+    padding: 8px;
+    width: calc(100% - 20px);
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+    .messageContent {
+      display: flex;
+      flex-direction: column;
+      -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+      -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+      box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+      border-radius: 20px;
+      padding: 10px 15px;
+      margin-top: 5px;
+      a{
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // width: 100px;
+        height: 35px;
+        color: $primaryRed;
+        // border: 2px solid $primaryRed;
+        border-radius: 30px;
+        margin-bottom: 0;
+        font-weight: 700;
+        i {
+          color: $sponsored;
+          margin-left: 5px;
+        }
+      }
+    }
+  }
 }
-.attivo0{
-  background-color: rgba(255, 0, 0, 0.19);
-}
-.sponsored{
-  // background-color: rgba(92, 155, 237, 0.84);
-}
-// .sponsor{
-//   color: #3F3F3F;
-//   border: 3px solid $primaryRed;
-//   border-radius: 20px;
-//   padding: 15px;
+// .attivo1{
+//   background-color: rgba(23, 232, 94, 0.34);
 // }
+
+// .attivo0{
+//   background-color: rgba(255, 0, 0, 0.1);
+//   border-radius: 20px;
+// }
+.attivo0{
+  background-color: rgba(27, 60, 89, 0.1);
+  border-radius: 20px;
+}
+
 ///////////////////////////////////////////////////////////////////
 ////////////////////////  STATISTICHE  ////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -917,7 +1007,7 @@ input[type=range]:focus::-ms-fill-upper {
 ///////////////////////////////////////////////////////////////////
 //////////////////////////  MEDIA QUERIES /////////////////////////////
 ///////////////////////////////////////////////////////////////////
-@media all and (max-width: 767px) {
+@media all and (max-width: 576px) {
 
   .content{
     .jumboSearch{
@@ -937,6 +1027,185 @@ input[type=range]:focus::-ms-fill-upper {
             outline: 0;
           }
         }
+      }
+    }
+  }
+  .createApartment  {
+
+      height: 77px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      .bulge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+        box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+        height: 30px;
+        margin-bottom: 10px;
+        a {
+          color: $primaryRed;
+          text-shadow: 1px 1px white;
+          font-weight: 600;
+        }
+      }
+      .legenda:hover .nascondino{
+        background-color: white;
+        display: block;
+        border-radius: 20px;
+        ul {
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          margin-bottom: 0;
+          width: 100%;
+          padding: 4px;
+          position: absolute;
+          bottom: 0px;
+          right:0px;
+          flex-direction: row;
+          li {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+          }
+        }
+      }
+  }
+  .apartmentsSponsored {
+    .card{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      padding: 8px;
+      margin: 10px;
+      width: calc(100% - 20px);
+    }
+  }
+  .normalApartments {
+    .card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      padding: 8px;
+      margin: 10px;
+      width: calc(100% - 20px);
+    }
+  }
+  .apartment{
+
+  .containApartment{
+    -webkit-box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
+    box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
+    border-radius: 20px;
+    .photo{
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
+    .apartmentlInfo{
+      border-top-right-radius: 0px;
+      height: 380px;
+      .services{
+        width: 100%;
+        // font-size: 12px;
+        padding: 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin-bottom: 0;
+        flex-wrap: wrap;
+        li {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          margin: 0px 11px;
+        }
+      }
+    }
+
+    .contact {
+      border-bottom: none;
+      height: 200px;
+      input[name=email]{
+        height: 30px;
+        width: 250px;
+        border-radius: 10px;
+        padding: 15px 15px;
+        margin-top: 0px;
+      }
+      textarea[name=message]{
+        height: 45px;
+        width: 250px;
+        padding: 3px 15px;
+      }
+      .funzioni {
+        flex-direction: row;
+      }
+    }
+    #map {
+      height: 350px;
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+     }
+   }
+  }
+
+  // LOGIN
+  .login-box{
+    .title{
+      border-right: none;
+    }
+  }
+}
+
+
+@media all and (min-width: 576px) and (max-width: 768px) {
+
+  .content{
+    .jumboSearch{
+      padding: 4rem 0;
+      .jumboText{
+        h1 {
+          font-size: 42px;
+        }
+        .info {
+          text-align: center;
+
+          .buttonWelcome{
+            margin-top: 10px;
+            width: 75px;
+            height: 50px;
+            border-radius: 30px;
+            outline: 0;
+          }
+        }
+      }
+    }
+  }
+  .createApartment{
+    .legenda:hover .nascondino{
+      display: block;
+      border-radius: 20px;
+      ul {
+        position: absolute;
+        bottom: -30px;
+        right: 56px;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 20px;
+        padding: 10px;
+        -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+        box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
       }
     }
   }
@@ -1033,6 +1302,24 @@ input[type=range]:focus::-ms-fill-upper {
 
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media all and (min-width: 768px) and (max-width: 991px) {
+  .createApartment{
+    .legenda:hover .nascondino{
+      display: block;
+      border-radius: 20px;
+      ul {
+        position: absolute;
+        bottom: -30px;
+        right: 45px;
+        flex-direction: column;
+        background-color: white;
+        border-radius: 20px;
+        padding: 10px;
+        -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+        box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
   .apartmentsSponsored {
     .card{
       display: flex;
@@ -1104,6 +1391,24 @@ input[type=range]:focus::-ms-fill-upper {
 
 /* Large devices (desktops, 992px and up) */
 @media all and (min-width: 992px) and (max-width:1199px) {
+    .createApartment{
+      .legenda:hover .nascondino{
+        display: block;
+        border-radius: 20px;
+        ul {
+          position: absolute;
+          bottom: -30px;
+          right: 79px;
+          flex-direction: column;
+          background-color: white;
+          border-radius: 20px;
+          padding: 10px;
+          -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+          -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+          box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+        }
+      }
+    }
     .apartment{
       .containApartment{
         .contact {
