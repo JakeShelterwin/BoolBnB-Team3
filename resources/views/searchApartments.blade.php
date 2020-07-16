@@ -60,15 +60,32 @@
         @foreach ($sponsoredApartment as $apartment)
           <div class="sponsoredApartment col-sm-12 row">
             <a  class=" col-sm-12 col-md-4"  href="{{route('showApartment', $apartment -> id)}}"> <div class="sponsoredApartmentImg" style="background-image: url('{{$apartment->image}}')"></div> </a>
-            <ul class="col-sm-12 col-md-6">
+            <ul class="col-sm-12 col-md-8">
               <li><a href="{{route('showApartment', $apartment -> id)}}"> <b>{{$apartment -> title}} </b> </a></li>
-              <li><b>Descrizione</b> {{$apartment["description"]}}</li>
+              <li class="description"><b>Descrizione</b> {{$apartment["description"]}}</li>
               <li><b>Proprietario</b> {{$apartment -> user -> name}}</li>
               <li>
                 <ul class="apartmentServices">
                   <li> <b>Servizi:</b> </li>
                   @foreach ($apartment -> services as $service)
-                    <li> {{$service -> name}} </li>
+                    <li>
+                      @if ($service -> name == "Wi-Fi")
+                        <i class="fas fa-wifi"></i>
+                      @elseif ($service -> name == "Posto Auto")
+                        <i class="fas fa-car"></i>
+                      @elseif ($service -> name == "Piscina")
+                        <i class="fas fa-swimming-pool"></i>
+                      @elseif ($service -> name == "Portineria")
+                        <i class="fas fa-concierge-bell"></i>
+                      @elseif ($service -> name == "Sauna")
+                        <i class="fas fa-hot-tub"></i>
+                      @elseif ($service -> name == "Vista Mare")
+                        <i class="fas fa-binoculars"></i>
+                      @endif
+                        {{$service -> name}}
+
+                    </li>
+
                   @endforeach
                 </ul>
               </li>
@@ -85,13 +102,30 @@
           <a class=" col-sm-12 col-md-4" href="{{route('showApartment', $apartment -> id)}}"> <div class="searchedApartmentImg" style="background-image: url('{{$apartment->image}}')"></div> </a>
           <ul class="col-sm-12 col-md-8">
             <li><a href="{{route('showApartment', $apartment -> id)}}"> <b>{{$apartment -> title}} </b> </a></li>
-            <li><b>Descrizione</b> {{$apartment["description"]}}</li>
+            <li class="description"><b>Descrizione</b> {{$apartment["description"]}}</li>
             <li><b>Proprietario</b> {{$apartment -> user -> name}}</li>
             <li>
               <ul class="apartmentServices">
                 <li> <b>Servizi:</b> </li>
                 @foreach ($apartment -> services as $service)
-                 <li> {{$service -> name}} </li>
+                  <li>
+                    @if ($service -> name == "Wi-Fi")
+                      <i class="fas fa-wifi"></i>
+                    @elseif ($service -> name == "Posto Auto")
+                      <i class="fas fa-car"></i>
+                    @elseif ($service -> name == "Piscina")
+                      <i class="fas fa-swimming-pool"></i>
+                    @elseif ($service -> name == "Portineria")
+                      <i class="fas fa-concierge-bell"></i>
+                    @elseif ($service -> name == "Sauna")
+                      <i class="fas fa-hot-tub"></i>
+                    @elseif ($service -> name == "Vista Mare")
+                      <i class="fas fa-binoculars"></i>
+                    @endif
+                      {{$service -> name}}
+
+                  </li>
+
                 @endforeach
               </ul>
             </li>

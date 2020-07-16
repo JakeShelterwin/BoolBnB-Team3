@@ -191,7 +191,7 @@ class HomeController extends Controller
       $apartment = Apartment::findOrFail($id);
       $deleteImage = File::delete(public_path($apartment -> image));
       $apartment -> delete();
-      return redirect() -> route("welcome")
+      return redirect() -> route("home")
                         -> withSuccess("Appartamento eliminato con successo!");
     }
     public function showApartmentStatistics($apartment_id)

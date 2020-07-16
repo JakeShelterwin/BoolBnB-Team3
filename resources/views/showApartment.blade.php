@@ -40,10 +40,10 @@
 
           <div class="features row col-sm-12">
             <ul class="rooms col-sm-12">
-              <li><b>Stanze </b>{{$apartment['rooms_n']}}</li>
-              <li><b>Letti </b>{{$apartment['beds_n']}}</li>
-              <li><b>Toilettes </b>{{$apartment['bathrooms_n']}}</li>
-              <li><b>Metratura </b>{{$apartment['square_meters']}}m&#178;</li>
+              <li><b>Stanze: &nbsp </b>{{$apartment['rooms_n']}}</li>
+              <li><b>Letti: &nbsp </b>{{$apartment['beds_n']}}</li>
+              <li><b>Toilettes: &nbsp </b>{{$apartment['bathrooms_n']}}</li>
+              <li><b>Metratura: &nbsp </b>{{$apartment['square_meters']}}m&#178;</li>
             </ul>
             <ul class="services col-sm-12">
               @foreach ($apartment -> services as $service)
@@ -93,7 +93,7 @@
               @csrf
               @method('POST')
               {{-- <label for="email">Inserisci la Tua Mail per essere Ricontattato</label> <br> --}}
-              <input type="email" name="email" value="{{old('email', $emailUtente)}}" placeholder="La tua e_mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'La tua e_mail'"> <br>
+              <input type="email" name="email" value="{{old('email', $emailUtente)}}" placeholder="La tua e-mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'La tua e-mail'"> <br>
               {{-- <label for="message">Scrivi qui un messaggio per un proprietario</label> <br> --}}
               <br>
               <textarea type="textarea" rows="4" cols="40" name="message" value="{{old('message')}}" placeholder="Inserisci la tua richiesta" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Inserisci la tua richiesta'"></textarea> <br>
@@ -101,13 +101,14 @@
             </form>
           @endauth
         @else
-          <h2>ta {{$apartment -> user -> name}}</h2>
+          <h5>Contatta {{$apartment -> user -> name}}</h5>
           <form class="form" action="{{route('storeMessage', $apartment -> id)}}" method="post">
             @csrf
             @method('POST')
-            <label for="email">Inserisci la Tua Mail per essere Ricontattato</label> <br>
-            <input type="email" name="email" value="{{old('email', $emailUtente)}}" placeholder="La tua e_mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'La tua e_mail'"> <br>
-            <label for="message">Scrivi qui un messaggio per un proprietario</label> <br>
+            {{-- <label for="email">Inserisci la Tua Mail per essere Ricontattato</label> <br> --}}
+            <input type="email" name="email" value="{{old('email', $emailUtente)}}" placeholder="La tua e-mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'La tua e-mail'"> <br>
+            {{-- <label for="message">Scrivi qui un messaggio per un proprietario</label> <br> --}}
+            <br>
             <textarea type="textarea" rows="4" cols="40" name="message" value="{{old('message')}}" placeholder="Inserisci la tua richiesta" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Inserisci la tua richiesta'"></textarea> <br>
             <button type="submit" name="submit">Invia Messaggio</button> <br>
           </form>
