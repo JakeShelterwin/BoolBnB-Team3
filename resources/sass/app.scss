@@ -21,9 +21,7 @@ body {
 a:hover{
   text-decoration: none;
 }
-.card:hover{
-  transform: scale(1.013);
-}
+
 // nasconde la scrollbar dovesse apparire, ma la fa comunque funzionare
 ::-webkit-scrollbar {
     width: 0px;  /* Remove scrollbar space */
@@ -33,6 +31,19 @@ a:hover{
 ::-webkit-scrollbar-thumb {
     background: $primaryRed;
 }
+// gestione messaggi d'errore
+.alert {
+  -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+  box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+  .container{
+    p {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
+}
+
 ///////////////////////////////////////////////////////////////////
 //////////////////////////    HEADER  /////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -40,7 +51,6 @@ header {
   .navbar{
     background-color: $primaryRed;
     .logo {
-      height: 100%;
       img {
         height: auto;
         width: 160px;
@@ -52,6 +62,9 @@ header {
 //////////////////////////   HOMEPAGE  /////////////////////////////
 ///////////////////////////////////////////////////////////////////
 .content{
+  .card:hover{
+    transform: scale(1.013);
+  }
   .jumboSearch{
     min-height: 100vh;
     padding: 8rem 0;
@@ -90,29 +103,92 @@ header {
       outline: 0;
     }
   }
-  .apartaments{
-    min-height: 15vh;
-    h1 {
-      padding-bottom: 2rem;
-    }
-    ul {
-      text-align: center;
-      a {
-        color: $primaryRed;
-        text-shadow: 1px 1px white;
-      }
-      .apartmentImg{
-        width: 100%;
-        height: 200px;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-        display: inline-block;
-        border: 4px solid $sponsored;
+  .apartaments {
+    margin-bottom: 20px;
+    .apartmentCard {
+      .card{
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border-radius: 20px;
-        -webkit-box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
-        -moz-box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
-        box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
+        padding: 8px;
+        margin: 10px;
+        -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+        box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+        .apartment{
+          width: 100%;
+          .sponsoredRibbon{
+            position: absolute;
+            top: 7px;
+            right: 9px;
+            text-align: center;
+            background-color: $sponsored;
+            border-radius: 6px;
+            padding: 5px;
+            padding-bottom: 1px;
+            i{
+              font-size: 20px;
+            }
+          }
+          .immagine{
+            width: 100%;
+            padding: 0;
+            a {
+              width: 100%;
+              color: $primaryRed;
+              text-shadow: 1px 1px white;
+              .apartmentImg {
+                width: 100%;
+                height: 140px;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                display: inline-block;
+                // border: 4px solid $sponsored;
+                border-radius: 20px;
+                // border-top-left-radius: 20px;
+                // border-top-right-radius: 20px;
+                -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+                -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+                box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+              }
+            }
+          }
+          .funzioni {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+            -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+            box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            a{
+              text-align: center;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 35px;
+              color: #1b3c59;
+              border-radius: 30px;
+              margin-bottom: 0;
+              font-weight: 700;
+              i {
+                color: $sponsored;
+                margin-left: 5px;
+              }
+            }
+            span{
+              text-align: center;
+              margin-bottom: 3px;
+              color: #1b3c59;
+              font-weight: 500;
+              i {
+                font-size: 0.8rem;
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -121,6 +197,9 @@ header {
 ///////////////////////   SEARCH APARTMENTS ///////////////////////
 ///////////////////////////////////////////////////////////////////
 .contentSearch {
+  .card:hover{
+    transform: scale(1.007);
+  }
   .info {
     input{
       outline: 0;
@@ -129,19 +208,26 @@ header {
     .searchField {
       width: 100%;
       display: flex;
-      border: 3px solid $primaryRed;
       justify-content: space-around;
       align-items: center;
+      display: flex;
       padding: 15px 20px;
-      border-radius: 30px;
+      border-radius: 20px;
       background: white;
       color: #3F3F3F;
       font-weight: 500;
-      margin: 10px 0px;
+      margin: 13px 0px;
+      flex-direction: row;
       flex-wrap: wrap;
+      -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+      -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+      box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
       #ricerca {
         background: white;
-        border: 3px solid rgb(228, 228, 228);
+        border: 2px solid rgb(228, 228, 228);
+        -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+        box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
         height: 30px;
         width: 350px;
         border-radius: 50px;
@@ -168,6 +254,9 @@ header {
           color: white;
           font-weight: 700;
           outline: 0;
+          -webkit-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+          -moz-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+          box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3);
         }
         p#btnFilter{
           display: flex;
@@ -183,14 +272,17 @@ header {
           color: white;
           font-weight: 700;
           outline: 0;
+          -webkit-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+          -moz-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+          box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3);
         }
     }
     .filtri {
       width: 100%;
       display: flex;
-      -webkit-box-shadow: 0px 5px 29px -8px rgba(255, 91, 96, 0.44);
-      -moz-box-shadow: 0px 5px 29px -8px rgba(255, 91, 96, 0.44);
-      box-shadow: 0px 5px 29px -8px rgba(255, 91, 96, 0.44);
+      -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+      -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+      box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
       justify-content: space-between;
       align-items: center;
       padding: 15px 20px;
@@ -198,7 +290,7 @@ header {
       background: white;
       color: #3F3F3F;
       font-weight: 500;
-      margin: 10px 0px;
+      margin-top: 10px;
       display: none;
       .filtriNascosti {
         .filtriNumerici, .filtroServizi{
@@ -209,86 +301,253 @@ header {
       }
     }
   }
-  .apartments{
-    .sponsoredApartment{
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      position: relative;
-      margin: 30px 0px;
-      a {
-        color: $primaryRed;
-        text-shadow: 1px 1px white;
-      }
-      ul {
-        margin-bottom: 0;
-      }
-      .description{
-        max-height: 50px;
-        overflow: auto;
-      }
-      .sponsoredRibbon{
-        position: absolute;
-        top: 8px;
-        right: 5%;
-        text-align: center;
-        background-color: gold;
-        border-radius: 6px;
-        padding: 5px;
-        i{
-          font-size: 20px;
-        }
-        p {
-          margin: 0;
-          font-size: 10px;
-        }
-      }
-    }
 
-    .searchedApartment{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 30px 0px;
-      a {
-        color: $primaryRed;
+  .row {
+    margin: 0;
+    padding: 0;
+  }
+  .apartments {
+    margin-bottom: 37px;
+      .card{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px;
+        padding: 8px;
+        margin-bottom: 13px;
+        -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+        box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+        .sponsoredApartment{
+          width: 100%;
+          margin-left: 0;
+          margin-right: 0;
+          padding-left: 0;
+          padding-right: 0;
+          .noPadding{
+            padding-left: 0;
+            padding-right: 0;
+          }
+          .sponsoredRibbon{
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $sponsored;
+            background-color: rgba(27, 60, 89, 1);
+            border-radius: 14px;
+            padding: 5px;
+            padding-bottom: 1px;
+            padding-top: 0;
+            -webkit-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+            -moz-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+            box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3);
+            i{
+              font-size: 20px;
+              padding: 5px;
+              padding-right: 0;
+            }
+            span {
+              margin-bottom: 0;
+              padding: 5px;
+            }
+          }
+          .sponsoredApartmentImg{
+              width: 100%;
+              height: 150px;
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: cover;
+              border-radius: 20px;
+              -webkit-box-shadow: 0px 1px 11px -1px rgba(0,0,0,0.3);
+              -moz-box-shadow: 0px 1px 11px -1px rgba(0,0,0,0.3);
+              box-shadow: 0px 1px 11px -1px rgba(0, 0, 0, 0.3);
+            }
+          .apartmentInfo {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            margin-bottom: 0;
+            -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+            -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+            box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            a{
+              text-align: center;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 35px;
+              color: #1b3c59;
+              border-radius: 30px;
+              margin-bottom: 0;
+              font-weight: 700;
+              i {
+                color: $sponsored;
+                margin-left: 5px;
+              }
+            }
+            .apartmentServices{
+              display: flex;
+              align-items: center;
+              flex-wrap: wrap;
+            }
+            span{
+              text-align: center;
+              margin-bottom: 3px;
+              color: #1b3c59;
+              font-weight: 500;
+              i {
+                font-size: 0.8rem;
+              }
+            }
+          }
+        }
+        .searchedApartment{
+          width: 100%;
+          margin-left: 0;
+          margin-right: 0;
+          padding-left: 0;
+          padding-right: 0;
+          .noPadding{
+            padding-left: 0;
+            padding-right: 0;
+          }
+          .searchedApartmentImg{
+              width: 100%;
+              height: 150px;
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: cover;
+              border-radius: 20px;
+              -webkit-box-shadow: 0px 1px 11px -1px rgba(0,0,0,0.3);
+              -moz-box-shadow: 0px 1px 11px -1px rgba(0,0,0,0.3);
+              box-shadow: 0px 1px 11px -1px rgba(0, 0, 0, 0.3);
+            }
+          .apartmentInfo {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            flex-direction: column;
+            margin-bottom: 0;
+            -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+            -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+            box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            a{
+              text-align: center;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 35px;
+              color: #1b3c59;
+              border-radius: 30px;
+              margin-bottom: 0;
+              font-weight: 700;
+              i {
+                color: $sponsored;
+                margin-left: 5px;
+              }
+            }
+            .apartmentServices{
+              display: flex;
+              align-items: center;
+              flex-wrap: wrap;
+            }
+            span{
+              text-align: center;
+              margin-bottom: 3px;
+              color: #1b3c59;
+              font-weight: 500;
+              i {
+                font-size: 0.8rem;
+              }
+            }
+          }
+        }
       }
-      ul {
-        margin-bottom: 0;
-      }
-      .description{
-        max-height: 50px;
-        overflow: auto;
-      }
-    }
-    .sponsoredApartmentImg{
-      width: 100%;
-      height: 150px;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-      border: 3px solid $sponsored;
-      border-radius: 20px;
-      -webkit-box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
-      -moz-box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
-      box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
-    }
-    .searchedApartmentImg{
-      width: 100%;
-      height: 150px;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-      border: 2px solid #1b3c59;
-      border-radius: 20px;
-      -webkit-box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
-      -moz-box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
-      box-shadow: 0px 5px 29px -8px rgba(0,0,0,0.4);
-    }
-  .apartmentServices li{
-    display: inline-block;
-    margin-right: 5px;
-    }
+  }
+  input[type=range] {
+    margin: 7.3px 0;
+    background-color: transparent;
+    -webkit-appearance: none;
+  }
+  input[type=range]:focus {
+    outline: none;
+  }
+  input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #FF7478;
+  }
+  input[type=range]::-webkit-slider-runnable-track {
+    background: $primaryRed;
+    border: 0;
+    border-radius: 25px;
+    width: 100%;
+    height: 11.4px;
+    cursor: pointer;
+  }
+  // pallino slider
+  input[type=range]::-webkit-slider-thumb {
+    margin-top: -7.3px;
+    width: 26px;
+    height: 26px;
+    background: $primaryRed;
+    border: 1.8px solid $primaryRed;
+    border-radius: 15px;
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+  input[type=range]::-moz-range-track {
+    background: #FF7478;
+    border: 0;
+    border-radius: 25px;
+    width: 100%;
+    height: 11.4px;
+    cursor: pointer;
+  }
+  input[type=range]::-moz-range-thumb {
+    width: 26px;
+    height: 26px;
+    background: $primaryRed;
+    border: 1.8px solid $primaryRed;
+    border-radius: 15px;
+    cursor: pointer;
+  }
+  input[type=range]::-ms-track {
+    background: transparent;
+    border-color: transparent;
+    border-width: 8.2px 0;
+    color: transparent;
+    width: 100%;
+    height: 11.4px;
+    cursor: pointer;
+  }
+  input[type=range]::-ms-fill-lower {
+    background: #FF4146;
+    border: 0;
+    border-radius: 50px;
+  }
+  input[type=range]::-ms-fill-upper {
+    background: $primaryRed;
+    border-radius: 50px;
+  }
+  input[type=range]::-ms-thumb {
+    width: 26px;
+    height: 26px;
+    background: $primaryRed;
+    border: 1.8px solid $primaryRed;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 0px;
+  }
+  input[type=range]:focus::-ms-fill-lower {
+    background: $primaryRed;
+  }
+  input[type=range]:focus::-ms-fill-upper {
+    background: #FF7478;
   }
 }
 ///////////////////////////////////////////////////////////////////
@@ -466,6 +725,12 @@ header {
 ///////////////////////////////////////////////////////////////////
 ////////////////////////    DASHBOARD  ////////////////////////////
 ///////////////////////////////////////////////////////////////////
+.containApartments,
+.containMessages{
+  .card:hover{
+    transform: scale(1.013);
+  }
+}
 .createApartment{
   border-radius: 20px;
   -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
@@ -562,6 +827,12 @@ header {
         i{
           font-size: 20px;
         }
+        span {
+          display: none;
+        }
+      }
+      .sponsoredRibbon:hover span{
+        display: inline;
       }
       .immagine{
         width: 100%;
@@ -617,7 +888,7 @@ header {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 100px;
+          width: 90px;
           height: 35px;
           color: $primaryRed;
           border-radius: 30px;
@@ -702,7 +973,7 @@ header {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 100px;
+          width: 70px;
           height: 35px;
           color: $primaryRed;
           border-radius: 30px;
@@ -727,7 +998,7 @@ header {
     margin-bottom: 20px;
     margin-top: 0px;
     margin-left: 0px;
-    width: calc(100% - 20px);
+    margin-right: 0px;
     -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
     -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
     box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
@@ -736,6 +1007,7 @@ header {
     align-items: center;
     justify-content: center;
     .bulge {
+      padding: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -743,7 +1015,7 @@ header {
       -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
       -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
       box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
-      height: 30px;
+      flex: 0 0 50%;
       span {
         color: $primaryRed;
         text-shadow: 1px 1px white;
@@ -755,39 +1027,27 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     border-radius: 20px;
     margin: 20px 0px;
     padding: 8px;
-    width: calc(100% - 20px);
     -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
     -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
     box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+    i {
+      font-size: 20px;
+      color: $sponsored;
+    }
     .messageContent {
       display: flex;
       flex-direction: column;
+      text-align: left;
       -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
       -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
       box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
       border-radius: 20px;
       padding: 10px 15px;
       margin-top: 5px;
-      a{
-        text-align: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        // width: 100px;
-        height: 35px;
-        color: $primaryRed;
-        // border: 2px solid $primaryRed;
-        border-radius: 30px;
-        margin-bottom: 0;
-        font-weight: 700;
-        i {
-          color: $sponsored;
-          margin-left: 5px;
-        }
-      }
     }
   }
 }
@@ -803,32 +1063,210 @@ header {
   background-color: rgba(27, 60, 89, 0.1);
   border-radius: 20px;
 }
+///////////////////////////////////////////////////////////////////
+////////////////////////   SPONSORS    ////////////////////////////
+///////////////////////////////////////////////////////////////////
+.sponsors{
+  min-height: 75vh;
+  -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+  box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  .card{
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    min-height: 30vh;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: calc(100% / 3 - 40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+  }
+  button#submit-button {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 35px;
+    background: $primaryRed;
+    border: none;
+    border-radius: 30px;
+    margin-bottom: 0;
+    color: white;
+    font-weight: 700;
+    outline: 0;
+    -webkit-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3);
+  }
+  button#submit-button:disabled{
+    background-color: lightgray;
+  }
+  .braintree-card{
+    border: none;
+    border-radius: 20px;
+    -webkit-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3);
+    .braintree-sheet__header{
+      border: none;
+    }
+    input[type="tel"]{
+      border: none;
+      border-radius: 20px;
+      -webkit-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+      -moz-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+      box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3);
+    }
+    .braintree-form-number.braintree-form__hosted-field,
+    .braintree-form-expiration.braintree-form__hosted-field{
+      border: none;
+      border-radius: 10px;
+      -webkit-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+      -moz-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+      box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3);
+    }
+  }
+  .Silver{
+    background: radial-gradient( #E8ECEF, #D8DEE4, #B8D1E1);
+    box-shadow: inset 0px 1px 7px -2px rgba(0, 0, 0, 0.3);
+    // #D70466
+  }
+  .Gold{
+    background: radial-gradient( #FFFDB5 , #FFE881 , #FFCF66 );
+    box-shadow: inset 0px 1px 7px -2px rgba(0, 0, 0, 0.3);
+  }
+  .Platinum{
+    background: radial-gradient( #F4FBFC , #DDF3F5 , #C3EBEF );
+    box-shadow: inset 0px 1px 7px -2px rgba(0, 0, 0, 0.3);
+  }
+}
 
 ///////////////////////////////////////////////////////////////////
 ////////////////////////  STATISTICHE  ////////////////////////////
 ///////////////////////////////////////////////////////////////////
-#statistics{
-  h1{
+.allStats{
+  -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+  box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  #statistics{
     text-align: center;
-    margin: 20px 0;
-  }
-  #charts{
-    display: flex;
-    justify-content: space-around;
-    margin: auto;
-    max-width: 1000px;
-    min-width: 850px;
-    h2{
+    h1{
+      margin: 20px 0;
+    }
+    #charts{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
       text-align: center;
+      #viewsStatsBar,
+      #viewsStatsLine,
+      #messagesStatsBar,
+      #messagesStatsLine{
+        margin: 10px;
+      }
     }
-    #viewsStatsBar,
-    #viewsStatsLine,
-    #messagesStatsBar,
-    #messagesStatsLine{
-      margin: 10px;
+
+  }
+}
+///////////////////////////////////////////////////////////////////
+////////////////////////   edit-Create  ////////////////////////////
+///////////////////////////////////////////////////////////////////
+.edit-Create{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 15px;
+  -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+  box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  ul {
+    li{
+      margin-bottom: 10px;
+      b {
+        margin-right: 5px;
+      }
     }
   }
-
+  input{
+    outline: none;
+  }
+  input[type="text"]{
+    background: white;
+    border: 2px solid #e4e4e4;
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+    height: 30px;
+    width: 350px;
+    border-radius: 20px;
+    padding: 15px 20px;
+    color: #3F3F3F;
+    font-size: 16px;
+  }
+  input[type="number"]{
+    background: white;
+    border: 2px solid #e4e4e4;
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+    height: 30px;
+    width: 85px;
+    border-radius: 20px;
+    padding: 15px 20px;
+    color: #3F3F3F;
+    font-size: 16px;
+  }
+  input[type="textarea"]{
+    background: white;
+    border: 2px solid #e4e4e4;
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+    height: 30px;
+    width: 85px;
+    border-radius: 20px;
+    padding: 15px 20px;
+    color: #3F3F3F;
+    font-size: 16px;
+  }
+  textarea{
+    resize: none;
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    border: 2px solid #e4e4e4;
+    padding: 3px 10px;
+    outline: none;
+  }
+  button {
+    width: 200px;
+    height: 35px;
+    background: #FF5A5F;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-weight: 700;
+    outline: 0;
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+  }
+  button:disabled{
+    background-color: lightgray;
+  }
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -842,6 +1280,9 @@ header {
     justify-content: space-between;
     padding: 15px;
     text-align: center;
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
     form {
       display: flex;
       justify-content: space-around;
@@ -865,7 +1306,7 @@ header {
       border-radius: 50px;
       padding: 0 10px;
       color: #3F3F3F;
-      font-size: 16px;
+      font-size: 15px;
       text-align: center;
     }
     button {
@@ -888,6 +1329,82 @@ header {
       color: $primaryRed;
       transform: scale(1.05);
       text-decoration: none;
+    }
+}
+///////////////////////////////////////////////////////////////////
+//////////////////////////   REGISTER  ////////////////////////////
+///////////////////////////////////////////////////////////////////
+.register-box{
+    background: white;
+    min-height: 450px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    text-align: center;
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+    form {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: column;
+    }
+    .title{
+      color: $primaryRed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-right: 1px solid rgb(228, 228, 228);
+    }
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    input[type="text"] {
+      width: 250px;
+      border: none;
+      background: rgb(238, 238, 238);
+      /* border: 5px solid $primaryRed; */
+      height: 45px;
+      border-radius: 50px;
+      padding: 0 10px;
+      color: #6C757D;
+      font-size: 15px;
+      text-align: center;
+    }
+    input[type="date"]{
+      text-indent: 25px;
+    }
+    button {
+      // width: 75px;
+      height: 45px;
+      background: $primaryRed;
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+    }
+    button:hover {
+      background: $primaryRed;
+      transform: scale(1.08);
+    }
+    a {
+      color: $primaryRed;
+    }
+    a:hover {
+      color: $primaryRed;
+      transform: scale(1.05);
+      text-decoration: none;
+    }
+    .card-footer{
+      background-color: white;
+      -webkit-box-shadow: 0px 8px 11px -10px rgba(0, 0, 0, 0.3);
+      -moz-box-shadow: 0px 8px 11px -10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0px 8px 11px -10px rgba(0, 0, 0, 0.3);
+      border-top: 0px;
+      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 20px;
     }
 }
 
@@ -922,86 +1439,6 @@ footer {
   }
 }
 
-
-input[type=range] {
-  margin: 7.3px 0;
-  background-color: transparent;
-  -webkit-appearance: none;
-}
-input[type=range]:focus {
-  outline: none;
-}
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #FF7478;
-}
-input[type=range]::-webkit-slider-runnable-track {
-  background: $primaryRed;
-  border: 0;
-  border-radius: 25px;
-  width: 100%;
-  height: 11.4px;
-  cursor: pointer;
-}
-// pallino slider
-input[type=range]::-webkit-slider-thumb {
-  margin-top: -7.3px;
-  width: 26px;
-  height: 26px;
-  background: $primaryRed;
-  border: 1.8px solid $primaryRed;
-  border-radius: 15px;
-  cursor: pointer;
-  -webkit-appearance: none;
-}
-input[type=range]::-moz-range-track {
-  background: #FF7478;
-  border: 0;
-  border-radius: 25px;
-  width: 100%;
-  height: 11.4px;
-  cursor: pointer;
-}
-input[type=range]::-moz-range-thumb {
-  width: 26px;
-  height: 26px;
-  background: $primaryRed;
-  border: 1.8px solid $primaryRed;
-  border-radius: 15px;
-  cursor: pointer;
-}
-input[type=range]::-ms-track {
-  background: transparent;
-  border-color: transparent;
-  border-width: 8.2px 0;
-  color: transparent;
-  width: 100%;
-  height: 11.4px;
-  cursor: pointer;
-}
-input[type=range]::-ms-fill-lower {
-  background: #FF4146;
-  border: 0;
-  border-radius: 50px;
-}
-input[type=range]::-ms-fill-upper {
-  background: $primaryRed;
-  border-radius: 50px;
-}
-input[type=range]::-ms-thumb {
-  width: 26px;
-  height: 26px;
-  background: $primaryRed;
-  border: 1.8px solid $primaryRed;
-  border-radius: 15px;
-  cursor: pointer;
-  margin-top: 0px;
-}
-input[type=range]:focus::-ms-fill-lower {
-  background: $primaryRed;
-}
-input[type=range]:focus::-ms-fill-upper {
-  background: #FF7478;
-}
 
 
 ///////////////////////////////////////////////////////////////////
@@ -1076,6 +1513,7 @@ input[type=range]:focus::-ms-fill-upper {
         }
       }
   }
+  // DASHBOARD
   .apartmentsSponsored {
     .card{
       display: flex;
@@ -1098,6 +1536,8 @@ input[type=range]:focus::-ms-fill-upper {
       width: calc(100% - 20px);
     }
   }
+
+  // SHOW APARTMENT
   .apartment{
 
   .containApartment{
@@ -1159,8 +1599,58 @@ input[type=range]:focus::-ms-fill-upper {
    }
   }
 
-  // LOGIN
+  /////////////////////////////SPONSORS//////////////////////////////
+  .sponsors{
+    .card{
+      margin-bottom: 20px;
+      width: calc(100% - 40px);
+    }
+  }
+  ///////////////////////   SEARCH APARTMENTS ///////////////////////
+  .contentSearch {
+    .info {
+
+    .apartments {
+        .card{
+          .sponsoredApartment{
+            .sponsoredRibbon{
+              position: absolute;
+              top: 7px;
+              right: 7px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: red;
+              background-color: rgba(27, 60, 89, 1);
+              border-radius: 14px;
+              padding: 5px;
+              padding-bottom: 1px;
+              padding-top: 0;
+              -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+              -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+              box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+              i{
+                font-size: 20px;
+                padding: 5px;
+                padding-right: 0;
+              }
+              span {
+                margin-bottom: 0;
+                padding: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  // LOGIN - REGISTER
   .login-box{
+    .title{
+      border-right: none;
+    }
+  }
+  .register-box{
     .title{
       border-right: none;
     }
@@ -1292,12 +1782,18 @@ input[type=range]:focus::-ms-fill-upper {
    }
   }
 
-  // LOGIN
+  // LOGIN - REGISTRAZIONE
   .login-box{
     .title{
       border-right: none;
     }
   }
+  .register-box{
+    .title{
+      border-right: none;
+    }
+  }
+
 }
 
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */

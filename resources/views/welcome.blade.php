@@ -25,15 +25,42 @@
     </div>
 
     <div class="apartaments row">
-      <h1 class="col-sm-12">Sponsorizzati</h1>
-      @foreach ($apartments as $apartment)
-        <ul class="col-sm-12 col-md-6 col-lg-4">
-          <li> <a href="{{route('showApartment', $apartment -> id)}}"> <div class="apartmentImg" style="background-image: url('{{$apartment->image}}')"></div> </a></li>
-          <li><b><a href="{{route('showApartment', $apartment -> id)}}">{{$apartment -> title}}</b>  </a></li>
-          <li>{{$apartment["description"]}}</li>
-          <li>Di: {{$apartment -> user -> name}}</li>
-        </ul>
-      @endforeach
+
+        <h1 class="col-sm-12">In Evidenza</h1>
+        @foreach ($apartments as $apartment)
+          <div class="apartmentCard col-sm-12 col-md-6 col-lg-4">
+              <div class="card  attivo{{$apartment['is_active']}}">
+              <div class="apartment row" data-annuncioAttivo="{{$apartment['is_active']}}">
+                <div class="immagine col-sm-12">
+
+                  <a href="{{route('showApartment', $apartment -> id)}}">
+                    <div class="apartmentImg" style="background-image: url('{{$apartment->image}}')"></div>
+                  </a>
+                  <div class="sponsoredRibbon">
+                    <i class="fas fa-award"></i>
+                  </div>
+
+                </div>
+
+                <div class="funzioni row col-sm-12">
+                  <a class="col-md-12" href="{{route('showApartment',$apartment['id'])}}">
+                    {{$apartment -> title }}
+                  </a>
+                  <span class="col-sm-12">
+                    {{$apartment -> address }} <i class="fas fa-map-marked-alt"></i>
+                  </span>
+                  <span class="col-sm-12">
+                    Proprietario - {{$apartment -> user -> name }} <i class="fas fa-key"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        @endforeach
     </div>
+
+
+
+
   </div>
 @endsection

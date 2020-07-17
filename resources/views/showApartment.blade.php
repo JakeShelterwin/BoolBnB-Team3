@@ -2,17 +2,6 @@
 
 @section('content')
 
-<div class="success_or_fail">
-  @if (session("success"))
-    <p>{{session("success")}}</p>
-  @endif
-  @if ($errors->any())
-    @foreach ($errors->all() as $error)
-      <p>{{$error}}</p>
-    @endforeach
-  @endif
-</div>
-
 <div class="apartment container">
   <h1 id="title">{{$apartment['title']}}
     @if ($sponsorAttivo)

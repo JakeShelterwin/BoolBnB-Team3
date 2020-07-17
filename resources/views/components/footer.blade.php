@@ -3,7 +3,7 @@
 
     <div class="linkfooter row">
         <ul class="col-sm-12 col-md-4">
-          <li><span class="titolilink"><strong>Nostri GitHub</strong></span></li>
+          <li><span class="titolilink"><strong>Creato Da</strong></span></li>
           <li>Cose a Caso</li>
           <li>Cose a Caso</li>
           <li>Cose a Caso</li>
@@ -11,7 +11,7 @@
           <li>Cose a Caso</li>
         </ul>
         <ul class="col-sm-12 col-md-4">
-          <li><span class="titolilink"><strong>Pagine Più Importanti</strong></span></li>
+          <li><span class="titolilink"><strong>Tecnologie Usate</strong></span></li>
           <li>Cose a Caso</li>
           <li>Cose a Caso</li>
           <li>Cose a Caso</li>
@@ -19,7 +19,7 @@
           <li>Cose a Caso</li>
         </ul>
         <ul class="col-sm-12 col-md-4">
-          <li><span class="titolilink"><strong>Teachers & Staff</strong></span></li>
+          <li><span class="titolilink"><strong>Ringraziamenti</strong></span></li>
           <li>Cose a Caso</li>
           <li>Cose a Caso</li>
           <li>Cose a Caso</li>

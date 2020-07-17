@@ -2,42 +2,27 @@
 @section('content')
   @if (auth()->user()-> id == $apartment -> user_id)
 
-<div class="apartment">
+<div class="apartment card container edit-Create">
 
-    @if ($errors->any())
-      @foreach ($errors->all() as $error)
-        <p>{{$error}}</p>
-      @endforeach
-    @endif
   <form class="" action="{{route('updateApartment', $apartment['id'])}}" method="post"  enctype="multipart/form-data">
       @csrf
       @method('POST')
-    <div class="photo">
-      <label for="image">Foto Appartamento: </label>
-      <input type="file" name="image">
-    </div>
     <div class="info">
-      <h2>Titolo</h2>
-      <h1><input type="text" name="title" value="{{old('title', $apartment['title'])}}"></h1>
-
-      <div class="address">
-        <h2>Indirizzo</h2>
-        {{-- <p>"{{$apartment['address']}}"</p> --}}
-        <input type="text" name="address" value="{{old('address', $apartment['address'])}}">
-        <div class="coordinate">
-          <input id="latitude" type="text" name="lat" value="">
-          <input id="longitude" type="text" name="lon" value="">
-        </div>
-      </div>
-
-      <div class="description">
-          <h2>Descrizione</h2>
-          <p><input type="textarea" name="description" value="{{old('description', $apartment['description'])}}"></p>
-      </div>
+      <ul>
+        <li><b>Titolo:</b> <input type="text" name="title" value="{{old('title', $apartment['title'])}}"></li>
+        <li class="photo"> <b>Foto Appartamento:</b> <input type="file" name="image"></li>
+        <li class="address"> <b>Indirizzo:</b>
+          <input type="text" name="address" value="{{old('address', $apartment['address'])}}">
+          <div class="coordinate">
+            <input id="latitude" type="text" name="lat" value="">
+            <input id="longitude" type="text" name="lon" value="">
+          </div>
+        </li>
+        <li><b>Descrizione:</b> <textarea rows="4" cols="40" name="description" value="{{old('description', $apartment['description'])}}" placeholder="Inserisci la tua richiesta" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Inserisci la tua richiesta'">{{old('description', $apartment['description'])}}</textarea></li>
+      </ul>
 
       <div class="other_info">
         <div class="features">
-          <h2>Caratteristiche</h2>
           <ul>
 
             <li><b>Numero stanze: </b>
@@ -58,8 +43,8 @@
           </ul>
         </div>
         <div class="services">
-          <h2>Servizi</h2>
-          <ul>
+          <b>Servizi</b>
+          <ul style="margin-left: 10px">
 
             @foreach ($services as $service)
               <li><input type="checkbox" name="services[]" value="{{$service -> id}}"
@@ -85,15 +70,6 @@
         <button id="bottoneCreate" type="submit" name="submit" disabled>Apporta Modifiche</button>
     </div>
   </form>
-
-      <div class="user_interactions">
-        <div class="map">
-
-        </div>
-        <div class="contact">
-
-        </div>
-      </div>
   </div>
 </div>
 

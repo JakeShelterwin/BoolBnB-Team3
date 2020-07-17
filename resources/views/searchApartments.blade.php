@@ -5,7 +5,7 @@
 <div class="container contentSearch">
   <div class="info">
     <form action="{{route('searchApartments')}}" method="GET">
-      <div class="searchField">
+      <div class="searchField card">
 
         <input id="ricerca" name="address" class="searchbar" type="text" placeholder="Dove vorresti alloggiare?" value="{{$query}}">
         <button id="btnQuery" class="buttonsearch" type="submit" name="button" value="Cerca">Cerca!</button>
@@ -58,11 +58,14 @@
   <div class="apartments row">
       @if ($sponsoredApartment)
         @foreach ($sponsoredApartment as $apartment)
+        <div class="card col-sm-12 row">
           <div class="sponsoredApartment col-sm-12 row">
-            <a  class=" col-sm-12 col-md-4"  href="{{route('showApartment', $apartment -> id)}}"> <div class="sponsoredApartmentImg" style="background-image: url('{{$apartment->image}}')"></div> </a>
-            <ul class="col-sm-12 col-md-8">
+
+            <a  class=" col-sm-12 col-md-4 noPadding"  href="{{route('showApartment', $apartment -> id)}}"> <div class="sponsoredApartmentImg" style="background-image: url('{{$apartment->image}}')"></div> </a>
+
+            <ul class="col-sm-12 col-md-8 apartmentInfo">
               <li><a href="{{route('showApartment', $apartment -> id)}}"> <b>{{$apartment -> title}} </b> </a></li>
-              <li class="description"><b>Descrizione</b> {{$apartment["description"]}}</li>
+              <li class="description"><b>Descrizione</b>  {{ Illuminate\Support\Str::limit($apartment -> description, 165) }}</li>
               <li><b>Proprietario</b> {{$apartment -> user -> name}}</li>
               <li>
                 <ul class="apartmentServices">
@@ -70,17 +73,17 @@
                   @foreach ($apartment -> services as $service)
                     <li>
                       @if ($service -> name == "Wi-Fi")
-                        <i class="fas fa-wifi"></i>
+                      &nbsp   <i class="fas fa-wifi"></i>
                       @elseif ($service -> name == "Posto Auto")
-                        <i class="fas fa-car"></i>
+                      &nbsp   <i class="fas fa-car"></i>
                       @elseif ($service -> name == "Piscina")
-                        <i class="fas fa-swimming-pool"></i>
+                      &nbsp   <i class="fas fa-swimming-pool"></i>
                       @elseif ($service -> name == "Portineria")
-                        <i class="fas fa-concierge-bell"></i>
+                      &nbsp   <i class="fas fa-concierge-bell"></i>
                       @elseif ($service -> name == "Sauna")
-                        <i class="fas fa-hot-tub"></i>
+                      &nbsp   <i class="fas fa-hot-tub"></i>
                       @elseif ($service -> name == "Vista Mare")
-                        <i class="fas fa-binoculars"></i>
+                      &nbsp    <i class="fas fa-binoculars"></i>
                       @endif
                         {{$service -> name}}
 
@@ -92,17 +95,19 @@
             </ul>
             <div class="sponsoredRibbon">
               <i class="fas fa-award"></i>
-              <p>Sponsored</p>
+              <span>Sponsored</span>
             </div>
           </div>
+        </div>
         @endforeach
       @endif
       @foreach ($selectedApartmentsFilteredByUser as $key => $apartment)
+        <div class="card col-sm-12 row">
         <div class="searchedApartment col-sm-12 row">
-          <a class=" col-sm-12 col-md-4" href="{{route('showApartment', $apartment -> id)}}"> <div class="searchedApartmentImg" style="background-image: url('{{$apartment->image}}')"></div> </a>
-          <ul class="col-sm-12 col-md-8">
+          <a class=" col-sm-12 col-md-4 noPadding" href="{{route('showApartment', $apartment -> id)}}"> <div class="searchedApartmentImg" style="background-image: url('{{$apartment->image}}')"></div> </a>
+          <ul class="col-sm-12 col-md-8 apartmentInfo">
             <li><a href="{{route('showApartment', $apartment -> id)}}"> <b>{{$apartment -> title}} </b> </a></li>
-            <li class="description"><b>Descrizione</b> {{$apartment["description"]}}</li>
+            <li class="description"><b>Descrizione</b>  {{ Illuminate\Support\Str::limit($apartment -> description, 165) }}</li>
             <li><b>Proprietario</b> {{$apartment -> user -> name}}</li>
             <li>
               <ul class="apartmentServices">
@@ -110,17 +115,17 @@
                 @foreach ($apartment -> services as $service)
                   <li>
                     @if ($service -> name == "Wi-Fi")
-                      <i class="fas fa-wifi"></i>
+                       &nbsp <i class="fas fa-wifi"></i>
                     @elseif ($service -> name == "Posto Auto")
-                      <i class="fas fa-car"></i>
+                      &nbsp <i class="fas fa-car"></i>
                     @elseif ($service -> name == "Piscina")
-                      <i class="fas fa-swimming-pool"></i>
+                    &nbsp   <i class="fas fa-swimming-pool"></i>
                     @elseif ($service -> name == "Portineria")
-                      <i class="fas fa-concierge-bell"></i>
+                    &nbsp   <i class="fas fa-concierge-bell"></i>
                     @elseif ($service -> name == "Sauna")
-                      <i class="fas fa-hot-tub"></i>
+                      &nbsp <i class="fas fa-hot-tub"></i>
                     @elseif ($service -> name == "Vista Mare")
-                      <i class="fas fa-binoculars"></i>
+                    &nbsp   <i class="fas fa-binoculars"></i>
                     @endif
                       {{$service -> name}}
 
@@ -142,6 +147,7 @@
                 @endif
             </li>
           </ul>
+        </div>
         </div>
       @endforeach
   </div>

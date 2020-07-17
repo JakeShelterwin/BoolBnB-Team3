@@ -2,22 +2,20 @@
 @section('content')
   @if (auth()->user()-> id == $apartment -> user_id)
     <script src='https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js'></script>
-      <div class='container'>
-        {{-- {{$apartment -> id }} --}}
-        <div class='row'>
-          <div class='col-md-8 col-md-offset-2'>
-            <div class="choice">
+      <div class='container card sponsors'>
+            <div class="choice row">
               @foreach ($sponsors as $sponsor)
-                <div class="sponsor">
+                <div class="sponsor card {{$sponsor -> name}}">
+                  <p> <b>Tipo:</b>  {{$sponsor -> name}} </p>
+                  <p> <b>Costo:</b>  {{$sponsor -> price}} &euro;</p>
+                  <p> <b>Durata: </b> <span class="durationSponsor">{{$sponsor -> duration}}</span> ore</p>
+
                   <input type="radio" name="sponsor" value="{{$sponsor -> name}}">
-                  {{$sponsor -> name}} {{$sponsor -> price}}
                 </div>
               @endforeach
             </div>
             <div id='dropin-container'></div>
             <button id='submit-button' disabled>Request payment method</button>
-          </div>
-        </div>
         <input type="text" name="apartmentId" value="{{$apartment -> id }}" disabled style="display: none">
       </div>
 
@@ -39,12 +37,14 @@
           button.on('click', function () {
             instance.requestPaymentMethod(function (err, payload) {
               $.get('{{ route('payment.make') }}', {payload, sponsorType, ApartmentId}, function (response) {
-                // console.log("ciao");
                 if (response.success) {
-                  console.log(response.transaction.amount);
-                  alert('Payment successfull');
+                  // debug
+                  // console.log(response.transaction.amount);
+                  // alert('Payment successfull');
+                  $('.success_or_fail').append("<div class='alert alert-success' role='alert'><div class='container'><p>SUCCESSO</p></div></div>");
                 } else {
-                  alert('Payment failed');
+                  // alert('Payment failed');
+                  $('.success_or_fail').append('<div class="alert alert-warning" role="alert"><div class="container"><p>Si è verificato un errore, il pagamento non è andato a buon fine</p></div></div>');
                 }
               }, 'json');
             });

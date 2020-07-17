@@ -40,19 +40,23 @@ class HomeController extends Controller
     {
       $user_id = auth()->user()->id;
       $apartments = Apartment::all() -> where('user_id',$user_id) ;
-      $messages = Message::all();
+      $allMessages = Message::all();
       $user_apartments = $apartments -> where('sponsor_expire_time', '<', time());
       $apartmentSponsored = $apartments -> where('sponsor_expire_time', '>=', time());
-      $users_messages_grouped_by_normal_apartment = [];
-      foreach ($user_apartments as $apartment) {
-        $users_messages_grouped_by_normal_apartment[] = $messages -> where('apartment_id', $apartment -> id);
-      }
-      $users_messages_grouped_by_sponsored_apartment = [];
-      foreach ($apartmentSponsored as $apartment) {
-        $users_messages_grouped_by_sponsored_apartment[] = $messages -> where('apartment_id', $apartment -> id);
+
+      $users_messages_grouped_by_apartment = [];
+      foreach ($apartments as $apartment) {
+        $users_messages_grouped_by_apartment[] = $allMessages -> where('apartment_id', $apartment -> id);
       }
 
-      return view('home', compact('user_apartments', "apartmentSponsored", 'users_messages_grouped_by_normal_apartment','users_messages_grouped_by_sponsored_apartment' ));
+      $messages = [];
+      foreach ($users_messages_grouped_by_apartment as $apartment) {
+        foreach ($apartment as $message) {
+          $messages[$message["id"]] = $message;
+        }
+      }
+      krsort($messages);
+      return view('home', compact('user_apartments', "apartmentSponsored", 'messages' ));
     }
 
     public function createApartment()

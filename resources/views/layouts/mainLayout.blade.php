@@ -17,8 +17,8 @@
     </head>
     <body>
         @include('components.header')
+        @include('components.successOrFail')
         @yield('content')
         @include('components.footer')
-
     </body>
 </html>
