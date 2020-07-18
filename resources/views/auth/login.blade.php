@@ -7,7 +7,7 @@
             <div class="card login-box">
                 <div class="card-body row">
                     <div class="title col-md-4">
-                      <h1>BoolBnb</h1>
+                      <h1>boolbnb</h1>
                     </div>
                     <form class="col-md-8" method="POST" action="{{ route('login') }}">
                         @csrf
@@ -51,14 +51,17 @@
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
+                                        {{ __('Ricordami') }}
                                     </label>
                                 </div>
-                                @if (Route::has('password.request'))
+                                @if (Route::has('register'))
+                                    <a class="btn btn-link" style="font-weight: 400" href="{{ route('register') }}">{{ __('Non hai un account? Registrati qui') }}</a>
+                                @endif
+                                {{-- @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
-                                @endif
+                                @endif --}}
                             </div>
                         </div>
                     </form>

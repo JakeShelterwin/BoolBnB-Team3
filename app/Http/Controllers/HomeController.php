@@ -40,19 +40,23 @@ class HomeController extends Controller
     {
       $user_id = auth()->user()->id;
       $apartments = Apartment::all() -> where('user_id',$user_id) ;
-      $messages = Message::all();
+      $allMessages = Message::all();
       $user_apartments = $apartments -> where('sponsor_expire_time', '<', time());
       $apartmentSponsored = $apartments -> where('sponsor_expire_time', '>=', time());
-      $users_messages_grouped_by_normal_apartment = [];
-      foreach ($user_apartments as $apartment) {
-        $users_messages_grouped_by_normal_apartment[] = $messages -> where('apartment_id', $apartment -> id);
-      }
-      $users_messages_grouped_by_sponsored_apartment = [];
-      foreach ($apartmentSponsored as $apartment) {
-        $users_messages_grouped_by_sponsored_apartment[] = $messages -> where('apartment_id', $apartment -> id);
+
+      $users_messages_grouped_by_apartment = [];
+      foreach ($apartments as $apartment) {
+        $users_messages_grouped_by_apartment[] = $allMessages -> where('apartment_id', $apartment -> id);
       }
 
-      return view('home', compact('user_apartments', "apartmentSponsored", 'users_messages_grouped_by_normal_apartment','users_messages_grouped_by_sponsored_apartment' ));
+      $messages = [];
+      foreach ($users_messages_grouped_by_apartment as $apartment) {
+        foreach ($apartment as $message) {
+          $messages[$message["id"]] = $message;
+        }
+      }
+      krsort($messages);
+      return view('home', compact('user_apartments', "apartmentSponsored", 'messages' ));
     }
 
     public function createApartment()
@@ -191,7 +195,7 @@ class HomeController extends Controller
       $apartment = Apartment::findOrFail($id);
       $deleteImage = File::delete(public_path($apartment -> image));
       $apartment -> delete();
-      return redirect() -> route("welcome")
+      return redirect() -> route("home")
                         -> withSuccess("Appartamento eliminato con successo!");
     }
     public function showApartmentStatistics($apartment_id)
@@ -203,10 +207,23 @@ class HomeController extends Controller
       $views = View::all() -> where('apartment_id', $apartment_id); //restituisce array[] con all'interno ogni singola view dell'appartamento
       $messages = Message::all() -> where('apartment_id', $apartment_id); //restituisce array[] con all'interno ogni singolo messaggio per l'appartamento
 
+      // FRA TUTTI I MESSAGGI PRENDIAMO SOLO QUELLI DELL'ULTIMO ANNO PARTENDO DALLA DATA ODIERNA
+      $lessThan1yearOldMessages = [];
+      foreach ($messages as $message) {
+        if (strtotime($message -> created_at) >= time() - 31536000 ) {
+          $lessThan1yearOldMessages[] = $message;
+        }
+      }
+      $messages = $lessThan1yearOldMessages;
+      // dd($lessThan1yearOldMessages);
+
       // Gestione delle informazioni per le visualizzazioni
+      // FRA TUTTI LE VISUALIZZAIONI PRENDIAMO SOLO QUELLE DELL'ULTIMO ANNO PARTENDO DALLA DATA ODIERNA
       $viewsFiltered = [];
       foreach ($views as $view) {
-        $viewsFiltered[] = date( "m",  strtotime( $view -> created_at) );
+        if (strtotime($view -> created_at) >= time() - 31536000 ) {
+          $viewsFiltered[] = date( "m",  strtotime( $view -> created_at) );
+        }
       }
       $viewsMonths = []; // restituirà l'array con i mesi in ordine
       $viewsCount = []; // restituirà l'array le occorrenze di ciascun mese
@@ -288,45 +305,6 @@ class HomeController extends Controller
       $sponsors = Sponsor::all();
       return view('sponsor', compact('apartment', "sponsors"));
     }
-
-
-    public function sponsorAppoggio($apartment_id){
-      $apartment = Apartment::findOrFail($apartment_id);
-      $sponsors = Sponsor::all();
-      // $Silver = "Silver";
-      // // 86400
-      $Gold = "Gold";
-      // // 259200
-      // $Platinum = "Platinum";
-      // // 518400
-
-      $allWasWell = false;
-      $sponsorId = 0;
-      foreach ($sponsors as $sponsor) {
-        if ($sponsor["name"]==$Gold) {
-          $duration = $sponsor["duration"];
-          $sponsorId = $sponsor["id"];
-        }
-      }
-
-      if ($apartment -> sponsor_expire_time) {
-        if ($apartment -> sponsor_expire_time <= time()){
-          $apartment -> sponsor_expire_time = time() + $duration;
-          $apartment -> save();
-          $apartment -> sponsor() -> attach($sponsorId);
-          $allWasWell = true;
-        }
-      } else {
-        $apartment -> sponsor_expire_time = time() + $duration;
-        $apartment -> save();
-        $apartment -> sponsor() -> attach($sponsorId);
-        $allWasWell = true;
-      }
-
-      return view('sponsorAppoggio', compact('apartment', "sponsors", "allWasWell"));
-    }
-
-
 
     public function make(Request $request) {
 

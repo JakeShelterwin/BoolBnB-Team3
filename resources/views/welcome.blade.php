@@ -5,7 +5,6 @@
     <div class="jumboSearch row">
       <div class="jumboText col-sm-12	col-lg-8">
         <h1>Immagina dove vorresti essere</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore obcaecati, reprehenderit beatae eveniet numquam cum deserunt iste nemo fugiat nisi? Illum, accusantium vero sit laudantium ipsum amet facere sapiente quos!</p>
         <div class="info">
           <form action="{{route('searchApartments')}}" method="GET">
             <input id="ricerca" name="address" class="searchbarWelcome" type="text" placeholder="Dove vorresti alloggiare?" value="">
@@ -17,23 +16,55 @@
           </form>
         </div>
       </div>
-      {{-- <div class="jumboImages">
-        <img class="mySlides" src="{{ asset('uploads/images/img.jpg') }}" alt="">
-        <img class="mySlides" src="{{ asset('uploads/images/img1.jpg') }}" alt="">
-        <img class="mySlides" src="{{ asset('uploads/images/img2.jpg') }}" alt="">
-      </div> --}}
+      <div class="jumboImages col-sm-12	col-lg-4">
+        <img class="mySlides" src="{{ asset('images/img1.png') }}" alt="">
+        <img class="mySlides" src="{{ asset('images/img2.png') }}" alt="">
+        <img class="mySlides" src="{{ asset('images/img3.png') }}" alt="">
+        <img class="mySlides" src="{{ asset('images/img4.png') }}" alt="">
+      </div>
+    </div>
+    <div class="arrow row">
+      <div>
+        <p><i class="fas fa-angle-down"></i></p>
+      </div>
+    </div>
+    <div class="apartaments row">
+
+        <h1 class="col-sm-12">In Evidenza</h1>
+        @foreach ($apartments as $apartment)
+          <div class="apartmentCard col-sm-12 col-md-6 col-lg-4">
+              <div class="card  attivo{{$apartment['is_active']}}">
+              <div class="apartment row" data-annuncioAttivo="{{$apartment['is_active']}}">
+                <div class="immagine col-sm-12">
+
+                  <a href="{{route('showApartment', $apartment -> id)}}">
+                    <div class="apartmentImg" style="background-image: url('{{$apartment->image}}')"></div>
+                  </a>
+                  <div class="sponsoredRibbon">
+                    <i class="fas fa-award"></i>
+                  </div>
+
+                </div>
+
+                <div class="funzioni row col-sm-12">
+                  <a class="col-md-12" href="{{route('showApartment',$apartment['id'])}}">
+                    {{$apartment -> title }}
+                  </a>
+                  <span class="col-sm-12">
+                    {{$apartment -> address }}</i>
+                  </span>
+                  <span class="col-sm-12">
+                    Proprietario - {{$apartment -> user -> name }}</i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        @endforeach
     </div>
 
-    <div class="apartaments row">
-      <h1 class="col-sm-12">Sponsorizzati</h1>
-      @foreach ($apartments as $apartment)
-        <ul class="col-sm-12 col-md-6 col-lg-4">
-          <li> <a href="{{route('showApartment', $apartment -> id)}}"> <div class="apartmentImg" style="background-image: url('{{$apartment->image}}')"></div> </a></li>
-          <li><b><a href="{{route('showApartment', $apartment -> id)}}">{{$apartment -> title}}</b>  </a></li>
-          <li>{{$apartment["description"]}}</li>
-          <li>Di: {{$apartment -> user -> name}}</li>
-        </ul>
-      @endforeach
-    </div>
+
+
+
   </div>
 @endsection

@@ -74668,8 +74668,9 @@ $(document).ready(function () {
       },
       method: "GET",
       success: function success(data) {
-        console.log(data['results']); //rimuovo eventuali p che mostra l'errore
-
+        //debug
+        // console.log(data['results']);
+        //rimuovo eventuali p che mostra l'errore
         $(".address p").remove(); // controllo di riceve almeno un indirizzo valido, se non lo ricevo faccio append di un p che mostra un messaggio d'errore
         // e disattiva il bottone d'invio dati
         // altrimneti valorizzo i campi lat e lon come sopra
@@ -74690,12 +74691,7 @@ $(document).ready(function () {
         console.log("E' avvenuto un errore. " + errori, "stato " + stato, richiesta);
       }
     });
-  }); // TEST PER ORDINARE CRONOLOGICAMENTE I MESSAGGI
-  // $('.messages .card').sort(function(a,b) {
-  //     console.log("ciclo");
-  //    return $(a).data('time') > $(b).data('time');
-  // }).appendTo('.messages');
-  // GUIDA TOM TOM https://developer.tomtom.com/maps-sdk-web-js/tutorials-use-cases/map-marker-tutorial
+  }); // GUIDA TOM TOM https://developer.tomtom.com/maps-sdk-web-js/tutorials-use-cases/map-marker-tutorial
 
   if ($('#map').length) {
     // se esiste nella pagina il div con id "map"
@@ -74718,7 +74714,7 @@ $(document).ready(function () {
     };
     var popup = new tt.Popup({
       offset: popupOffsets
-    }).setHTML("<p>" + $(".info #title").text() + "</p>" + $(".address p").text());
+    }).setHTML("<p>" + $(".apartment #title").text() + "</p>" + $(".apartment h4").text());
     marker.setPopup(popup).togglePopup();
   }
 
@@ -74824,64 +74820,81 @@ $(document).ready(function () {
   $('.searchField').on('click', '#btnFilter', function () {
     $(".filtriNascosti").slideToggle();
   }); ///////////////////////////////////////////////////////////////////
-  //////////////     GESTIONE PAGAMENTI BRAINTREE   /////////////////
+  ////////  GESTIONE COUNTDOWN APPARTAMENTI SPONSORIZZATI ///////////
   ///////////////////////////////////////////////////////////////////
-  // const fs = require('fs');
-  // var express = require('express');
-  // var router = express.Router();
-  // var braintree = require('braintree');
-  //
-  // router.post('/', function(req, res, next) {
-  //   var gateway = braintree.connect({
-  //     environment: braintree.Environment.Sandbox,
-  //     // Use your own credentials from the sandbox Control Panel here
-  //     merchantId: '442xpnv7h2cgqc4y',
-  //     publicKey: 'pvg4gptytvvn52sc',
-  //     privateKey: 'c09adb2130855fa0924b10e1d961bb51'
-  //   });
-  //
-  //   // Use the payment method nonce here
-  //   var nonceFromTheClient = req.body.paymentMethodNonce;
-  //   // Create a new transaction for $10
-  //   var newTransaction = gateway.transaction.sale({
-  //     amount: '10.00',
-  //     paymentMethodNonce: nonceFromTheClient,
-  //     options: {
-  //       // This option requests the funds from the transaction
-  //       // once it has been authorized successfully
-  //       submitForSettlement: true
-  //     }
-  //   }, function(error, result) {
-  //       if (result) {
-  //         res.send(result);
-  //       } else {
-  //         res.status(500).send(error);
-  //       }
-  //   });
-  // });
-  //
-  // module.exports = router;
-  // SLIDER
+
+  function sec2time(timeInSeconds) {
+    var pad = function pad(num, size) {
+      return ('000' + num).slice(size * -1);
+    },
+        time = parseFloat(timeInSeconds).toFixed(3),
+        hours = Math.floor(time / 60 / 60),
+        minutes = Math.floor(time / 60) % 60,
+        seconds = Math.floor(time - minutes * 60);
+
+    if (hours >= 100) {
+      return pad(hours, 3) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2);
+    } else {
+      return pad(hours, 2) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2);
+    }
+  }
+
+  setInterval(function () {
+    var allSponsoredApartments = $('.expire'); //in secondi
+
+    var allShowTime = $('.showTime'); // estesa
+
+    for (var i = 0; i < allSponsoredApartments.length; i++) {
+      var expire = allSponsoredApartments[i].innerHTML - 1;
+      allShowTime[i].innerHTML = sec2time(expire);
+      allSponsoredApartments[i].innerHTML = expire;
+    }
+  }, 1000); ///////////////////////////////////////////////////////////////////
+  ////////  MOSTRARE IN ORE LA DURATA DEGLI SPONSOR ///////////
+  ///////////////////////////////////////////////////////////////////
+
+  function sec2Hours(timeInSeconds) {
+    var pad = function pad(num, size) {
+      return ('000' + num).slice(size * -1);
+    },
+        time = parseFloat(timeInSeconds).toFixed(3),
+        hours = Math.floor(time / 60 / 60);
+
+    if (hours >= 100) {
+      return pad(hours, 3);
+    } else {
+      return pad(hours, 2);
+    }
+  }
+
+  var allSponsor = $('.durationSponsor');
+
+  for (var i = 0; i < allSponsor.length; i++) {
+    var sponsorTime = allSponsor[i].innerHTML;
+    allSponsor[i].innerHTML = sec2Hours(sponsorTime);
+  } ///////////////////////////////////////////////////////////////////
+  /////////////////////////   SLIDER   //////////////////////////////
+  ///////////////////////////////////////////////////////////////////
+
 
   var myIndex = 0;
   carousel();
 
   function carousel() {
     var i;
-    var x = document.getElementsByClassName("mySlides");
+    var x = $(".mySlides");
 
     for (i = 0; i < x.length; i++) {
       x[i].style.display = "none";
     }
 
-    myIndex++;
-
-    if (myIndex > x.length) {
-      myIndex = 1;
+    if (myIndex >= x.length) {
+      myIndex = 0;
     }
 
-    x[myIndex - 1].style.display = "block";
-    setTimeout(carousel, 5000); // Change image every 2 seconds
+    x[myIndex].style.display = "block";
+    myIndex++;
+    setTimeout(carousel, 3000); // Change image every 3 seconds
   }
 });
 
