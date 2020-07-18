@@ -79,17 +79,18 @@
               <a href="{{route('editApartment', $apartment['id'])}}">Modifica</a>
               <a href="{{route('deleteApartment', $apartment['id'])}}">Cancella</a>
               <a href="{{route('showApartmentStatistics', $apartment['id'])}}">Statistiche</a>
+              @if (!$sponsorAttivo)
+                <a href="{{route('sponsorApartment', $apartment['id'])}}">Sponsor</a>
+              @endif
             </div>
           @else
             <h5>Contatta {{$apartment -> user -> name}}</h5>
             <form class="form" action="{{route('storeMessage', $apartment -> id)}}" method="post">
               @csrf
               @method('POST')
-              {{-- <label for="email">Inserisci la Tua Mail per essere Ricontattato</label> <br> --}}
               <input type="email" name="email" value="{{old('email', $emailUtente)}}" placeholder="La tua e-mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'La tua e-mail'"> <br>
-              {{-- <label for="message">Scrivi qui un messaggio per un proprietario</label> <br> --}}
               <br>
-              <textarea type="textarea" rows="4" cols="40" name="message" value="{{old('message')}}" placeholder="Inserisci la tua richiesta" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Inserisci la tua richiesta'"></textarea> <br>
+              <textarea type="textarea" rows="4" cols="40" name="message" value="{{old('message')}}" placeholder="Inserisci la tua richiesta" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Inserisci la tua richiesta'">{{old('message')}}</textarea> <br>
               <button type="submit" name="submit">Invia Messaggio</button> <br>
             </form>
           @endauth
@@ -98,11 +99,9 @@
           <form class="form" action="{{route('storeMessage', $apartment -> id)}}" method="post">
             @csrf
             @method('POST')
-            {{-- <label for="email">Inserisci la Tua Mail per essere Ricontattato</label> <br> --}}
             <input type="email" name="email" value="{{old('email', $emailUtente)}}" placeholder="La tua e-mail" onfocus="this.placeholder = ''" onblur="this.placeholder = 'La tua e-mail'"> <br>
-            {{-- <label for="message">Scrivi qui un messaggio per un proprietario</label> <br> --}}
             <br>
-            <textarea type="textarea" rows="4" cols="40" name="message" value="{{old('message')}}" placeholder="Inserisci la tua richiesta" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Inserisci la tua richiesta'"></textarea> <br>
+            <textarea type="textarea" rows="4" cols="40" name="message" value="{{old('message')}}" placeholder="Inserisci la tua richiesta" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Inserisci la tua richiesta'">{{old('message')}}</textarea> <br>
             <button type="submit" name="submit">Invia Messaggio</button> <br>
           </form>
         @endif

@@ -207,10 +207,23 @@ class HomeController extends Controller
       $views = View::all() -> where('apartment_id', $apartment_id); //restituisce array[] con all'interno ogni singola view dell'appartamento
       $messages = Message::all() -> where('apartment_id', $apartment_id); //restituisce array[] con all'interno ogni singolo messaggio per l'appartamento
 
+      // FRA TUTTI I MESSAGGI PRENDIAMO SOLO QUELLI DELL'ULTIMO ANNO PARTENDO DALLA DATA ODIERNA
+      $lessThan1yearOldMessages = [];
+      foreach ($messages as $message) {
+        if (strtotime($message -> created_at) >= time() - 31536000 ) {
+          $lessThan1yearOldMessages[] = $message;
+        }
+      }
+      $messages = $lessThan1yearOldMessages;
+      // dd($lessThan1yearOldMessages);
+
       // Gestione delle informazioni per le visualizzazioni
+      // FRA TUTTI LE VISUALIZZAIONI PRENDIAMO SOLO QUELLE DELL'ULTIMO ANNO PARTENDO DALLA DATA ODIERNA
       $viewsFiltered = [];
       foreach ($views as $view) {
-        $viewsFiltered[] = date( "m",  strtotime( $view -> created_at) );
+        if (strtotime($view -> created_at) >= time() - 31536000 ) {
+          $viewsFiltered[] = date( "m",  strtotime( $view -> created_at) );
+        }
       }
       $viewsMonths = []; // restituirà l'array con i mesi in ordine
       $viewsCount = []; // restituirà l'array le occorrenze di ciascun mese
@@ -292,45 +305,6 @@ class HomeController extends Controller
       $sponsors = Sponsor::all();
       return view('sponsor', compact('apartment', "sponsors"));
     }
-
-
-    public function sponsorAppoggio($apartment_id){
-      $apartment = Apartment::findOrFail($apartment_id);
-      $sponsors = Sponsor::all();
-      // $Silver = "Silver";
-      // // 86400
-      $Gold = "Gold";
-      // // 259200
-      // $Platinum = "Platinum";
-      // // 518400
-
-      $allWasWell = false;
-      $sponsorId = 0;
-      foreach ($sponsors as $sponsor) {
-        if ($sponsor["name"]==$Gold) {
-          $duration = $sponsor["duration"];
-          $sponsorId = $sponsor["id"];
-        }
-      }
-
-      if ($apartment -> sponsor_expire_time) {
-        if ($apartment -> sponsor_expire_time <= time()){
-          $apartment -> sponsor_expire_time = time() + $duration;
-          $apartment -> save();
-          $apartment -> sponsor() -> attach($sponsorId);
-          $allWasWell = true;
-        }
-      } else {
-        $apartment -> sponsor_expire_time = time() + $duration;
-        $apartment -> save();
-        $apartment -> sponsor() -> attach($sponsorId);
-        $allWasWell = true;
-      }
-
-      return view('sponsorAppoggio', compact('apartment', "sponsors", "allWasWell"));
-    }
-
-
 
     public function make(Request $request) {
 

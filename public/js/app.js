@@ -74832,7 +74832,11 @@ $(document).ready(function () {
         minutes = Math.floor(time / 60) % 60,
         seconds = Math.floor(time - minutes * 60);
 
-    return pad(hours, 2) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2);
+    if (hours >= 100) {
+      return pad(hours, 3) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2);
+    } else {
+      return pad(hours, 2) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2);
+    }
   }
 
   setInterval(function () {
@@ -74878,7 +74882,7 @@ $(document).ready(function () {
 
   function carousel() {
     var i;
-    var x = document.getElementsByClassName("mySlides");
+    var x = $(".mySlides");
 
     for (i = 0; i < x.length; i++) {
       x[i].style.display = "none";
@@ -74890,7 +74894,7 @@ $(document).ready(function () {
 
     x[myIndex].style.display = "block";
     myIndex++;
-    setTimeout(carousel, 5000); // Change image every 5 seconds
+    setTimeout(carousel, 3000); // Change image every 3 seconds
   }
 });
 

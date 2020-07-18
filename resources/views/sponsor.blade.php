@@ -6,16 +6,17 @@
             <div class="choice row">
               @foreach ($sponsors as $sponsor)
                 <div class="sponsor card {{$sponsor -> name}}">
-                  <p> <b>Tipo:</b>  {{$sponsor -> name}} </p>
-                  <p> <b>Costo:</b>  {{$sponsor -> price}} &euro;</p>
-                  <p> <b>Durata: </b> <span class="durationSponsor">{{$sponsor -> duration}}</span> ore</p>
+                  <span> <b>Tipo:</b>  {{$sponsor -> name}} </span>
+                  <span> <b>Costo:</b>  {{$sponsor -> price}} &euro;</span>
+                  <span> <b>Durata: </b> <span class="durationSponsor">{{$sponsor -> duration}}</span> ore</span>
 
                   <input type="radio" name="sponsor" value="{{$sponsor -> name}}">
                 </div>
               @endforeach
             </div>
             <div id='dropin-container'></div>
-            <button id='submit-button' disabled>Request payment method</button>
+            {{-- <button id='submit-button' disabled>Request payment method</button> --}}
+            <button id='submit-button' disabled>Esegui Pagamento</button>
         <input type="text" name="apartmentId" value="{{$apartment -> id }}" disabled style="display: none">
       </div>
 
@@ -25,8 +26,8 @@
       var ApartmentId = $('input[name=apartmentId]').val();
        // = $('input:checked').val();
       // console.log(sponsorType);
-      $('.choice').on('click', "input[type=radio]", function () {
-        sponsorType = $(this).val();
+      $('.choice').on('click', ".sponsor.card", function () {
+        sponsorType = $(this).find("input[type=radio]").val();
         // console.log(sponsorType);
         var button = $('#submit-button');
         button.prop("disabled", false);
@@ -51,6 +52,15 @@
           });
         });
       });
+
+      $('.choice').on('click', ".sponsor.card", function () {
+        $(".sponsor.card").css({"box-shadow": "0px 1px 11px -2px rgba(0, 0, 0, 0.3), inset 0 -3px 4px -1px rgba(0,0,0,0.2), 0 -10px 15px -1px rgba(255,255,255,0.6),  inset 0 20px 30px 0 rgba(255,255,255,0.2)", "color" : "#1b3c59"});
+        $(this).css({"box-shadow": "inset 0px 1px 7px -2px rgba(0, 0, 0, 0.3)", "color" : "#E31C5F"});
+        $(this).find("input[type=radio]").prop("checked", true);
+
+      });
+
+
       </script>
   @endif
 @endsection

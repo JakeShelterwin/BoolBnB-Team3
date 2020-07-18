@@ -5,7 +5,6 @@
     <div class="jumboSearch row">
       <div class="jumboText col-sm-12	col-lg-8">
         <h1>Immagina dove vorresti essere</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore obcaecati, reprehenderit beatae eveniet numquam cum deserunt iste nemo fugiat nisi? Illum, accusantium vero sit laudantium ipsum amet facere sapiente quos!</p>
         <div class="info">
           <form action="{{route('searchApartments')}}" method="GET">
             <input id="ricerca" name="address" class="searchbarWelcome" type="text" placeholder="Dove vorresti alloggiare?" value="">
@@ -17,13 +16,18 @@
           </form>
         </div>
       </div>
-      {{-- <div class="jumboImages">
-        <img class="mySlides" src="{{ asset('uploads/images/img.jpg') }}" alt="">
-        <img class="mySlides" src="{{ asset('uploads/images/img1.jpg') }}" alt="">
-        <img class="mySlides" src="{{ asset('uploads/images/img2.jpg') }}" alt="">
-      </div> --}}
+      <div class="jumboImages col-sm-12	col-lg-4">
+        <img class="mySlides" src="{{ asset('images/img1.png') }}" alt="">
+        <img class="mySlides" src="{{ asset('images/img2.png') }}" alt="">
+        <img class="mySlides" src="{{ asset('images/img3.png') }}" alt="">
+        <img class="mySlides" src="{{ asset('images/img4.png') }}" alt="">
+      </div>
     </div>
-
+    <div class="arrow row">
+      <div>
+        <p><i class="fas fa-angle-down"></i></p>
+      </div>
+    </div>
     <div class="apartaments row">
 
         <h1 class="col-sm-12">In Evidenza</h1>
@@ -47,10 +51,10 @@
                     {{$apartment -> title }}
                   </a>
                   <span class="col-sm-12">
-                    {{$apartment -> address }} <i class="fas fa-map-marked-alt"></i>
+                    {{$apartment -> address }}</i>
                   </span>
                   <span class="col-sm-12">
-                    Proprietario - {{$apartment -> user -> name }} <i class="fas fa-key"></i>
+                    Proprietario - {{$apartment -> user -> name }}</i>
                   </span>
                 </div>
               </div>

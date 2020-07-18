@@ -41,7 +41,7 @@ $(document).ready(function(){
               success : function (data) {
                 //debug
                 // console.log(data['results']);
-                
+
                 //rimuovo eventuali p che mostra l'errore
                 $(".address p").remove();
                 // controllo di riceve almeno un indirizzo valido, se non lo ricevo faccio append di un p che mostra un messaggio d'errore
@@ -240,7 +240,11 @@ $(document).ready(function(){
     hours = Math.floor(time / 60 / 60),
     minutes = Math.floor(time / 60) % 60,
     seconds = Math.floor(time - minutes * 60)
-    return pad(hours, 2) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2);
+    if (hours >= 100){
+      return pad(hours, 3) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2);
+    } else {
+      return pad(hours, 2) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2);
+    }
   }
   setInterval(function(){
     var allSponsoredApartments = $('.expire'); //in secondi
@@ -280,7 +284,7 @@ $(document).ready(function(){
   carousel();
     function carousel() {
       var i;
-      var x = document.getElementsByClassName("mySlides");
+      var x = $(".mySlides");
       for (i = 0; i < x.length; i++) {
         x[i].style.display = "none";
       }
@@ -289,7 +293,7 @@ $(document).ready(function(){
       }
       x[myIndex].style.display = "block";
       myIndex++;
-      setTimeout(carousel, 5000); // Change image every 5 seconds
+      setTimeout(carousel, 3000); // Change image every 3 seconds
   }
 
 

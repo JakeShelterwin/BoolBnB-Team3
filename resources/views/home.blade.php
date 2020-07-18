@@ -96,11 +96,7 @@
         <div class="col-md-4 containMessages">
           <div class="messages card row">
             <div class="bulge col-sm-8">
-              <span>
-                {{-- <i class="fas fa-arrow-circle-down"></i>  --}}
-                Messaggi ricevuti
-                {{-- <i class="fas fa-arrow-circle-down"></i> --}}
-              </span>
+              <span> Messaggi ricevuti </span>
             </div>
           </div>
          @if ($messages)

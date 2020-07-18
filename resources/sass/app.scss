@@ -43,7 +43,19 @@ a:hover{
     }
   }
 }
+// messaggi d'errore nella login
+.invalid-feedback {
+  width: 250px;
+}
 
+// customizzazoine dropdown header
+.dropdown-menu{
+  border-radius: 13px;
+  border: 1px solid $primaryRed;
+  -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+  box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+}
 ///////////////////////////////////////////////////////////////////
 //////////////////////////    HEADER  /////////////////////////////
 ///////////////////////////////////////////////////////////////////
@@ -66,15 +78,22 @@ header {
     transform: scale(1.013);
   }
   .jumboSearch{
-    min-height: 100vh;
     padding: 8rem 0;
+    min-height: 80vh;
     .jumboText{
       h1 {
-        font-size: 65px;
         font-weight: 700;
+        font-size: 72px;
+        background: -webkit-linear-gradient( rgb(146, 23, 77), rgb(228, 29, 92));
+        // background: -webkit-linear-gradient(to right, rgb(146, 23, 77) 9.38%, rgb(228, 29, 92) 88.54%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
       }
-      p{
-        font-size: 16px;
+    }
+    .jumboImages{
+      .mySlides{
+        width: 90%;
+        height: auto;
       }
     }
   }
@@ -84,7 +103,10 @@ header {
       width: 350px;
       border: none;
       background: white;
-      border: 5px solid $primaryRed;
+      border: 4px solid $primaryRed;
+      -webkit-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+      -moz-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+      box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3);
       height: 50px;
       border-radius: 50px;
       padding: 0 20px;
@@ -96,12 +118,37 @@ header {
       width: 75px;
       height: 50px;
       background-color: $primaryRed;
+      -webkit-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+      -moz-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+      box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3);
       color: white;
       border: none;
       border-radius: 50px;
       margin-left: 15px;
       outline: 0;
     }
+    .buttonWelcome:hover{
+      transform: scale(1.03);
+    }
+  }
+  .arrow {
+    height: 130px;
+    div {
+      text-align: center;
+      height: 60px;
+      width: 100%;
+      p {
+
+        font-size: 60px;
+        color: rgba(158, 158, 158, 0.35);
+        animation: example 2s infinite;
+      }
+    }
+  }
+  @keyframes example {
+    0%   {padding-top: 0px;}
+    50%  {padding-top: 12px;}
+    100% {padding-top: 0px;}
   }
   .apartaments {
     margin-bottom: 20px;
@@ -591,6 +638,9 @@ header {
         background-position: center;
         background-size: cover;
         border-radius: 20px;
+        -webkit-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+        box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3);
       }
     }
     .apartmentlInfo{
@@ -673,7 +723,6 @@ header {
         border: 3px solid $primaryRed;
       }
       button[type=submit]{
-
         width: 155px;
         height: 30px;
         background: $primaryRed;
@@ -682,6 +731,9 @@ header {
         color: white;
         font-weight: 700;
         outline: 0;
+        -webkit-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+        -moz-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+        box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3);
       }
       .funzioni {
         height: 60%;
@@ -689,6 +741,7 @@ header {
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
+        flex-wrap: wrap;
         a{
           display: flex;
           align-items: center;
@@ -698,20 +751,24 @@ header {
           background: $primaryRed;
           border: none;
           border-radius: 30px;
-          margin-left: 15px;
           margin-bottom: 0;
           color: white;
           font-weight: 700;
           outline: 0;
+          -webkit-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+          -moz-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
+          box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3);
         }
       }
     }
     #map {
       height: 700px;  /* The height is 400 pixels */
       // width: 400px;  /* The width is the width of the web page */
-      border-top-right-radius: 20px;
-      border-bottom-right-radius: 20px;
+      border-radius: 20px;
       padding: 0;
+      -webkit-box-shadow: -7px 0px 7px -8px rgba(0, 0, 0, 0.3);
+      -moz-box-shadow: -7px 0px 7px -8px rgba(0, 0, 0, 0.3);
+      box-shadow:-7px 0px 7px -8px rgba(0, 0, 0, 0.3);
       p {
         text-align: center;
         font-weight: bold;
@@ -1137,16 +1194,17 @@ header {
   }
   .Silver{
     background: radial-gradient( #E8ECEF, #D8DEE4, #B8D1E1);
-    box-shadow: inset 0px 1px 7px -2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3), inset 0 -3px 4px -1px rgba(0,0,0,0.2), 0 -10px 15px -1px rgba(255,255,255,0.6),  inset 0 20px 30px 0 rgba(255,255,255,0.2);
     // #D70466
   }
   .Gold{
     background: radial-gradient( #FFFDB5 , #FFE881 , #FFCF66 );
-    box-shadow: inset 0px 1px 7px -2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3), inset 0 -3px 4px -1px rgba(0,0,0,0.2), 0 -10px 15px -1px rgba(255,255,255,0.6),  inset 0 20px 30px 0 rgba(255,255,255,0.2);
   }
   .Platinum{
     background: radial-gradient( #F4FBFC , #DDF3F5 , #C3EBEF );
-    box-shadow: inset 0px 1px 7px -2px rgba(0, 0, 0, 0.3);
+    // box-shadow: inset 0px 1px 7px -2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3), inset 0 -3px 4px -1px rgba(0,0,0,0.2), 0 -10px 15px -1px rgba(255,255,255,0.6),  inset 0 20px 30px 0 rgba(255,255,255,0.2);
   }
 }
 
@@ -1174,7 +1232,8 @@ header {
       #viewsStatsLine,
       #messagesStatsBar,
       #messagesStatsLine{
-        margin: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
       }
     }
 
@@ -1191,6 +1250,15 @@ header {
   -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
   box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
   border-radius: 20px;
+  .info{
+    border-right: 1px solid rgb(228, 228, 228);
+  }
+  .title{
+    color: $primaryRed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   ul {
     li{
       margin-bottom: 10px;
@@ -1209,7 +1277,7 @@ header {
     -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
     box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
     height: 30px;
-    width: 350px;
+    width: 315px;
     border-radius: 20px;
     padding: 15px 20px;
     color: #3F3F3F;
@@ -1420,11 +1488,28 @@ footer {
   ul {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    // justify-content: flex-start;
+    // align-items: center;
+    text-align: center;
     margin-top: 2rem;
     margin-bottom: 2rem;
-  }
+    li {
+        text-align: left;
+        margin-left: 28%;
+        a {
+          color: white;
+          img {
+            width: 35%;
+            height: auto;
+            margin-left: 29px;
+          }
+        }
+      }
+      li:first-child{
+        text-align: center;
+        margin-left: 0;
+      }
+    }
   .social{
     display: flex;
     justify-content: space-between;
@@ -1449,6 +1534,8 @@ footer {
   .content{
     .jumboSearch{
       padding: 4rem 0;
+      min-height: 66vh;
+      text-align: center;
       .jumboText{
         h1 {
           font-size: 42px;
@@ -1461,8 +1548,19 @@ footer {
             width: 75px;
             height: 50px;
             border-radius: 30px;
+            margin-left: 0px;
             outline: 0;
           }
+        }
+      }
+      .jumboImages{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5vh;
+        .mySlides{
+          width: 50%;
+          height: auto;
         }
       }
     }
@@ -1592,9 +1690,9 @@ footer {
     }
     #map {
       height: 350px;
-      border-top-right-radius: 0px;
-      border-bottom-right-radius: 20px;
-      border-bottom-left-radius: 20px;
+      -webkit-box-shadow: 0px -7px 14px -10px rgba(0, 0, 0, 0.3);
+      -moz-box-shadow: 0px -7px 14px -10px rgba(0, 0, 0, 0.3);
+      box-shadow:0px -7px 14px -10px rgba(0, 0, 0, 0.3);
      }
    }
   }
@@ -1655,6 +1753,12 @@ footer {
       border-right: none;
     }
   }
+  ////////////////////////   edit-Create  ////////////////////////////
+  .edit-Create{
+  .info{
+      border-right: 0;
+    }
+  }
 }
 
 
@@ -1663,6 +1767,7 @@ footer {
   .content{
     .jumboSearch{
       padding: 4rem 0;
+      min-height: 72vh;
       .jumboText{
         h1 {
           font-size: 42px;
@@ -1672,11 +1777,22 @@ footer {
 
           .buttonWelcome{
             margin-top: 10px;
+            margin-left: 0px;
             width: 75px;
             height: 50px;
             border-radius: 30px;
             outline: 0;
           }
+        }
+      }
+      .jumboImages{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5vh;
+        .mySlides{
+          width: 50%;
+          height: auto;
         }
       }
     }
@@ -1775,9 +1891,9 @@ footer {
     }
     #map {
       height: 350px;
-      border-top-right-radius: 0px;
-      border-bottom-right-radius: 20px;
-      border-bottom-left-radius: 20px;
+      -webkit-box-shadow: 0px -7px 14px -10px rgba(0, 0, 0, 0.3);
+      -moz-box-shadow: 0px -7px 14px -10px rgba(0, 0, 0, 0.3);
+      box-shadow:0px -7px 14px -10px rgba(0, 0, 0, 0.3);
      }
    }
   }
@@ -1793,11 +1909,32 @@ footer {
       border-right: none;
     }
   }
+  ////////////////////////   edit-Create  ////////////////////////////
+  .edit-Create{
+  .info{
+      border-right: 0;
+    }
+  }
 
 }
 
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 @media all and (min-width: 768px) and (max-width: 991px) {
+  .content{
+    .jumboSearch{
+      // padding-bottom: 1rem;
+      .jumboImages{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5vh;
+        .mySlides{
+          width: 50%;
+          height: auto;
+        }
+      }
+    }
+  }
   .createApartment{
     .legenda:hover .nascondino{
       display: block;
@@ -1877,11 +2014,17 @@ footer {
     }
     #map {
       height: 350px;
-      border-top-right-radius: 0px;
-      border-bottom-right-radius: 20px;
-      border-bottom-left-radius: 20px;
+      -webkit-box-shadow: 0px -7px 14px -10px rgba(0, 0, 0, 0.3);
+      -moz-box-shadow: 0px -7px 14px -10px rgba(0, 0, 0, 0.3);
+      box-shadow:0px -7px 14px -10px rgba(0, 0, 0, 0.3);
      }
    }
+  }
+  ////////////////////////   edit-Create  ////////////////////////////
+  .edit-Create{
+  .info{
+      border-right: 0;
+    }
   }
 }
 
