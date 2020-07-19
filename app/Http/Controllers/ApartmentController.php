@@ -12,16 +12,26 @@ use Carbon\Carbon;
 use Treffynnon\Navigator as N;
 class ApartmentController extends Controller
 {
+  // ----------------------------------------------------------------
+  // -- PAGINA INIZIALE CHE MOSTRA SOLO APPARTAMENTI SPONSORIZZATI --
+  // ----------------------------------------------------------------
     public function index(){
       $apartments = Apartment::all() -> where('is_active', 1) -> where('sponsor_expire_time', '>=', time());
       $services = Service::all();
       return view('welcome', compact("apartments", "services"));
     }
+
+    // ----------------------------------------------------------------
+    // -------- PAGINA CHE MOSTRA L'APPARTAMENTO SELEZIONATO ----------
+    // ----------------------------------------------------------------
+
+    // -> GESTISCE LE VISUALIZZAZIONI: SE LO STESSO IP HA VISTO LA PAGINA ENTRO 2 ORE,
+    //    CONTEGGIA UNA SOLA VISUALIZZAZIONE
     public function showApartment($id){
       $apartment = Apartment::findOrFail($id);
-      // prendo tutte le view
       $allView = View::all();
 
+      // ------------ GESTIONE VISUALIZZAZIONI ------------
       // mi seleziono l'ultima view salvata appartenente all'ip dell'utente che clicca per un dato appartamento
       $lastViewIP = $allView -> where('ip', \Request::getClientIp()) -> where('apartment_id', $id) -> last() ;
 
@@ -40,17 +50,24 @@ class ApartmentController extends Controller
         $apartmentViews->apartment_id = $apartment -> id;
         $apartmentViews->url = \Request::url();
         $apartmentViews->session_id = \Request::getSession()->getId();
-        $apartmentViews->user_id = (\Auth::check())?\Auth::id():null; //this check will either put the user id or null, no need to use \Auth()->user()->id as we have an inbuild function to get auth id
+        $apartmentViews->user_id = (\Auth::check())?\Auth::id():null;
         $apartmentViews->ip = \Request::getClientIp();
         $apartmentViews->agent = \Request::header('User-Agent');
-        $apartmentViews->save();//please note to save it at lease, very important
+        $apartmentViews->save();
       }
+
+      // ------------ SPONSOR ------------
+      // controlla se l'appartamento ha uno sponsor attivo
       $sponsorAttivo = 0;
        if ($apartment['sponsor_expire_time'] >= time()) {
          $sponsorAttivo = 1;
        }
       return view('showApartment', compact("apartment", "sponsorAttivo"));
     }
+
+    // ----------------------------------------------------------------
+    // ---------------- SALVATAGGIO IN DB DEI MESSAGGI ----------------
+    // ----------------------------------------------------------------
     public function storeMessage(Request $request, $id){
       $validateData = $request -> validate([
         'email' => 'required | email',
@@ -74,12 +91,15 @@ class ApartmentController extends Controller
                           -> withSuccess("Messaggio inviato correttamente");
       }else{
         return redirect() -> route("showApartment", $id)
-                          -> withSuccess("Messaggio inviato correttamente");
+                          -> withErrors("Messaggio precedente inviato correttamenteo. Per inviare altri messaggi attendere qualche secondo.");
       }
     }
 
+
+    // ----------------------------------------------------------------
+    // ---------------- RICERCA APPARTAMENTO  -------------------------
+    // ----------------------------------------------------------------
     public function searchApartments(Request $request){
-      // preparazione variabili
       $apartments = Apartment::all() -> where('is_active', 1)  -> where('beds_n', ">=", $request['beds_n'])-> where('rooms_n', ">=", $request['rooms_n']);
       $services = Service::all();
       $query = $request['address'];
@@ -91,44 +111,39 @@ class ApartmentController extends Controller
       $numberOfRooms = $request['rooms_n'];
       $selectedApartments = $apartments;
 
-      ///////////////////////////////////////////////////////////////////////////
-      // GESTIONE SELEZIONE APPARTAMENTI IN BASE AI SERVIZI SCELTI DALL'UTENTE //
-      ///////////////////////////////////////////////////////////////////////////
-
-      // funzione che controlla che tutti i valori fi arrayA siano dentro dentro arrayB: https://stackoverflow.com/questions/7542694/in-array-multiple-values
+      // GESTIONE SELEZIONE APPARTAMENTI IN BASE AI SERVIZI SCELTI DALL'UTENTE
+      // funzione che controlla che tutti i valori di arrayA siano dentro dentro arrayB: https://stackoverflow.com/questions/7542694/in-array-multiple-values
       function in_array_all($arrayA, $arrayB) {
          return empty(array_diff($arrayA, $arrayB));
       }
 
-      // SE L'UTENTE HA DEI SERVIZI SELEZIONATI, SELEZIONIAMO SOLO GLI APPARTAMENTI CHE HANNO QUEI SERVIZI
+      // Se l'utente ha dei servizi selezionati, selezioniamo solo gli appartamenti che hanno quei servizi
       if ($selectedServices) {
-        // prepariam un array dove salvarsi gli appartamenti selezionati
+        // prepariamo un array dove salvarsi gli appartamenti selezionati
         $selectedApartments = [];
         // per ogni appartamenti nel DB
         foreach ($apartments as $apartment) {
-          // SALVIAMO IN UN ARRAY I SERVIZI DELL'APPARTAMENTO
+          // salviamo in un array i servizi dell'appartamento
           $apartmentServices = $apartment -> services;
+          // prepariamo array per salvare i servizi scelti dall'utente
           $arrayApartmentServices = [];
           foreach ($apartmentServices as $service) {
             $arrayApartmentServices[] = $service->name;
           }
-          // USANDO LA FUNZIONE DICHIARA PRIMA, CONTROLLIAMO CHE L'ARRAY CHE CONTIENE I SERVIZI SELEZIONATI DALL'UTENTE SIA COMPLETAMENTE CONTENUTO NELL'ARRAY DEI SERVIZI DELL'APPARTAMENTO, SE QUESTO E' VERO L'APPARTAMENTO VIENE SALVATO
+          // usando la funzione dichiara prima, controlliamo che l'array che contiene i servizi selezionati dall'utente sia completamente contenuto nell'array dei servizi dell'appartamento, se questo e' vero l'appartamento viene salvato
           if (in_array_all( $selectedServices, $arrayApartmentServices )){
             $selectedApartments[] = $apartment;
           }
         }
       }
 
-      /////////////////////////////////////////////////////////////////////////////
-      // GESTIONE SELEZIONE APPARTAMENTI IN BASE RAGGIO DI KM SCELTO DALL'UTENTE //
-      /////////////////////////////////////////////////////////////////////////////
-
+      // gestione selezione appartamenti in base raggio di km scelto dall'utente
       // se l'utente non sceglie nulla, allora il raggio è automaticamente 20km da frontend. Se sceglie 0 il raggio è 1km
       if($request['radius']){
           $radius = $request['radius'] * 1000;
-        } else {
+      } else {
           $radius = 20000;
-        }
+      }
 
       $selectedApartmentsBasedOnLocation = [];
       // FONTE LIBRERIA per il calcolo della distanza fra 2 punti sul globo https://github.com/treffynnon/Navigator
@@ -158,7 +173,5 @@ class ApartmentController extends Controller
         $selectedApartmentsFilteredByUser = $selectedApartmentsBasedOnLocation;
       }
       return view("searchApartments", compact("sponsoredApartment", 'selectedApartmentsFilteredByUser', "services","selectedServices", 'query', "numberOfBeds", "numberOfRooms" ));
-
     }
-
 }
