@@ -42,7 +42,7 @@
             <h2>Servizi</h2>
             <ul style="margin-left: 10px">
               @foreach ($services as $service)
-                <li><input type="checkbox" name="services[]" value="{{$service -> id}}" {{ (is_array(old('services')) and in_array($service -> id, old('services'))) ? ' checked' : '' }}>{{$service -> name}}</li>
+                <li><input type="checkbox" name="services[]" value="{{$service -> id}}" {{ (is_array(old('services')) and in_array($service -> id, old('services'))) ? ' checked' : '' }}> {{$service -> name}}</li>
               @endforeach
             </ul>
           </div>
@@ -52,7 +52,7 @@
             <option value="1">Si</option>
             <option value="0">No</option>
           </select>
-          
+
           <br>
           <button id="bottoneCreate" type="submit" name="submit" disabled >Crea Appartamento</button>
         </div>

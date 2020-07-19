@@ -15,7 +15,6 @@
               @endforeach
             </div>
             <div id='dropin-container'></div>
-            {{-- <button id='submit-button' disabled>Request payment method</button> --}}
             <button id='submit-button' disabled>Esegui Pagamento</button>
         <input type="text" name="apartmentId" value="{{$apartment -> id }}" disabled style="display: none">
       </div>
@@ -42,9 +41,11 @@
                   // debug
                   // console.log(response.transaction.amount);
                   // alert('Payment successfull');
-                  $('.success_or_fail').append("<div class='alert alert-success' role='alert'><div class='container'><p>SUCCESSO</p></div></div>");
+                  $('.success_or_fail').append("<div class='alert alert-success' role='alert'><div class='container'><p>Appartamento Sponsorizzato con Successo</p></div></div>");
                 } else {
+                  //debug
                   // alert('Payment failed');
+                  $('.alert-warning').remove();
                   $('.success_or_fail').append('<div class="alert alert-warning" role="alert"><div class="container"><p>Si è verificato un errore, il pagamento non è andato a buon fine</p></div></div>');
                 }
               }, 'json');

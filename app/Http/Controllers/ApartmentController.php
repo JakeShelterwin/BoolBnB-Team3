@@ -91,7 +91,7 @@ class ApartmentController extends Controller
                           -> withSuccess("Messaggio inviato correttamente");
       }else{
         return redirect() -> route("showApartment", $id)
-                          -> withErrors("Messaggio precedente inviato correttamenteo. Per inviare altri messaggi attendere qualche secondo.");
+                          -> withErrors("Messaggio precedente inviato correttamente. Per inviare altri messaggi attendere qualche secondo.");
       }
     }
 
