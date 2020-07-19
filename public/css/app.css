@@ -10928,68 +10928,6 @@ a.text-dark:focus {
   }
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  list-style-type: none;
-  font-family: "Montserrat", sans-serif;
-}
-
-body {
-  background-color: #e9ecef;
-  color: #1b3c59;
-}
-
-.coordinate {
-  display: none;
-}
-
-a:hover {
-  text-decoration: none;
-}
-
-::-webkit-scrollbar {
-  width: 0px;
-  /* Remove scrollbar space */
-  background: transparent;
-  /* Optional: just make scrollbar invisible */
-}
-
-/* Optional: show position indicator in red */
-
-::-webkit-scrollbar-thumb {
-  background: #FF5A5F;
-}
-
-.alert {
-  box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
-}
-
-.alert .container p {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.invalid-feedback {
-  width: 250px;
-}
-
-.dropdown-menu {
-  border-radius: 13px;
-  border: 1px solid #FF5A5F;
-  box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
-}
-
-header .navbar {
-  background-color: #FF5A5F;
-}
-
-header .navbar .logo img {
-  height: auto;
-  width: 160px;
-}
-
 .content .card:hover {
   transform: scale(1.013);
 }
@@ -11181,6 +11119,97 @@ header .navbar .logo img {
 .content .apartaments .apartmentCard .card .apartment .funzioni span i {
   font-size: 0.8rem;
 }
+
+@media all and (max-width: 576px) {
+  .content .jumboSearch {
+    padding: 4rem 0;
+    min-height: 66vh;
+    text-align: center;
+  }
+
+  .content .jumboSearch .jumboText h1 {
+    font-size: 42px;
+  }
+
+  .content .jumboSearch .jumboText .info {
+    text-align: center;
+  }
+
+  .content .jumboSearch .jumboText .info .buttonWelcome {
+    margin-top: 10px;
+    width: 75px;
+    height: 50px;
+    border-radius: 30px;
+    margin-left: 0px;
+    outline: 0;
+  }
+
+  .content .jumboSearch .jumboImages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5vh;
+  }
+
+  .content .jumboSearch .jumboImages .mySlides {
+    width: 50%;
+    height: auto;
+  }
+}
+
+@media all and (min-width: 576px) and (max-width: 768px) {
+  .content .jumboSearch {
+    padding: 4rem 0;
+    min-height: 72vh;
+  }
+
+  .content .jumboSearch .jumboText h1 {
+    font-size: 42px;
+  }
+
+  .content .jumboSearch .jumboText .info {
+    text-align: center;
+  }
+
+  .content .jumboSearch .jumboText .info .buttonWelcome {
+    margin-top: 10px;
+    margin-left: 0px;
+    width: 75px;
+    height: 50px;
+    border-radius: 30px;
+    outline: 0;
+  }
+
+  .content .jumboSearch .jumboImages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5vh;
+  }
+
+  .content .jumboSearch .jumboImages .mySlides {
+    width: 50%;
+    height: auto;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+
+@media all and (min-width: 768px) and (max-width: 991px) {
+  .content .jumboSearch .jumboImages {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5vh;
+  }
+
+  .content .jumboSearch .jumboImages .mySlides {
+    width: 50%;
+    height: auto;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
 
 .contentSearch .card:hover {
   transform: scale(1.007);
@@ -11552,6 +11581,39 @@ header .navbar .logo img {
   background: #FF7478;
 }
 
+@media all and (max-width: 576px) {
+  .contentSearch .info .apartments .card .sponsoredApartment .sponsoredRibbon {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    background-color: #1b3c59;
+    border-radius: 14px;
+    padding: 5px;
+    padding-bottom: 1px;
+    padding-top: 0;
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  .contentSearch .info .apartments .card .sponsoredApartment .sponsoredRibbon i {
+    font-size: 20px;
+    padding: 5px;
+    padding-right: 0;
+  }
+
+  .contentSearch .info .apartments .card .sponsoredApartment .sponsoredRibbon span {
+    margin-bottom: 0;
+    padding: 5px;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+
+/* Large devices (desktops, 992px and up) */
+
 .apartment .row {
   padding-right: 0px;
   padding-left: 0px;
@@ -11600,7 +11662,6 @@ header .navbar .logo img {
 
 .apartment .containApartment .apartmentlInfo {
   height: 350px;
-  /* The height is 400 pixels */
   border-bottom-left-radius: 20px;
 }
 
@@ -11726,7 +11787,6 @@ header .navbar .logo img {
 
 .apartment .containApartment #map {
   height: 700px;
-  /* The height is 400 pixels */
   border-radius: 20px;
   padding: 0;
   box-shadow: -7px 0px 7px -8px rgba(0, 0, 0, 0.3);
@@ -11736,6 +11796,209 @@ header .navbar .logo img {
   text-align: center;
   font-weight: bold;
   margin-bottom: 0px;
+}
+
+@media all and (max-width: 576px) {
+  .apartment .containApartment {
+    box-shadow: 0px 5px 29px -8px rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+  }
+
+  .apartment .containApartment .photo {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  .apartment .containApartment .apartmentlInfo {
+    border-top-right-radius: 0px;
+    height: 380px;
+  }
+
+  .apartment .containApartment .apartmentlInfo .services {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 0;
+    flex-wrap: wrap;
+  }
+
+  .apartment .containApartment .apartmentlInfo .services li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0px 11px;
+  }
+
+  .apartment .containApartment .contact {
+    border-bottom: none;
+    height: 200px;
+  }
+
+  .apartment .containApartment .contact input[name=email] {
+    height: 30px;
+    width: 250px;
+    border-radius: 10px;
+    padding: 15px 15px;
+    margin-top: 0px;
+  }
+
+  .apartment .containApartment .contact textarea[name=message] {
+    height: 45px;
+    width: 250px;
+    padding: 3px 15px;
+  }
+
+  .apartment .containApartment .contact .funzioni {
+    flex-direction: row;
+  }
+
+  .apartment .containApartment #map {
+    height: 350px;
+    box-shadow: 0px -7px 14px -10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@media all and (min-width: 576px) and (max-width: 768px) {
+  .apartment .containApartment {
+    box-shadow: 0px 5px 29px -8px rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+  }
+
+  .apartment .containApartment .photo {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  .apartment .containApartment .apartmentlInfo {
+    border-top-right-radius: 0px;
+    height: 380px;
+  }
+
+  .apartment .containApartment .apartmentlInfo .services {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 0;
+    flex-wrap: wrap;
+  }
+
+  .apartment .containApartment .apartmentlInfo .services li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0px 11px;
+  }
+
+  .apartment .containApartment .contact {
+    border-bottom: none;
+    height: 200px;
+  }
+
+  .apartment .containApartment .contact input[name=email] {
+    height: 30px;
+    width: 250px;
+    border-radius: 10px;
+    padding: 15px 15px;
+    margin-top: 0px;
+  }
+
+  .apartment .containApartment .contact textarea[name=message] {
+    height: 45px;
+    width: 250px;
+    padding: 3px 15px;
+  }
+
+  .apartment .containApartment .contact .funzioni {
+    flex-direction: row;
+  }
+
+  .apartment .containApartment #map {
+    height: 350px;
+    box-shadow: 0px -7px 14px -10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+
+@media all and (min-width: 768px) and (max-width: 991px) {
+  .apartment .containApartment {
+    box-shadow: 0px 5px 29px -8px rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+  }
+
+  .apartment .containApartment .photo {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  .apartment .containApartment .apartmentlInfo {
+    border-top-right-radius: 0px;
+  }
+
+  .apartment .containApartment .apartmentlInfo .features,
+  .apartment .containApartment .apartmentlInfo .services {
+    padding-bottom: 0px;
+  }
+
+  .apartment .containApartment .contact {
+    border-bottom: none;
+    height: 240px;
+  }
+
+  .apartment .containApartment .contact input[name=email] {
+    height: 30px;
+    width: 250px;
+    border-radius: 10px;
+    padding: 15px 15px;
+    margin-top: 0px;
+  }
+
+  .apartment .containApartment .contact textarea[name=message] {
+    height: 65px;
+    width: 500px;
+    padding: 3px 15px;
+  }
+
+  .apartment .containApartment .contact .funzioni {
+    flex-direction: row;
+  }
+
+  .apartment .containApartment #map {
+    height: 350px;
+    box-shadow: 0px -7px 14px -10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+
+@media all and (min-width: 992px) and (max-width: 1199px) {
+  .apartment .containApartment .contact {
+    border-bottom: none;
+  }
+
+  .apartment .containApartment .contact input[name=email] {
+    margin-top: 3px;
+    height: 30px;
+    width: 200px;
+    border-radius: 10px;
+    padding: 15px 15px;
+    margin-top: 0px;
+  }
+
+  .apartment .containApartment .contact textarea[name=message] {
+    width: 200px;
+    padding: 3px 15px;
+  }
+
+  .apartment .containApartment .contact .funzioni {
+    flex-direction: column;
+  }
 }
 
 .containApartments .card:hover,
@@ -12062,6 +12325,175 @@ header .navbar .logo img {
   border-radius: 20px;
 }
 
+@media all and (max-width: 576px) {
+  .createApartment {
+    height: 77px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .createApartment .bulge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+    height: 30px;
+    margin-bottom: 10px;
+  }
+
+  .createApartment .bulge a {
+    color: #FF5A5F;
+    text-shadow: 1px 1px white;
+    font-weight: 600;
+  }
+
+  .createApartment .legenda:hover .nascondino {
+    background-color: white;
+    display: block;
+    border-radius: 20px;
+  }
+
+  .createApartment .legenda:hover .nascondino ul {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 0;
+    width: 100%;
+    padding: 4px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    flex-direction: row;
+  }
+
+  .createApartment .legenda:hover .nascondino ul li {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .apartmentsSponsored .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 8px;
+    margin: 10px;
+    width: calc(100% - 20px);
+  }
+
+  .normalApartments .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 8px;
+    margin: 10px;
+    width: calc(100% - 20px);
+  }
+}
+
+@media all and (min-width: 576px) and (max-width: 768px) {
+  .createApartment .legenda:hover .nascondino {
+    display: block;
+    border-radius: 20px;
+  }
+
+  .createApartment .legenda:hover .nascondino ul {
+    position: absolute;
+    bottom: -30px;
+    right: 56px;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  .apartmentsSponsored .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 8px;
+    margin: 10px;
+    width: calc(100% - 20px);
+  }
+
+  .normalApartments .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 8px;
+    margin: 10px;
+    width: calc(100% - 20px);
+  }
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+
+@media all and (min-width: 768px) and (max-width: 991px) {
+  .createApartment .legenda:hover .nascondino {
+    display: block;
+    border-radius: 20px;
+  }
+
+  .createApartment .legenda:hover .nascondino ul {
+    position: absolute;
+    bottom: -30px;
+    right: 45px;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  .apartmentsSponsored .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 8px;
+    margin: 10px;
+    width: calc(100% / 2 - 20px);
+  }
+
+  .normalApartments .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    padding: 8px;
+    margin: 10px;
+    width: calc(100% / 2 - 20px);
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+
+@media all and (min-width: 992px) and (max-width: 1199px) {
+  .createApartment .legenda:hover .nascondino {
+    display: block;
+    border-radius: 20px;
+  }
+
+  .createApartment .legenda:hover .nascondino ul {
+    position: absolute;
+    bottom: -30px;
+    right: 79px;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+  }
+}
+
 .sponsors {
   min-height: 75vh;
   box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
@@ -12143,6 +12575,17 @@ header .navbar .logo img {
   box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3), inset 0 -3px 4px -1px rgba(0, 0, 0, 0.2), 0 -10px 15px -1px rgba(255, 255, 255, 0.6), inset 0 20px 30px 0 rgba(255, 255, 255, 0.2);
 }
 
+@media all and (max-width: 576px) {
+  .sponsors .card {
+    margin-bottom: 20px;
+    width: calc(100% - 40px);
+  }
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+
+/* Large devices (desktops, 992px and up) */
+
 .allStats {
   box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
   border-radius: 20px;
@@ -12172,6 +12615,10 @@ header .navbar .logo img {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+
+/* Large devices (desktops, 992px and up) */
 
 .edit-Create {
   margin-top: 20px;
@@ -12265,6 +12712,28 @@ header .navbar .logo img {
   background-color: lightgray;
 }
 
+@media all and (max-width: 576px) {
+  .edit-Create .info {
+    border-right: 0;
+  }
+}
+
+@media all and (min-width: 576px) and (max-width: 768px) {
+  .edit-Create .info {
+    border-right: 0;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+
+@media all and (min-width: 768px) and (max-width: 991px) {
+  .edit-Create .info {
+    border-right: 0;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+
 .login-box {
   background: white;
   min-height: 450px;
@@ -12296,7 +12765,6 @@ header .navbar .logo img {
   width: 250px;
   border: none;
   background: #eeeeee;
-  /* border: 5px solid $primaryRed; */
   height: 45px;
   border-radius: 50px;
   padding: 0 10px;
@@ -12363,7 +12831,6 @@ header .navbar .logo img {
   width: 250px;
   border: none;
   background: #eeeeee;
-  /* border: 5px solid $primaryRed; */
   height: 45px;
   border-radius: 50px;
   padding: 0 10px;
@@ -12408,6 +12875,92 @@ header .navbar .logo img {
   border-bottom-left-radius: 20px;
 }
 
+@media all and (max-width: 576px) {
+  .login-box .title {
+    border-right: none;
+  }
+
+  .register-box .title {
+    border-right: none;
+  }
+}
+
+@media all and (min-width: 576px) and (max-width: 768px) {
+  .login-box .title {
+    border-right: none;
+  }
+
+  .register-box .title {
+    border-right: none;
+  }
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+
+/* Large devices (desktops, 992px and up) */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  background-color: #e9ecef;
+  color: #1b3c59;
+}
+
+.coordinate {
+  display: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
+}
+
+/* Optional: show position indicator in red */
+
+::-webkit-scrollbar-thumb {
+  background: #FF5A5F;
+}
+
+.alert {
+  box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+}
+
+.alert .container p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.invalid-feedback {
+  width: 250px;
+}
+
+.dropdown-menu {
+  border-radius: 13px;
+  border: 1px solid #FF5A5F;
+  box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+}
+
+header .navbar {
+  background-color: #FF5A5F;
+}
+
+header .navbar .logo img {
+  height: auto;
+  width: 160px;
+}
+
 footer {
   color: white;
   background-color: #FF5A5F;
@@ -12440,6 +12993,11 @@ footer ul li a img {
   margin-left: 29px;
 }
 
+footer ul li a:hover {
+  color: white;
+  font-weight: bold;
+}
+
 footer ul li:first-child {
   text-align: center;
   margin-left: 0;
@@ -12460,505 +13018,7 @@ footer .social span i {
   margin-left: 0.5rem;
 }
 
-@media all and (max-width: 576px) {
-  .content .jumboSearch {
-    padding: 4rem 0;
-    min-height: 66vh;
-    text-align: center;
-  }
-
-  .content .jumboSearch .jumboText h1 {
-    font-size: 42px;
-  }
-
-  .content .jumboSearch .jumboText .info {
-    text-align: center;
-  }
-
-  .content .jumboSearch .jumboText .info .buttonWelcome {
-    margin-top: 10px;
-    width: 75px;
-    height: 50px;
-    border-radius: 30px;
-    margin-left: 0px;
-    outline: 0;
-  }
-
-  .content .jumboSearch .jumboImages {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5vh;
-  }
-
-  .content .jumboSearch .jumboImages .mySlides {
-    width: 50%;
-    height: auto;
-  }
-
-  .createApartment {
-    height: 77px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-  }
-
-  .createApartment .bulge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
-    height: 30px;
-    margin-bottom: 10px;
-  }
-
-  .createApartment .bulge a {
-    color: #FF5A5F;
-    text-shadow: 1px 1px white;
-    font-weight: 600;
-  }
-
-  .createApartment .legenda:hover .nascondino {
-    background-color: white;
-    display: block;
-    border-radius: 20px;
-  }
-
-  .createApartment .legenda:hover .nascondino ul {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-bottom: 0;
-    width: 100%;
-    padding: 4px;
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    flex-direction: row;
-  }
-
-  .createApartment .legenda:hover .nascondino ul li {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-
-  .apartmentsSponsored .card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    padding: 8px;
-    margin: 10px;
-    width: calc(100% - 20px);
-  }
-
-  .normalApartments .card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    padding: 8px;
-    margin: 10px;
-    width: calc(100% - 20px);
-  }
-
-  .apartment .containApartment {
-    box-shadow: 0px 5px 29px -8px rgba(0, 0, 0, 0.4);
-    border-radius: 20px;
-  }
-
-  .apartment .containApartment .photo {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-  }
-
-  .apartment .containApartment .apartmentlInfo {
-    border-top-right-radius: 0px;
-    height: 380px;
-  }
-
-  .apartment .containApartment .apartmentlInfo .services {
-    width: 100%;
-    padding: 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 0;
-    flex-wrap: wrap;
-  }
-
-  .apartment .containApartment .apartmentlInfo .services li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 0px 11px;
-  }
-
-  .apartment .containApartment .contact {
-    border-bottom: none;
-    height: 200px;
-  }
-
-  .apartment .containApartment .contact input[name=email] {
-    height: 30px;
-    width: 250px;
-    border-radius: 10px;
-    padding: 15px 15px;
-    margin-top: 0px;
-  }
-
-  .apartment .containApartment .contact textarea[name=message] {
-    height: 45px;
-    width: 250px;
-    padding: 3px 15px;
-  }
-
-  .apartment .containApartment .contact .funzioni {
-    flex-direction: row;
-  }
-
-  .apartment .containApartment #map {
-    height: 350px;
-    box-shadow: 0px -7px 14px -10px rgba(0, 0, 0, 0.3);
-  }
-
-  .sponsors .card {
-    margin-bottom: 20px;
-    width: calc(100% - 40px);
-  }
-
-  .contentSearch .info .apartments .card .sponsoredApartment .sponsoredRibbon {
-    position: absolute;
-    top: 7px;
-    right: 7px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: red;
-    background-color: #1b3c59;
-    border-radius: 14px;
-    padding: 5px;
-    padding-bottom: 1px;
-    padding-top: 0;
-    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
-  }
-
-  .contentSearch .info .apartments .card .sponsoredApartment .sponsoredRibbon i {
-    font-size: 20px;
-    padding: 5px;
-    padding-right: 0;
-  }
-
-  .contentSearch .info .apartments .card .sponsoredApartment .sponsoredRibbon span {
-    margin-bottom: 0;
-    padding: 5px;
-  }
-
-  .login-box .title {
-    border-right: none;
-  }
-
-  .register-box .title {
-    border-right: none;
-  }
-
-  .edit-Create .info {
-    border-right: 0;
-  }
-}
-
-@media all and (min-width: 576px) and (max-width: 768px) {
-  .content .jumboSearch {
-    padding: 4rem 0;
-    min-height: 72vh;
-  }
-
-  .content .jumboSearch .jumboText h1 {
-    font-size: 42px;
-  }
-
-  .content .jumboSearch .jumboText .info {
-    text-align: center;
-  }
-
-  .content .jumboSearch .jumboText .info .buttonWelcome {
-    margin-top: 10px;
-    margin-left: 0px;
-    width: 75px;
-    height: 50px;
-    border-radius: 30px;
-    outline: 0;
-  }
-
-  .content .jumboSearch .jumboImages {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5vh;
-  }
-
-  .content .jumboSearch .jumboImages .mySlides {
-    width: 50%;
-    height: auto;
-  }
-
-  .createApartment .legenda:hover .nascondino {
-    display: block;
-    border-radius: 20px;
-  }
-
-  .createApartment .legenda:hover .nascondino ul {
-    position: absolute;
-    bottom: -30px;
-    right: 56px;
-    flex-direction: column;
-    background-color: white;
-    border-radius: 20px;
-    padding: 10px;
-    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
-  }
-
-  .apartmentsSponsored .card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    padding: 8px;
-    margin: 10px;
-    width: calc(100% - 20px);
-  }
-
-  .normalApartments .card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    padding: 8px;
-    margin: 10px;
-    width: calc(100% - 20px);
-  }
-
-  .apartment .containApartment {
-    box-shadow: 0px 5px 29px -8px rgba(0, 0, 0, 0.4);
-    border-radius: 20px;
-  }
-
-  .apartment .containApartment .photo {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-  }
-
-  .apartment .containApartment .apartmentlInfo {
-    border-top-right-radius: 0px;
-    height: 380px;
-  }
-
-  .apartment .containApartment .apartmentlInfo .services {
-    width: 100%;
-    padding: 0;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 0;
-    flex-wrap: wrap;
-  }
-
-  .apartment .containApartment .apartmentlInfo .services li {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 0px 11px;
-  }
-
-  .apartment .containApartment .contact {
-    border-bottom: none;
-    height: 200px;
-  }
-
-  .apartment .containApartment .contact input[name=email] {
-    height: 30px;
-    width: 250px;
-    border-radius: 10px;
-    padding: 15px 15px;
-    margin-top: 0px;
-  }
-
-  .apartment .containApartment .contact textarea[name=message] {
-    height: 45px;
-    width: 250px;
-    padding: 3px 15px;
-  }
-
-  .apartment .containApartment .contact .funzioni {
-    flex-direction: row;
-  }
-
-  .apartment .containApartment #map {
-    height: 350px;
-    box-shadow: 0px -7px 14px -10px rgba(0, 0, 0, 0.3);
-  }
-
-  .login-box .title {
-    border-right: none;
-  }
-
-  .register-box .title {
-    border-right: none;
-  }
-
-  .edit-Create .info {
-    border-right: 0;
-  }
-}
-
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
 
-@media all and (min-width: 768px) and (max-width: 991px) {
-  .content .jumboSearch .jumboImages {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 5vh;
-  }
-
-  .content .jumboSearch .jumboImages .mySlides {
-    width: 50%;
-    height: auto;
-  }
-
-  .createApartment .legenda:hover .nascondino {
-    display: block;
-    border-radius: 20px;
-  }
-
-  .createApartment .legenda:hover .nascondino ul {
-    position: absolute;
-    bottom: -30px;
-    right: 45px;
-    flex-direction: column;
-    background-color: white;
-    border-radius: 20px;
-    padding: 10px;
-    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
-  }
-
-  .apartmentsSponsored .card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    padding: 8px;
-    margin: 10px;
-    width: calc(100% / 2 - 20px);
-  }
-
-  .normalApartments .card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 20px;
-    padding: 8px;
-    margin: 10px;
-    width: calc(100% / 2 - 20px);
-  }
-
-  .apartment .containApartment {
-    box-shadow: 0px 5px 29px -8px rgba(0, 0, 0, 0.4);
-    border-radius: 20px;
-  }
-
-  .apartment .containApartment .photo {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-  }
-
-  .apartment .containApartment .apartmentlInfo {
-    border-top-right-radius: 0px;
-  }
-
-  .apartment .containApartment .apartmentlInfo .features,
-  .apartment .containApartment .apartmentlInfo .services {
-    padding-bottom: 0px;
-  }
-
-  .apartment .containApartment .contact {
-    border-bottom: none;
-    height: 240px;
-  }
-
-  .apartment .containApartment .contact input[name=email] {
-    height: 30px;
-    width: 250px;
-    border-radius: 10px;
-    padding: 15px 15px;
-    margin-top: 0px;
-  }
-
-  .apartment .containApartment .contact textarea[name=message] {
-    height: 65px;
-    width: 500px;
-    padding: 3px 15px;
-  }
-
-  .apartment .containApartment .contact .funzioni {
-    flex-direction: row;
-  }
-
-  .apartment .containApartment #map {
-    height: 350px;
-    box-shadow: 0px -7px 14px -10px rgba(0, 0, 0, 0.3);
-  }
-
-  .edit-Create .info {
-    border-right: 0;
-  }
-}
-
 /* Large devices (desktops, 992px and up) */
-
-@media all and (min-width: 992px) and (max-width: 1199px) {
-  .createApartment .legenda:hover .nascondino {
-    display: block;
-    border-radius: 20px;
-  }
-
-  .createApartment .legenda:hover .nascondino ul {
-    position: absolute;
-    bottom: -30px;
-    right: 79px;
-    flex-direction: column;
-    background-color: white;
-    border-radius: 20px;
-    padding: 10px;
-    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
-  }
-
-  .apartment .containApartment .contact {
-    border-bottom: none;
-  }
-
-  .apartment .containApartment .contact input[name=email] {
-    margin-top: 3px;
-    height: 30px;
-    width: 200px;
-    border-radius: 10px;
-    padding: 15px 15px;
-    margin-top: 0px;
-  }
-
-  .apartment .containApartment .contact textarea[name=message] {
-    height: 200px;
-    width: 200px;
-    padding: 3px 15px;
-  }
-
-  .apartment .containApartment .contact .funzioni {
-    flex-direction: column;
-  }
-}
 

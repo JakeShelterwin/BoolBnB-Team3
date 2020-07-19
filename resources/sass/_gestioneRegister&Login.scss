@@ -1,0 +1,179 @@
+///////////////////////////////////////////////////////////////////
+//////////////////////////    LOGIN  /////////////////////////////
+///////////////////////////////////////////////////////////////////
+.login-box{
+    background: white;
+    min-height: 450px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    text-align: center;
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+    form {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: column;
+    }
+    .title{
+      color: $primaryRed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-right: 1px solid rgb(228, 228, 228);
+    }
+    input[type="email"],
+    input[type="password"] {
+      width: 250px;
+      border: none;
+      background: rgb(238, 238, 238);
+      height: 45px;
+      border-radius: 50px;
+      padding: 0 10px;
+      color: #3F3F3F;
+      font-size: 15px;
+      text-align: center;
+    }
+    button {
+      width: 75px;
+      height: 45px;
+      background: $primaryRed;
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+    }
+    button:hover {
+      background: $primaryRed;
+      transform: scale(1.08);
+    }
+    a {
+      color: $primaryRed;
+    }
+    a:hover {
+      color: $primaryRed;
+      transform: scale(1.05);
+      text-decoration: none;
+    }
+}
+
+///////////////////////////////////////////////////////////////////
+//////////////////////////   REGISTER  ////////////////////////////
+///////////////////////////////////////////////////////////////////
+.register-box{
+    background: white;
+    min-height: 450px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    text-align: center;
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+    form {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: column;
+    }
+    .title{
+      color: $primaryRed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-right: 1px solid rgb(228, 228, 228);
+    }
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    input[type="text"] {
+      width: 250px;
+      border: none;
+      background: rgb(238, 238, 238);
+      height: 45px;
+      border-radius: 50px;
+      padding: 0 10px;
+      color: #6C757D;
+      font-size: 15px;
+      text-align: center;
+    }
+    input[type="date"]{
+      text-indent: 25px;
+    }
+    button {
+      height: 45px;
+      background: $primaryRed;
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+    }
+    button:hover {
+      background: $primaryRed;
+      transform: scale(1.08);
+    }
+    a {
+      color: $primaryRed;
+    }
+    a:hover {
+      color: $primaryRed;
+      transform: scale(1.05);
+      text-decoration: none;
+    }
+    .card-footer{
+      background-color: white;
+      -webkit-box-shadow: 0px 8px 11px -10px rgba(0, 0, 0, 0.3);
+      -moz-box-shadow: 0px 8px 11px -10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0px 8px 11px -10px rgba(0, 0, 0, 0.3);
+      border-top: 0px;
+      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+    }
+}
+
+
+
+///////////////////////////////////////////////////////////////////
+//////////////////////////  MEDIA QUERIES /////////////////////////
+///////////////////////////////////////////////////////////////////
+@media all and (max-width: 576px) {
+  // LOGIN - REGISTRAZIONE
+  .login-box{
+    .title{
+      border-right: none;
+    }
+  }
+  .register-box{
+    .title{
+      border-right: none;
+    }
+  }
+}
+
+
+@media all and (min-width: 576px) and (max-width: 768px) {
+  .login-box{
+    .title{
+      border-right: none;
+    }
+  }
+  .register-box{
+    .title{
+      border-right: none;
+    }
+  }
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media all and (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/* Large devices (desktops, 992px and up) */
+@media all and (min-width: 992px) and (max-width:1199px) {
+
+}

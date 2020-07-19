@@ -1,0 +1,54 @@
+///////////////////////////////////////////////////////////////////
+////////////////////////  STATISTICHE  ////////////////////////////
+///////////////////////////////////////////////////////////////////
+.allStats{
+  -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+  box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  #statistics{
+    text-align: center;
+    h1{
+      margin: 20px 0;
+    }
+    #charts{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      text-align: center;
+      #viewsStatsBar,
+      #viewsStatsLine,
+      #messagesStatsBar,
+      #messagesStatsLine{
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+    }
+
+  }
+}
+
+
+///////////////////////////////////////////////////////////////////
+//////////////////////////  MEDIA QUERIES /////////////////////////
+///////////////////////////////////////////////////////////////////
+@media all and (max-width: 576px) {
+
+}
+
+
+@media all and (min-width: 576px) and (max-width: 768px) {
+
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media all and (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/* Large devices (desktops, 992px and up) */
+@media all and (min-width: 992px) and (max-width:1199px) {
+
+}

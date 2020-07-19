@@ -1,0 +1,132 @@
+///////////////////////////////////////////////////////////////////
+////////////////////////   edit-Create  ////////////////////////////
+///////////////////////////////////////////////////////////////////
+.edit-Create{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 15px;
+  -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+  -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+  box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  .info{
+    border-right: 1px solid rgb(228, 228, 228);
+  }
+  .title{
+    color: $primaryRed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  ul {
+    li{
+      margin-bottom: 10px;
+      b {
+        margin-right: 5px;
+      }
+    }
+  }
+  input{
+    outline: none;
+  }
+  input[type="text"]{
+    background: white;
+    border: 2px solid #e4e4e4;
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+    height: 30px;
+    width: 315px;
+    border-radius: 20px;
+    padding: 15px 20px;
+    color: #3F3F3F;
+    font-size: 16px;
+  }
+  input[type="number"]{
+    background: white;
+    border: 2px solid #e4e4e4;
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+    height: 30px;
+    width: 85px;
+    border-radius: 20px;
+    padding: 15px 20px;
+    color: #3F3F3F;
+    font-size: 16px;
+  }
+  input[type="textarea"]{
+    background: white;
+    border: 2px solid #e4e4e4;
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+    height: 30px;
+    width: 85px;
+    border-radius: 20px;
+    padding: 15px 20px;
+    color: #3F3F3F;
+    font-size: 16px;
+  }
+  textarea{
+    resize: none;
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    border: 2px solid #e4e4e4;
+    padding: 3px 10px;
+    outline: none;
+  }
+  button {
+    width: 200px;
+    height: 35px;
+    background: #FF5A5F;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-weight: 700;
+    outline: 0;
+    -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+  }
+  button:disabled{
+    background-color: lightgray;
+  }
+}
+
+
+///////////////////////////////////////////////////////////////////
+//////////////////////////  MEDIA QUERIES /////////////////////////
+///////////////////////////////////////////////////////////////////
+@media all and (max-width: 576px) {
+  .edit-Create{
+  .info{
+      border-right: 0;
+    }
+  }
+}
+
+
+@media all and (min-width: 576px) and (max-width: 768px) {
+  .edit-Create{
+  .info{
+      border-right: 0;
+    }
+  }
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+@media all and (min-width: 768px) and (max-width: 991px) {
+  .edit-Create{
+  .info{
+      border-right: 0;
+    }
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media all and (min-width: 992px) and (max-width:1199px) {
+
+}
