@@ -36,6 +36,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+   // ----------------------------------------------------------------
+   // ---------------- DASHBOARD UTENTE REGISTRATO -------------------
+   // ----------------------------------------------------------------
     public function index()
     {
       $user_id = auth()->user()->id;
@@ -44,27 +48,37 @@ class HomeController extends Controller
       $user_apartments = $apartments -> where('sponsor_expire_time', '<', time());
       $apartmentSponsored = $apartments -> where('sponsor_expire_time', '>=', time());
 
+      // preparo array per conservare i messaggi per ogni appartamento dell'utente
       $users_messages_grouped_by_apartment = [];
       foreach ($apartments as $apartment) {
         $users_messages_grouped_by_apartment[] = $allMessages -> where('apartment_id', $apartment -> id);
       }
 
+      // preparo array dove inserire tutti i messaggi
       $messages = [];
       foreach ($users_messages_grouped_by_apartment as $apartment) {
         foreach ($apartment as $message) {
           $messages[$message["id"]] = $message;
         }
       }
+      // ordino al contrario i messaggi, così da mostrare in pagina in testa i più recenti
       krsort($messages);
       return view('home', compact('user_apartments', "apartmentSponsored", 'messages' ));
     }
 
+
+    // ----------------------------------------------------------------
+    // --------------------- CREA APPARTAMENTO  -----------------------
+    // ----------------------------------------------------------------
     public function createApartment()
     {
       $services = Service::all();
       return view('createApartment', compact('services'));
     }
 
+    // ----------------------------------------------------------------
+    // --------------- SALVA APPARTAMENTO CREATO ----------------------
+    // ----------------------------------------------------------------
     public function storeApartment(Request $request){
       $validateData = $request -> validate([
         'title' => 'required | string',
@@ -82,7 +96,6 @@ class HomeController extends Controller
       ]);
       $apartment = new Apartment;
       $apartment -> title = $validateData['title'];
-      // $apartment -> image = $validateData['image'];
       $apartment -> description = $validateData['description'];
       $apartment -> rooms_n = $validateData['rooms_n'];
       $apartment -> beds_n = $validateData['beds_n'];
@@ -94,21 +107,19 @@ class HomeController extends Controller
       $apartment -> is_active = $validateData['is_active'];
       $apartment -> user_id = auth()->user()->id;
 
-
-
-      // Check if a profile image has been uploaded
+      // Controlla se un'immagine è stata caricata
       if ($request->has('image')) {
-          // Get image file
+          // Ottieni il file dell'immagine
           $image = $request->file('image');
-          // Make a image name based on apartment title and current timestamp
+          // assegna al nome del file il titolo dell'appartamento + il timestamp
           $name = Str::slug($request->input('title'), '-').'_'.time();
-          // Define folder path
+          // Cartella salvataggio dell'immagine
           $folder = '/uploads/images/';
-          // Make a file path where image will be stored [ folder path + file name + file extension]
+          // file Path dove verrà salvata l'immagine
           $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
-          // Upload image
+          // funzione che carica l'immagine
           $this->uploadOne($image, $folder, 'public', $name);
-          // Set user profile image path in database to filePath
+          // assegna all'appartamento l'immagine caricata
           $apartment -> image = $filePath;
       }
 
@@ -118,6 +129,8 @@ class HomeController extends Controller
       $now = date( "Y-m-d H:i:s", strtotime( Carbon::now()));
       $lastApartmentCreatedTime = date( "Y-m-d H:i:s", strtotime( $lastApartment["created_at"]) + 30);
 
+      //se la data dell'ultimo appartamento creato (sommati 30 secondi) è superiore a "adesso"
+      // salva l'appartamento, altrimenti no.
       if($now >= $lastApartmentCreatedTime){
         $apartment -> save();
         $apartment -> services() -> sync($validateData['services']);
@@ -129,12 +142,18 @@ class HomeController extends Controller
       }
     }
 
+    // ----------------------------------------------------------------
+    // -------------- MODIFICA APPARTAMENTO CREATO --------------------
+    // ----------------------------------------------------------------
     public function editApartment($id){
       $apartment = Apartment::findOrFail($id);
       $services = Service::all();
       return view('editApartment', compact("apartment", "services"));
     }
 
+    // ----------------------------------------------------------------
+    // --------------- SALVA APPARTAMENTO MODIFICATO ------------------
+    // ----------------------------------------------------------------
     public function updateApartment(Request $request, $id){
       $validateData = $request -> validate([
         'title' => 'required | string',
@@ -166,22 +185,20 @@ class HomeController extends Controller
 
       // Check if a profile image has been uploaded
       if ($request->has('image')) {
-          // Get image file
-          $image = $request->file('image');
-          // Make a image name based on apartment title and current timestamp
-          $name = 'apartment'.Str::slug($apartment -> id, '-').'_'.time();
-          // Define folder path
-          $folder = '/uploads/images/';
-          // Make a file path where image will be stored [ folder path + file name + file extension]
-          $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
-
-          // PRIMA DI SALVARE L'APPARTAMENTO CANCELLO IN LOCALE LA VECCHIA IMMAGINE
-          File::delete($oldImage);
-
-          // Upload image
-          $this->uploadOne($image, $folder, 'public', $name);
-          // Set user profile image path in database to filePath
-          $apartment -> image = $filePath;
+        // Ottieni il file dell'immagine
+        $image = $request->file('image');
+        // assegna al nome del file il titolo dell'appartamento + il timestamp
+        $name = 'apartment'.Str::slug($apartment -> id, '-').'_'.time();
+        // Cartella salvataggio dell'immagine
+        $folder = '/uploads/images/';
+        // file Path dove verrà salvata l'immagine
+        $filePath = $folder . $name. '.' . $image->getClientOriginalExtension();
+        // prima di salvare l'appartamento cancello in locale la vecchia immagine
+        File::delete($oldImage);
+        // funzione che carica l'immagine
+        $this->uploadOne($image, $folder, 'public', $name);
+        // assegna all'appartamento l'immagine caricata
+        $apartment -> image = $filePath;
       }
       $apartment -> save();
       $apartment -> services() -> sync($validateData['services']);
@@ -191,6 +208,9 @@ class HomeController extends Controller
                             ." aggiornato correttamente");
     }
 
+    // ----------------------------------------------------------------
+    // ------------------ CANCELLA APPARTAMENTO -----------------------
+    // ----------------------------------------------------------------
     public function deleteApartment($id){
       $apartment = Apartment::findOrFail($id);
       $deleteImage = File::delete(public_path($apartment -> image));
@@ -198,16 +218,20 @@ class HomeController extends Controller
       return redirect() -> route("home")
                         -> withSuccess("Appartamento eliminato con successo!");
     }
+
+    // ----------------------------------------------------------------
+    // --------------- MOSTRA STATISTICHE APPARTAMENTO ----------------
+    // ----------------------------------------------------------------
     public function showApartmentStatistics($apartment_id)
     {
       //soluzione spiegata https://stackoverflow.com/questions/5667888/counting-the-occurrences-frequency-of-array-elements
       // soluzione https://jsfiddle.net/simevidas/bnACW/
       $apartment = Apartment::findOrFail($apartment_id);
-
-      $views = View::all() -> where('apartment_id', $apartment_id); //restituisce array[] con all'interno ogni singola view dell'appartamento
-      $messages = Message::all() -> where('apartment_id', $apartment_id); //restituisce array[] con all'interno ogni singolo messaggio per l'appartamento
-
-      // FRA TUTTI I MESSAGGI PRENDIAMO SOLO QUELLI DELL'ULTIMO ANNO PARTENDO DALLA DATA ODIERNA
+      //restituisce array[] con all'interno ogni singola view dell'appartamento
+      $views = View::all() -> where('apartment_id', $apartment_id);
+      //restituisce array[] con all'interno ogni singolo messaggio per l'appartamento
+      $messages = Message::all() -> where('apartment_id', $apartment_id);
+      // fra tutti i messaggi prendiamo solo quelli dell'ultimo anno partendo dalla data odierna
       $lessThan1yearOldMessages = [];
       foreach ($messages as $message) {
         if (strtotime($message -> created_at) >= time() - 31536000 ) {
@@ -215,10 +239,9 @@ class HomeController extends Controller
         }
       }
       $messages = $lessThan1yearOldMessages;
-      // dd($lessThan1yearOldMessages);
 
       // Gestione delle informazioni per le visualizzazioni
-      // FRA TUTTI LE VISUALIZZAIONI PRENDIAMO SOLO QUELLE DELL'ULTIMO ANNO PARTENDO DALLA DATA ODIERNA
+      // fra tutti le visualizzaioni prendiamo solo quelle dell'ultimo anno partendo dalla data odierna
       $viewsFiltered = [];
       foreach ($views as $view) {
         if (strtotime($view -> created_at) >= time() - 31536000 ) {
@@ -230,6 +253,8 @@ class HomeController extends Controller
       $prev = 0;
 
       sort($viewsFiltered);
+      // Questo ciclo popolerà 2 array: uno conterrà i mesi (da 1 a 12),
+      // l'altro, rispettando la posizione degli indici, le viste.
       for ($i = 0; $i < count($viewsFiltered); $i++ ) {
           if ( $viewsFiltered[$i] !== $prev ) {
               $viewsMonths[] = $viewsFiltered[$i];
@@ -296,18 +321,22 @@ class HomeController extends Controller
       'messagesCount' => $messagesCountFinal,
       ]);
 
-      // return view('showApartmentStatistics', compact("views", "messages"));
       return view('showApartmentStatistics', compact('apartment'));
     }
 
+    // ----------------------------------------------------------------
+    // --------------------- SPONSOR APPARTAMENTO ---------------------
+    // ----------------------------------------------------------------
     public function sponsorApartment($apartment_id){
       $apartment = Apartment::findOrFail($apartment_id);
       $sponsors = Sponsor::all();
       return view('sponsor', compact('apartment', "sponsors"));
     }
 
+    // ----------------------------------------------------------------
+    // ---------------------- PAGAMENTO SPONSOR -----------------------
+    // ----------------------------------------------------------------
     public function make(Request $request) {
-
           $apartment_id = $request->input('ApartmentId');
           $apartment = Apartment::findOrFail($apartment_id);
           $sponsors = Sponsor::all();
@@ -326,12 +355,12 @@ class HomeController extends Controller
             }
           }
           $status = Transaction::sale([
-                                  'amount' => 0,
-                                  'paymentMethodNonce' => $nonce,
-                                  'options' => [
-                                             'submitForSettlement' => False
-                                               ]
-                    ]);
+            'amount' => 0,
+            'paymentMethodNonce' => $nonce,
+            'options' => [
+              'submitForSettlement' => False
+               ]
+          ]);
 
           if ($apartment -> sponsor_expire_time) {
             if ($apartment -> sponsor_expire_time <= time()){
@@ -340,12 +369,12 @@ class HomeController extends Controller
               $apartment -> sponsor() -> attach($sponsorId);
               $allWasWell = true;
               $status = Transaction::sale([
-                                      'amount' => $amount,
-                                      'paymentMethodNonce' => $nonce,
-                                      'options' => [
-                                                 'submitForSettlement' => True
-                                                   ]
-                        ]);
+                'amount' => $amount,
+                'paymentMethodNonce' => $nonce,
+                'options' => [
+                  'submitForSettlement' => True
+                 ]
+              ]);
             }
           } else {
             $apartment -> sponsor_expire_time = time() + $duration;
@@ -353,14 +382,13 @@ class HomeController extends Controller
             $apartment -> sponsor() -> attach($sponsorId);
             $allWasWell = true;
             $status = Transaction::sale([
-                                    'amount' => $amount,
-                                    'paymentMethodNonce' => $nonce,
-                                    'options' => [
-                                               'submitForSettlement' => True
-                                                 ]
-                      ]);
+              'amount' => $amount,
+              'paymentMethodNonce' => $nonce,
+              'options' => [
+                 'submitForSettlement' => True
+               ]
+            ]);
           }
-
           return response()->json($status);
       }
 }
