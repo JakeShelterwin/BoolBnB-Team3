@@ -57,9 +57,7 @@
         $(".sponsor.card").css({"box-shadow": "0px 1px 11px -2px rgba(0, 0, 0, 0.3), inset 0 -3px 4px -1px rgba(0,0,0,0.2), 0 -10px 15px -1px rgba(255,255,255,0.6),  inset 0 20px 30px 0 rgba(255,255,255,0.2)", "color" : "#1b3c59"});
         $(this).css({"box-shadow": "inset 0px 1px 7px -2px rgba(0, 0, 0, 0.3)", "color" : "#E31C5F"});
         $(this).find("input[type=radio]").prop("checked", true);
-
       });
-
 
       </script>
   @endif

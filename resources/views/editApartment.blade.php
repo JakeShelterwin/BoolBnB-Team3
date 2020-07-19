@@ -24,19 +24,15 @@
           <div class="other_info">
             <div class="features">
               <ul>
-
                 <li><b>Numero stanze: </b>
                   <input type="number" name="rooms_n" value="{{old('rooms_n', $apartment['rooms_n'])}}">
                 </li>
-
                 <li><b>Numero letti: </b>
                   <input type="number" name="beds_n" value="{{old('beds_n', $apartment['beds_n'])}}">
                 </li>
-
                 <li><b>Numero bagni: </b>
                   <input type="number" name="bathrooms_n" value="{{old('bathrooms_n', $apartment['bathrooms_n'])}}">
                 </li>
-
                 <li><b>Metri quadrati: </b>
                   <input type="number" name="square_meters" value="{{old('square_meters', $apartment['square_meters'])}}"> m<SUP>2</SUP>
                 </li>
@@ -45,7 +41,6 @@
             <div class="services">
               <b>Servizi</b>
               <ul style="margin-left: 10px">
-
                 @foreach ($services as $service)
                   <li><input type="checkbox" name="services[]" value="{{$service -> id}}"
                     @foreach ($apartment -> services as $serviceApartment)
