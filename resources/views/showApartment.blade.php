@@ -55,9 +55,7 @@
                     <i class="fas fa-binoculars"></i>
                   @endif
                   <p>{{$service -> name}}</p>
-
                 </li>
-
               @endforeach
             </ul>
           </div>

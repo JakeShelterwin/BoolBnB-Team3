@@ -29,7 +29,7 @@
                     <div class="immagine col-sm-12">
 
                       <a href="{{route('showApartment', $apartment -> id)}}">
-                        <div class="apartmentImg" style="background-image: url('{{$apartment->image}}')"></div>
+                        <div class="apartmentImg" style="background-image: url('{{$apartment->image}}')" alt="Foto {{$apartment['title']}}"></div>
                       </a>
                       <div class="sponsoredRibbon">
                           <span class="expire d-none">{{$apartment['sponsor_expire_time'] - time()}}</span>

@@ -20,7 +20,6 @@
                 "1"
               @endif>
 
-
               Posti letto <input type="number" name="beds_n"  value=
               @if ($numberOfBeds)
                 "{{$numberOfBeds}}"
@@ -86,7 +85,6 @@
                       &nbsp    <i class="fas fa-binoculars"></i>
                       @endif
                         {{$service -> name}}
-
                     </li>
 
                   @endforeach
@@ -128,7 +126,6 @@
                     &nbsp   <i class="fas fa-binoculars"></i>
                     @endif
                       {{$service -> name}}
-
                   </li>
 
                 @endforeach
@@ -137,7 +134,6 @@
             <li><b>Distanza:</b>
                 @if ($key < 1000)
                   {{$key}}m
-
                 @else
                   @php
                     $key = $key/1000;
