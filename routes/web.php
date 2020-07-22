@@ -15,7 +15,7 @@ Route::get('/apartment/{id}/sponsor', 'HomeController@sponsorApartment')->name('
 // ROTTA CHE GESTISCE I PAGAMENTI
 Route::get('/payment/make', 'HomeController@make')->name('payment.make');
 
-
+Route::get('/documentation', function(){return view('documentation');})->name('documentation');
 
 Route::get('/', "ApartmentController@index")->name("welcome");
 Route::get('/searchApartments', "ApartmentController@searchApartments")->name("searchApartments");

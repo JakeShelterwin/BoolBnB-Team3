@@ -74635,6 +74635,8 @@ $(document).ready(function () {
   console.log("js collegato"); // questo if gestisce il modo in cui ci ricaviamo le coordiante dato un indirizzo.
   //Nel caso in cui l'utente commetta errori e dunque la pagina si ricarichi (non perdendo i valori grazie a old()) l'ajax viene richiamato in automatico su quei valori.
 
+  var withAddress = 0;
+
   if ($("input[name=address]").val()) {
     var input = $("input[name=address]").val();
     $.ajax({
@@ -74649,6 +74651,7 @@ $(document).ready(function () {
         var lon = data["results"][0]["position"]["lon"];
         $("input[name=lat]").val(lat);
         $("input[name=lon]").val(lon);
+        withAddress = 1;
         $("#bottoneCreate").prop("disabled", false);
       },
       error: function error(richiesta, stato, errori) {
@@ -74660,6 +74663,8 @@ $(document).ready(function () {
 
   $(".info").on("keyup", "input[name=address]", function () {
     var input = $("input[name=address]").val();
+    $("input[name=lat]").val(null);
+    $("input[name=lon]").val(null);
     $.ajax({
       url: "https://api.tomtom.com/search/2/geocode/" + input + ".json?",
       data: {
@@ -74677,20 +74682,54 @@ $(document).ready(function () {
         // e attivo il bottone d'invio dati
 
         if (data["results"].length === 0) {
-          $("#bottoneCreate").prop("disabled", true);
           $(".address").append("<p style='color: red'>Indirizzo non riconosciuto</p>");
+          $("input[name=lat]").val(null);
+          $("input[name=lon]").val(null);
+          withAddress = 0;
         } else {
           var lat = data["results"][0]["position"]["lat"];
           var lon = data["results"][0]["position"]["lon"];
           $("input[name=lat]").val(lat);
-          $("input[name=lon]").val(lon);
-          $("#bottoneCreate").prop("disabled", false);
+          $("input[name=lon]").val(lon); // if ($("input[name=lat]").val() && $("input[name=lon]").val()) {
+
+          withAddress = 1; // }
         }
       },
       error: function error(richiesta, stato, errori) {
         console.log("E' avvenuto un errore. " + errori, "stato " + stato, richiesta);
       }
     });
+  });
+  var checkedServices = 0; // ascolta che tutti i campi comprese le checkbox siano valorizzati prima di attivare il bottone
+
+  $(".info").on("keyup", ".listen", function () {
+    if ($("input:checked").length) {
+      checkedServices = 1;
+    } else {
+      checkedServices = 0;
+    }
+
+    if ($("input[name=title]").val() && $("textarea[name=description]").val() && $("input[name=rooms_n]").val() && $("input[name=beds_n]").val() && $("input[name=bathrooms_n]").val() && $("input[name=square_meters]").val() && checkedServices && withAddress) {
+      console.log(withAddress);
+      $("#bottoneCreate").prop("disabled", false);
+    } else {
+      $("#bottoneCreate").prop("disabled", true);
+    }
+  }); // ascolta che almeno una checkbox sia cliccata prima di attivare il bottone
+
+  $(".info").on("change", ".listen", function () {
+    if ($("input:checked").length) {
+      checkedServices = 1;
+    } else {
+      checkedServices = 0;
+    }
+
+    if ($("input[name=title]").val() && $("textarea[name=description]").val() && $("input[name=rooms_n]").val() && $("input[name=beds_n]").val() && $("input[name=bathrooms_n]").val() && $("input[name=square_meters]").val() && checkedServices && withAddress) {
+      console.log(withAddress);
+      $("#bottoneCreate").prop("disabled", false);
+    } else {
+      $("#bottoneCreate").prop("disabled", true);
+    }
   }); // GUIDA TOM TOM https://developer.tomtom.com/maps-sdk-web-js/tutorials-use-cases/map-marker-tutorial
 
   if ($('#map').length) {
@@ -74778,15 +74817,9 @@ $(document).ready(function () {
       },
       method: "GET",
       success: function success(data) {
-        // $(".address p").remove();
-        if (data["results"].length === 0) {// $("#bottoneCreate").prop("disabled", true);
-          // $(".address").append("<p style='color: red'>Indirizzo non riconosciuto</p>")
-        } else {
+        if (data["results"].length === 0) {} else {
           var lat = data["results"][0]["position"]["lat"];
-          var lon = data["results"][0]["position"]["lon"]; // var querystring = "?search=" + input + "&lat=" + lat + "&lon=" + lon;
-          //
-          // var url = "searchApartments/" + querystring;
-          // window.location.href = url;
+          var lon = data["results"][0]["position"]["lon"];
         }
       },
       error: function error(richiesta, stato, errori) {

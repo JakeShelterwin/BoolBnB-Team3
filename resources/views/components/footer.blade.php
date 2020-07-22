@@ -67,6 +67,13 @@
               Treffynnon-Navigator
             </a>
           </li>
+          <li>&nbsp</li>
+          <li>&nbsp</li>
+          <li>
+            <strong><a class="titolilink" href="{{route('documentation')}}">
+              <i class="far fa-file-alt"></i> Documentazione
+            </a></strong>
+          </li>
         </ul>
 
         <ul class="col-sm-12 col-md-4">
@@ -103,7 +110,7 @@
           <li>
             <a href="https://www.linkedin.com/in/nikolas-mosca-frontend-backend-web-developer">
               <i class="fab fa-linkedin"></i>
-              Nickolas Mosca
+              Nikolas Mosca
             </a>
           </li>
           <li>

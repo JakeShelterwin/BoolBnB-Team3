@@ -2,6 +2,9 @@
 @section('content')
   @if (auth()->user()-> id == $apartment -> user_id)
     <script src='https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js'></script>
+      <div class="container card titleSponsor">
+          <h2>Sponsorizza il tuo appartamento</h2>
+      </div>
       <div class='container card sponsors'>
             <div class="choice row">
               @foreach ($sponsors as $sponsor)

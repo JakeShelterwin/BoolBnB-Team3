@@ -11,7 +11,7 @@
                     </div>
                     <form class="col-md-8" method="POST" action="{{ route('login') }}">
                         @csrf
-                        <h1 style="text-align: center">LOGIN</h1>
+                        <h1 style="text-align: center">ACCEDI</h1>
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Mail">
@@ -39,7 +39,7 @@
                         <div class="form-group row">
                             <div class="col-md-12">
                               <button type="submit" class="btn btn-primary">
-                                  {{ __('Login') }}
+                                  {{ __('Accedi') }}
                               </button>
                             </div>
                         </div>

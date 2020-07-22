@@ -6,7 +6,7 @@
         <div class="col-md-8 containApartments">
             <div class="card createApartment row">
               <div class="bulge col-sm-6 col-lg-5">
-                  <a href="{{route('createApartment')}}">Crea Appartamento <i class="far fa-plus-square"></i></a>
+                  <a href="{{route('createApartment')}}">Crea Annuncio &nbsp  <i class="far fa-plus-square"></i></a>
               </div>
               <div class="legenda col-sm-5 col-lg-5">
                 <span> LEGENDA &nbsp  <i class="fas fa-layer-group"></i></span>

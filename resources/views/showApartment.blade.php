@@ -91,8 +91,9 @@
               <textarea type="textarea" rows="4" cols="40" name="message" value="{{old('message')}}" placeholder="Inserisci la tua richiesta" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Inserisci la tua richiesta'">{{old('message')}}</textarea> <br>
               <button type="submit" name="submit">Invia Messaggio</button> <br>
             </form>
-          @endauth
-        @else
+          @endif
+        @endauth
+        @guest
           <h5>Contatta {{$apartment -> user -> name}}</h5>
           <form class="form" action="{{route('storeMessage', $apartment -> id)}}" method="post">
             @csrf
@@ -102,7 +103,7 @@
             <textarea type="textarea" rows="4" cols="40" name="message" value="{{old('message')}}" placeholder="Inserisci la tua richiesta" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Inserisci la tua richiesta'">{{old('message')}}</textarea> <br>
             <button type="submit" name="submit">Invia Messaggio</button> <br>
           </form>
-        @endif
+        @endguest
       </div>
     </div>
     <div id="map" class="col-sm-12 col-lg-3"></div>

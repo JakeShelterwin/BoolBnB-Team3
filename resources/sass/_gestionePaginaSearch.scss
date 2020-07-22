@@ -77,6 +77,7 @@
           color: white;
           font-weight: 700;
           outline: 0;
+          cursor: pointer;
           -webkit-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
           -moz-box-shadow: 0px 1px 11px -2px rgba(0,0,0,0.3);
           box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3);
@@ -161,7 +162,7 @@
           }
           .sponsoredApartmentImg{
               width: 100%;
-              height: 150px;
+              height: 100%;
               background-repeat: no-repeat;
               background-position: center;
               background-size: cover;
@@ -223,7 +224,7 @@
           }
           .searchedApartmentImg{
               width: 100%;
-              height: 150px;
+              height: 100%;
               background-repeat: no-repeat;
               background-position: center;
               background-size: cover;
@@ -362,36 +363,33 @@
 ///////////////////////////////////////////////////////////////////
 @media all and (max-width: 576px) {
   .contentSearch {
-    .info {
     .apartments {
-        .card{
-          .sponsoredApartment{
-            .sponsoredRibbon{
-              position: absolute;
-              top: 7px;
-              right: 7px;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              color: red;
-              background-color: rgba(27, 60, 89, 1);
-              border-radius: 14px;
-              padding: 5px;
-              padding-bottom: 1px;
-              padding-top: 0;
-              -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
-              -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
-              box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
-              i{
-                font-size: 20px;
-                padding: 5px;
-                padding-right: 0;
-              }
-              span {
-                margin-bottom: 0;
-                padding: 5px;
-              }
-            }
+      .card{
+        .sponsoredApartment{
+          .sponsoredRibbon{
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            // color: red;
+            // background-color: rgba(27, 60, 89, 1);
+            border-radius: 14px;
+            padding: 5px;
+            padding-bottom: 1px;
+            padding-top: 0;
+            -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+            -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+            box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+          }
+          .sponsoredApartmentImg{
+            height: 150px;
+          }
+        }
+        .searchedApartment{
+          .searchedApartmentImg{
+              height: 150px;
           }
         }
       }
@@ -401,7 +399,39 @@
 
 
 @media all and (min-width: 576px) and (max-width: 768px) {
-
+  .contentSearch {
+    .apartments {
+      .card{
+        .sponsoredApartment{
+          .sponsoredRibbon{
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            // color: red;
+            // background-color: rgba(27, 60, 89, 1);
+            border-radius: 14px;
+            padding: 5px;
+            padding-bottom: 1px;
+            padding-top: 0;
+            -webkit-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+            -moz-box-shadow: 0px 1px 11px -5px rgba(0,0,0,0.3);
+            box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+          }
+          .sponsoredApartmentImg{
+            height: 150px;
+          }
+        }
+        .searchedApartment{
+          .searchedApartmentImg{
+              height: 150px;
+          }
+        }
+      }
+    }
+  }
 }
 
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */

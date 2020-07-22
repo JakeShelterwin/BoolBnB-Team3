@@ -11285,6 +11285,7 @@ a.text-dark:focus {
   color: white;
   font-weight: 700;
   outline: 0;
+  cursor: pointer;
   box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3);
 }
 
@@ -11371,7 +11372,7 @@ a.text-dark:focus {
 
 .contentSearch .apartments .card .sponsoredApartment .sponsoredApartmentImg {
   width: 100%;
-  height: 150px;
+  height: 100%;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -11438,7 +11439,7 @@ a.text-dark:focus {
 
 .contentSearch .apartments .card .searchedApartment .searchedApartmentImg {
   width: 100%;
-  height: 150px;
+  height: 100%;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -11582,15 +11583,13 @@ a.text-dark:focus {
 }
 
 @media all and (max-width: 576px) {
-  .contentSearch .info .apartments .card .sponsoredApartment .sponsoredRibbon {
+  .contentSearch .apartments .card .sponsoredApartment .sponsoredRibbon {
     position: absolute;
     top: 7px;
     right: 7px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: red;
-    background-color: #1b3c59;
     border-radius: 14px;
     padding: 5px;
     padding-bottom: 1px;
@@ -11598,15 +11597,36 @@ a.text-dark:focus {
     box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
   }
 
-  .contentSearch .info .apartments .card .sponsoredApartment .sponsoredRibbon i {
-    font-size: 20px;
-    padding: 5px;
-    padding-right: 0;
+  .contentSearch .apartments .card .sponsoredApartment .sponsoredApartmentImg {
+    height: 150px;
   }
 
-  .contentSearch .info .apartments .card .sponsoredApartment .sponsoredRibbon span {
-    margin-bottom: 0;
+  .contentSearch .apartments .card .searchedApartment .searchedApartmentImg {
+    height: 150px;
+  }
+}
+
+@media all and (min-width: 576px) and (max-width: 768px) {
+  .contentSearch .apartments .card .sponsoredApartment .sponsoredRibbon {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
     padding: 5px;
+    padding-bottom: 1px;
+    padding-top: 0;
+    box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  .contentSearch .apartments .card .sponsoredApartment .sponsoredApartmentImg {
+    height: 150px;
+  }
+
+  .contentSearch .apartments .card .searchedApartment .searchedApartmentImg {
+    height: 150px;
   }
 }
 
@@ -12494,6 +12514,19 @@ a.text-dark:focus {
   }
 }
 
+.titleSponsor {
+  box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.titleSponsor h2 {
+  margin-bottom: 0;
+  margin-left: 4px;
+}
+
 .sponsors {
   min-height: 75vh;
   box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
@@ -12558,6 +12591,10 @@ a.text-dark:focus {
   border: none;
   border-radius: 10px;
   box-shadow: 0px 1px 11px -2px rgba(0, 0, 0, 0.3);
+}
+
+.sponsors .braintree-upper-container:before {
+  background-color: white;
 }
 
 .sponsors .Silver {
@@ -12893,6 +12930,50 @@ a.text-dark:focus {
   .register-box .title {
     border-right: none;
   }
+}
+
+/* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
+
+/* Large devices (desktops, 992px and up) */
+
+.documentationTitle {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.documentationTitle h1 {
+  padding: 0px;
+  margin: 0px;
+}
+
+.documentation {
+  box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.documentation ul {
+  margin-top: 0;
+  padding-left: 40px;
+  margin-bottom: 1rem;
+}
+
+.documentation .tariffe {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.documentation .tariffe ul {
+  padding-left: 0px;
 }
 
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */
