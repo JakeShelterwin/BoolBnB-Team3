@@ -13033,6 +13033,22 @@ a:hover {
   box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
 }
 
+.permissionDenied {
+  min-height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.permissionDenied h1 {
+  font-weight: 700;
+  font-size: 72px;
+  background: -webkit-linear-gradient(#92174d, #e41d5c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 header .navbar {
   background-color: #FF5A5F;
 }
@@ -13097,6 +13113,18 @@ footer .social span {
 
 footer .social span i {
   margin-left: 0.5rem;
+}
+
+@media all and (max-width: 576px) {
+  .permissionDenied h1 {
+    font-size: 42px;
+  }
+}
+
+@media all and (min-width: 576px) and (max-width: 768px) {
+  .permissionDenied h1 {
+    font-size: 42px;
+  }
 }
 
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */

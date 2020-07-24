@@ -68,6 +68,26 @@ a:hover{
   box-shadow: 0px 1px 11px -5px rgba(0, 0, 0, 0.3);
 }
 ///////////////////////////////////////////////////////////////////
+//////////////////      PAGINE D'ERRORE      //////////////////////
+///////////////////////////////////////////////////////////////////
+
+.permissionDenied{
+  min-height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  h1 {
+    font-weight: 700;
+    font-size: 72px;
+    background: -webkit-linear-gradient( rgb(146, 23, 77), rgb(228, 29, 92));
+    // background: -webkit-linear-gradient(to right, rgb(146, 23, 77) 9.38%, rgb(228, 29, 92) 88.54%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+///////////////////////////////////////////////////////////////////
 //////////////////////////    HEADER  /////////////////////////////
 ///////////////////////////////////////////////////////////////////
 header {
@@ -144,11 +164,19 @@ footer {
 
 /// MEDIA QUERIES SPECIFICHE ESISTONO IN CIASCUNA PAGINA IMPORTATA
 @media all and (max-width: 576px) {
-
+  .permissionDenied{
+    h1 {
+      font-size: 42px;
+    }
+  }
 }
 
 @media all and (min-width: 576px) and (max-width: 768px) {
-
+  .permissionDenied{
+    h1 {
+      font-size: 42px;
+    }
+  }
 }
 
 /* Medium devices (tablets, 768px and up) The navbar toggle appears at this breakpoint */

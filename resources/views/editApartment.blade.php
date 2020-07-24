@@ -72,5 +72,9 @@
   </div>
 </div>
 
+  @else
+    <div class="container permissionDenied">
+      <h1>Ops... non hai il permesso per accedere a questa pagina</h1>
+    </div>
   @endif
 @endsection

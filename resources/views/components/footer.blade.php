@@ -120,6 +120,12 @@
             </a>
           </li>
           <li>
+            <a href="https://www.linkedin.com/in/chiara-passaro-90812b10/">
+              <i class="fab fa-linkedin"></i>
+              Chiara Passano
+            </a>
+          </li>
+          <li>
             <a href="https://www.linkedin.com/in/margherita-ghidini-32227711b/">
               <i class="fab fa-linkedin"></i>
               Margherita Ghidini

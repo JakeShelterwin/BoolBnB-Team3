@@ -8,7 +8,7 @@
 
           <div class="chartBox visualizzazioni col-sm-12 col-md-6">
             <h2>Visualizzazioni</h2>
-            <small>negli ultimi 365 giorni</small>  
+            <small>negli ultimi 365 giorni</small>
             <canvas id="viewsStatsBar" style="width: 400px; height: 400px"></canvas>
             <canvas id="viewsStatsLine" style="width: 400px; height: 400px"></canvas>
           </div>
@@ -22,6 +22,10 @@
 
         </div>
       </div>
+    </div>
+  @else
+    <div class="container permissionDenied">
+      <h1>Ops... non hai il permesso per accedere a questa pagina</h1>
     </div>
   @endif
 @endsection

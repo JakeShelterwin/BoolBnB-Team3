@@ -9,7 +9,8 @@ $(document).ready(function(){
       if ($("input[name=address]").val()) {
         var input = $("input[name=address]").val();
         $.ajax({
-            url : "https://api.tomtom.com/search/2/geocode/"+input+".json?",
+            // url : "https://api.tomtom.com/search/2/geocode/"+input+".json?",
+            url : "https://api.tomtom.com/search/2/search/"+input+".json?",
             data: {
               "key": "GqqMbjtoswnKOW5HbgKmS6sLaqEXL7pl",
               "countrySet" : "IT"
@@ -35,13 +36,15 @@ $(document).ready(function(){
           $("input[name=lat]").val(null);
           $("input[name=lon]").val(null);
           $.ajax({
-              url : "https://api.tomtom.com/search/2/geocode/"+input+".json?",
+              // url : "https://api.tomtom.com/search/2/geocode/"+input+".json?",
+              url : "https://api.tomtom.com/search/2/search/"+input+".json?",
               data: {
                 "key": "GqqMbjtoswnKOW5HbgKmS6sLaqEXL7pl",
                 "countrySet" : "IT"
               },
               method : "GET",
               success : function (data) {
+                // console.log(data);
                 //debug
                 // console.log(data['results']);
                 //rimuovo eventuali p che mostra l'errore
